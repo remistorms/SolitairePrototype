@@ -4,14 +4,23 @@ using UnityEngine;
 
 public class Card : MonoBehaviour
 {
-    [SerializeField] private bool m_isFaceUp = true;
+    [Header("Card Properties")]
+    public int value;
+    public CardSuit suit;
 
+    [Header("Card Objects")]
+    [SerializeField] private bool m_isFaceUp = true;
     [SerializeField] private GameObject m_frontSide;
     [SerializeField] private GameObject m_backSide;
     [SerializeField] private SpriteRenderer[] m_suitSprites;
     [SerializeField] private SpriteRenderer[] m_valueSprites;
 
     private bool m_isLerping = false;
+
+    public void InitializeCard(int value, CardSuit suit)
+    {
+
+    }
 
     public void Flip(float flipTime = 0.15f )
     {
