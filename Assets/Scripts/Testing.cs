@@ -25,17 +25,21 @@ public class Testing : MonoBehaviour
 
         for (int s = 0; s <  4 ; s++)
         {
-            CardSuit currentSuit = (CardSuit)s;
+            CardSuit currentSuit = CardHelper.Instance.GetCardSuitFromIndex(s);
 
             for (int v = 0; v < 13; v++)
             {
+                CardValue currentCardValue = CardHelper.Instance.GetCardValueFromInt(v);
+
                 GameObject clonedCard = Instantiate(m_cardPrefab, transform.position, Quaternion.identity);
 
                 clonedCard.GetComponent<Card>().InitializeCard(v, currentSuit);
 
-                clonedCard.name = currentSuit.ToString() + "_" + v.ToString();
+                clonedCard.name = currentCardValue.ToString() + " of " + currentSuit.ToString();
 
                 clonedCard.transform.position = new Vector3( v * 1.2f , s * 1.7f, 0 );
+
+                clonedCard.transform.SetParent(this.transform);
 
                 m_deck.Add(clonedCard.GetComponent<Card>());
             }

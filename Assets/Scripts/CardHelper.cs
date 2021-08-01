@@ -12,8 +12,6 @@ public class CardHelper : MonoBehaviour
     [SerializeField] private Sprite m_heartSprite;
     [SerializeField] private Sprite m_spadeSprite;
 
-    [Header("Value Sprites")]
-    [SerializeField] private Sprite[] m_valueSprites;
 
     private void Awake()
     {
@@ -54,11 +52,6 @@ public class CardHelper : MonoBehaviour
         }
 
         return selectedSprite;
-    }
-
-    public Sprite GetValueSprite(int value)
-    {
-        return m_valueSprites[value];
     }
 
     public CardColor GetCardColor(CardSuit cardSuit)
@@ -109,5 +102,144 @@ public class CardHelper : MonoBehaviour
         }
 
         return color;
+    }
+
+    public string GetCardValueString(CardValue cardValue)
+    {
+        string stringValue = "";
+
+        switch (cardValue)
+        {
+            case CardValue.Ace:
+                stringValue = "A";
+                break;
+            case CardValue.Two:
+                stringValue = "2";
+                break;
+            case CardValue.Three:
+                stringValue = "3";
+                break;
+            case CardValue.Four:
+                stringValue = "4";
+                break;
+            case CardValue.Five:
+                stringValue = "5";
+                break;
+            case CardValue.Six:
+                stringValue = "6";
+                break;
+            case CardValue.Seven:
+                stringValue = "7";
+                break;
+            case CardValue.Eight:
+                stringValue = "8";
+                break;
+            case CardValue.Nine:
+                stringValue = "9";
+                break;
+            case CardValue.Ten:
+                stringValue = "10";
+                break;
+            case CardValue.Jack:
+                stringValue = "J";
+                break;
+            case CardValue.Queen:
+                stringValue = "Q";
+                break;
+            case CardValue.King:
+                stringValue = "K";
+                break;
+            default:
+                break;
+        }
+
+        return stringValue;
+    }
+
+    public CardSuit GetCardSuitFromIndex(int index)
+    {
+        CardSuit cardSuit = CardSuit.Clubs;
+
+        switch (index)
+        {
+            case 0:
+                cardSuit = CardSuit.Clubs;
+                break;
+            case 1:
+                cardSuit = CardSuit.Diamonds;
+                break;
+            case 2:
+                cardSuit = CardSuit.Hearts;
+                break;
+            case 3:
+                cardSuit = CardSuit.Spades;
+                break;
+
+            default:
+                break;
+        }
+
+        return cardSuit;
+    }
+
+    //Converts an int value from 0 to 12 into a CardValue Enum
+    public CardValue GetCardValueFromInt(int intValue)
+    {
+        CardValue cardValue = CardValue.Ace;
+
+        if (intValue == 0)
+        {
+            cardValue = CardValue.Ace;
+        }
+        else if (intValue == 1)
+        {
+            cardValue = CardValue.Two;
+        }
+        else if (intValue == 2)
+        {
+            cardValue = CardValue.Three;
+        }
+        else if (intValue == 3)
+        {
+            cardValue = CardValue.Four;
+        }
+        else if (intValue == 4)
+        {
+            cardValue = CardValue.Five;
+        }
+        else if (intValue == 5)
+        {
+            cardValue = CardValue.Six;
+        }
+        else if (intValue == 6)
+        {
+            cardValue = CardValue.Seven;
+        }
+        else if (intValue == 7)
+        {
+            cardValue = CardValue.Eight;
+        }
+        else if (intValue == 8)
+        {
+            cardValue = CardValue.Nine;
+        }
+        else if (intValue == 9)
+        {
+            cardValue = CardValue.Ten;
+        }
+        else if (intValue == 10)
+        {
+            cardValue = CardValue.Jack;
+        }
+        else if (intValue == 11)
+        {
+            cardValue = CardValue.Queen;
+        }
+        else if (intValue == 12)
+        {
+            cardValue = CardValue.King;
+        }
+
+        return cardValue;
     }
 }

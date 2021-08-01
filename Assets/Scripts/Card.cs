@@ -1,27 +1,41 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using TMPro;
 
-public class Card : MonoBehaviour, IDragHandler 
+public class Card : MonoBehaviour, IDropHandler
 {
     [Header("Card Properties")]
+    public bool m_isTopCard = false;
     public int m_value;
+    public CardValue m_cardValue;
     public CardSuit m_cardSuit;
     public CardColor m_cardColor;
+    public CardPile m_cardPile = null;
 
     [Header("Card Objects")]
     [SerializeField] private bool m_isFaceUp = true;
     [SerializeField] private GameObject m_frontSide;
     [SerializeField] private GameObject m_backSide;
-    [SerializeField] private SpriteRenderer[] m_suitSprites;
-    [SerializeField] private SpriteRenderer[] m_valueSprites;
+    [SerializeField] private Image[] m_suitSprites;
+    [SerializeField] private TextMeshProUGUI[] m_valueLabels;
+
+    private Image m_outlineImage;
+
+    private void Awake()
+    {
+        m_outlineImage = GetComponent<Image>();
+    }
 
     private bool m_isLerping = false;
 
     public void InitializeCard(int value, CardSuit suit)
     {
         m_value = value;
+
+        m_cardValue = CardHelper.Instance.GetCardValueFromInt(value);
 
         m_cardSuit = suit;
 
@@ -55,15 +69,17 @@ public class Card : MonoBehaviour, IDragHandler
         }
 
         //Set Value Sprites
-        Sprite valueSprite = CardHelper.Instance.GetValueSprite(value);
         Color spriteColor = CardHelper.Instance.GetColorFromSuit(m_cardSuit);
+        string cardValueText = CardHelper.Instance.GetCardValueString(m_cardValue);
 
-        for (int i = 0; i < m_valueSprites.Length; i++)
+        for (int i = 0; i < m_valueLabels.Length; i++)
         {
-            m_valueSprites[i].sprite = valueSprite;
+            m_valueLabels[i].text = cardValueText;
 
-            m_valueSprites[i].color = spriteColor;
+            m_valueLabels[i].color = spriteColor;
         }
+
+        //this.gameObject.name = m_cardValue.ToString() + " of " + m_cardSuit.ToString();
     }
 
     public void Flip(float flipTime = 0.15f )
@@ -122,9 +138,30 @@ public class Card : MonoBehaviour, IDragHandler
         }
     }
 
-    public void OnDrag(PointerEventData eventData)
+    public void SetOutlineColor(Color color)
     {
-        //throw new System.NotImplementedException();
-        Debug.Log( this.gameObject.name + " is being dragged arround");
+        m_outlineImage.color = color;
+    }
+
+    public void OnDrop(PointerEventData eventData)
+    {
+        if (m_cardPile == null)
+        {
+            return;
+        }
+
+        if (m_isTopCard)
+        {
+            if (eventData.pointerDrag.GetComponent<Card>() != null)
+            {
+                Card card = eventData.pointerDrag.GetComponent<Card>();
+
+                m_cardPile.AddToPile(card);
+            }
+        }
+        else
+        {
+
+        }
     }
 }
