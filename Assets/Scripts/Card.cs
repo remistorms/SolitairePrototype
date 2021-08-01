@@ -5,8 +5,9 @@ using UnityEngine;
 public class Card : MonoBehaviour
 {
     [Header("Card Properties")]
-    public int value;
-    public CardSuit suit;
+    public int m_value;
+    public CardSuit m_cardSuit;
+    public CardColor m_cardColor;
 
     [Header("Card Objects")]
     [SerializeField] private bool m_isFaceUp = true;
@@ -19,7 +20,49 @@ public class Card : MonoBehaviour
 
     public void InitializeCard(int value, CardSuit suit)
     {
+        m_value = value;
 
+        m_cardSuit = suit;
+
+        switch (m_cardSuit)
+        {
+            case CardSuit.Clubs:
+                m_cardColor = CardColor.Black;
+                break;
+
+            case CardSuit.Diamonds:
+                m_cardColor = CardColor.Red;
+                break;
+
+            case CardSuit.Hearts:
+                m_cardColor = CardColor.Red;
+                break;
+
+            case CardSuit.Spades:
+                m_cardColor = CardColor.Black;
+                break;
+
+            default:
+                break;
+        }
+           
+        //Set Suit Sprites
+        Sprite suitSprite = CardHelper.Instance.GetSuitSprite(m_cardSuit);
+        for (int i = 0; i < m_suitSprites.Length; i++)
+        {
+            m_suitSprites[i].sprite = suitSprite;
+        }
+
+        //Set Value Sprites
+        Sprite valueSprite = CardHelper.Instance.GetValueSprite(value);
+        Color spriteColor = CardHelper.Instance.GetColorFromSuit(m_cardSuit);
+
+        for (int i = 0; i < m_valueSprites.Length; i++)
+        {
+            m_valueSprites[i].sprite = valueSprite;
+
+            m_valueSprites[i].color = spriteColor;
+        }
     }
 
     public void Flip(float flipTime = 0.15f )
