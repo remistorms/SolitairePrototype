@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
-public class Card : MonoBehaviour
+public class Card : MonoBehaviour, IDragHandler 
 {
     [Header("Card Properties")]
     public int m_value;
@@ -121,4 +122,9 @@ public class Card : MonoBehaviour
         }
     }
 
+    public void OnDrag(PointerEventData eventData)
+    {
+        //throw new System.NotImplementedException();
+        Debug.Log( this.gameObject.name + " is being dragged arround");
+    }
 }
