@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerClickHandler
 {
     private CanvasGroup m_canvasGroup;
     private Vector3 m_returningPosition;
@@ -22,9 +22,9 @@ public class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     public void OnBeginDrag(PointerEventData eventData)
     {
         m_returningPosition = transform.position;
-        Debug.Log(this.gameObject.name + ": Begin Drag");
         m_canvasGroup.blocksRaycasts = false;
         m_card.SetOutlineColor(Color.cyan);
+        EventsManager.Fire_evt_OnCardBeginDrag(m_card);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -40,10 +40,19 @@ public class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
         m_canvasGroup.blocksRaycasts = true;
         transform.position = m_returningPosition;
         m_card.SetOutlineColor(Color.white);
+        EventsManager.Fire_evt_OnCardEndedDrag(m_card);
     }
 
     public void SetReturningPosition(Vector3 position)
     {
         m_returningPosition = position;
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (m_card.m_isTopCard && !m_card.m_isFaceUp)
+        {
+            m_card.Flip();
+        }
     }
 }

@@ -42,6 +42,8 @@ public class Testing : MonoBehaviour
                 clonedCard.transform.SetParent(this.transform);
 
                 m_deck.Add(clonedCard.GetComponent<Card>());
+
+                
             }
         }
     }

@@ -8,6 +8,7 @@ using TMPro;
 public class Card : MonoBehaviour, IDropHandler
 {
     [Header("Card Properties")]
+    public bool m_isFaceUp = true;
     public bool m_isTopCard = false;
     public int m_value;
     public CardValue m_cardValue;
@@ -16,7 +17,7 @@ public class Card : MonoBehaviour, IDropHandler
     public CardPile m_cardPile = null;
 
     [Header("Card Objects")]
-    [SerializeField] private bool m_isFaceUp = true;
+
     [SerializeField] private GameObject m_frontSide;
     [SerializeField] private GameObject m_backSide;
     [SerializeField] private Image[] m_suitSprites;
@@ -156,7 +157,9 @@ public class Card : MonoBehaviour, IDropHandler
             {
                 Card card = eventData.pointerDrag.GetComponent<Card>();
 
-                m_cardPile.AddToPile(card);
+                m_cardPile.AddCardToPile(card);
+
+                Debug.Log( "Droping " + card.name + " on top of " + this.name + " stack check = " + CardHelper.Instance.CheckIfCanStack( card, this ) );
             }
         }
         else
