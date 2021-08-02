@@ -86,7 +86,7 @@ public class CardsManager : MonoBehaviour
 
                 selectedPile.AddCardToPile(topCard);
 
-                yield return new WaitForSeconds(0.1f);
+                //yield return new WaitForSeconds(0.1f);
             }
      
         }
@@ -101,14 +101,14 @@ public class CardsManager : MonoBehaviour
 
             selectedPile.AddCardToPile(topCard);
 
-            yield return new WaitForSeconds(0.1f);
+            //yield return new WaitForSeconds(0.1f);
         }
 
         for (int i = 0; i < m_bottomPiles.Length; i++)
         {
             m_bottomPiles[i].GetTopCard().Flip();
 
-            yield return new WaitForSeconds(0.1f);
+            //yield return new WaitForSeconds(0.1f);
         }
 
         yield return null;

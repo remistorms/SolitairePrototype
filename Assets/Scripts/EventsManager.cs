@@ -6,24 +6,43 @@ using UnityEngine.EventSystems;
 
 public static class EventsManager
 {
-    public static event Action<Card, CardPile> OnCardDropped = delegate{};
-    public static void Fire_evt_OnCardDropped(Card card, CardPile pile)
+    public static event Action<Card, CardPile> OnCardDroppedOnPile = delegate{};
+    public static void Fire_evt_OnCardDroppedOnPile(Card card, CardPile pile)
     {
-        //Debug.Log( card.name + " was dropped onto " + pile.name );
-        OnCardDropped( card, pile );
+        //Debug.Log( "EventsManager: " + card.name + " was dropped onto " + pile.name );
+        OnCardDroppedOnPile( card, pile );
     }
 
-    public static event Action<Card> OnCardBeginDrag = delegate { };
-    public static void Fire_evt_OnCardBeginDrag(Card card)
+    //DRAG EVENTS
+    //Start Drag
+    public static event Action<Card, PointerEventData> OnCardDragStarted = delegate { };
+    public static void Fire_evt_OnCardDragStarted(Card card, PointerEventData pointerEventData)
     {
-        //Debug.Log(card.name + " started being dragged.");
-        OnCardBeginDrag( card );
+       // Debug.Log("EventsManager: " + card.name + " drag START");
+        OnCardDragStarted( card, pointerEventData);
     }
 
-    public static event Action<Card> OnCardEndedDrag = delegate { };
-    public static void Fire_evt_OnCardEndedDrag(Card card)
+    //UpdateDrag
+    public static event Action<Card, PointerEventData> OnCardDragUpdate = delegate { };
+    public static void Fire_evt_OnCardDragUpdate(Card card, PointerEventData pointerEventData)
     {
-        //Debug.Log(card.name + " ended drag.");
-        OnCardEndedDrag(card);
+      //  Debug.Log("EventsManager: " + card.name + " drag UPDATE");
+        OnCardDragUpdate(card, pointerEventData);
+    }
+
+    //End Drag
+    public static event Action<Card, PointerEventData> OnCardDragEnded = delegate { };
+    public static void Fire_evt_OnCardDragEnded(Card card, PointerEventData pointerEventData)
+    {
+       // Debug.Log("EventsManager: " + card.name + " drag END");
+        OnCardDragEnded(card, pointerEventData);
+    }
+
+    //Fire_evt_ClickedOnCard
+    public static event Action<Card, PointerEventData> OnClickedOnCard = delegate { };
+    public static void Fire_evt_OnClickedOnCard(Card card, PointerEventData pointerEventData)
+    {
+        //Debug.Log("EventsManager: " + card.name + " was clicked on");
+        OnClickedOnCard(card, pointerEventData);
     }
 }

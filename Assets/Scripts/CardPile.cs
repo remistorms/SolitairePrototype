@@ -20,15 +20,36 @@ public class CardPile : MonoBehaviour, IDropHandler
 
     private void Start()
     {
-        EventsManager.OnCardBeginDrag += OnCardBeginDrag;
+
     }
 
     public void AddCardToPile(Card cardToAdd)
     {
+        if (m_cardsInPile.Contains(cardToAdd))
+        {
+            return;
+        }
+
         m_cardsInPile.Add(cardToAdd);
 
         //cardToAdd.GetComponent<Draggable>().SetReturningPosition(this.transform.position);
 
+        StartCoroutine(UpdatePositions());
+    }
+
+    public void AddCardsToPile(List<Card> cardsToAdd)
+    {
+        for (int i = 0; i < cardsToAdd.Count; i++)
+        {
+            if (m_cardsInPile.Contains(cardsToAdd[i]))
+            {
+                return;
+            }
+            else
+            {
+                m_cardsInPile.Add(cardsToAdd[i]);
+            }
+        }
         StartCoroutine(UpdatePositions());
     }
 
@@ -84,16 +105,17 @@ public class CardPile : MonoBehaviour, IDropHandler
     {
         if (eventData.pointerDrag.GetComponent<Card>() != null)
         {
-            Card card = eventData.pointerDrag.GetComponent<Card>();
-
-            EventsManager.Fire_evt_OnCardDropped( card, this );
-
-            AddCardToPile(card);
+            DropCardOnPile(eventData.pointerDrag.GetComponent<Card>());
         }
     }
 
+    public void DropCardOnPile(Card card)
+    {
+        EventsManager.Fire_evt_OnCardDroppedOnPile(card, this);
+    }
+
     //Events
-    private void OnCardBeginDrag(Card card)
+    private void OnCardDragStarted(Card card, PointerEventData pointerEventData)
     {
         if (m_cardsInPile.Contains(card))
         {
@@ -107,11 +129,15 @@ public class CardPile : MonoBehaviour, IDropHandler
 
         if (m_cardsInPile.Contains(selectedCard))
         {
-            for (int i =  m_cardsInPile.IndexOf(selectedCard) ; i < m_cardsInPile.Count - 1 ; i++)
+            for (int i =  m_cardsInPile.IndexOf(selectedCard) ; i < m_cardsInPile.Count ; i++)
             {
                 cardsAbove.Add(m_cardsInPile[i]);
+                Debug.Log("card at i index" + i + " was added");
             }
         }
+
+        //Debug.Log("CardPile" + this.gameObject.name + ": GetAllCardsAvobeSelected(...)");
+
         return cardsAbove;
     }
 

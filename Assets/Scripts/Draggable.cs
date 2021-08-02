@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerClickHandler
+public class Draggable : MonoBehaviour //,IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerClickHandler
 {
+    /*
     private CanvasGroup m_canvasGroup;
     private Vector3 m_returningPosition;
     private Transform m_lastParent;
@@ -50,6 +51,7 @@ public class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
     }
     */
 
+        /*
     public void OnPointerClick(PointerEventData eventData)
     {
         if (m_card.m_isTopCard && !m_card.m_isFaceUp)
@@ -57,4 +59,5 @@ public class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
             m_card.Flip();
         }
     }
+    */
 }

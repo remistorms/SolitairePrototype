@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 
-public class Card : MonoBehaviour, IDropHandler
+public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [Header("Card Properties")]
     public bool m_isFaceUp = true;
@@ -23,11 +23,18 @@ public class Card : MonoBehaviour, IDropHandler
     [SerializeField] private Image[] m_suitSprites;
     [SerializeField] private TextMeshProUGUI[] m_valueLabels;
 
+    [Header("Outline Colors")]
+    [SerializeField] private Color m_normalColor;
+    [SerializeField] private Color m_highlightColor;
+    [SerializeField] private Color m_acceptColor;
+    [SerializeField] private Color m_rejectColor;
+
     private Image m_outlineImage;
 
     private void Awake()
     {
         m_outlineImage = GetComponent<Image>();
+        SetOutlineColor(m_normalColor);
     }
 
     private bool m_isLerping = false;
@@ -131,19 +138,29 @@ public class Card : MonoBehaviour, IDropHandler
         m_isLerping = false;
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            Flip(0.15f);
-        }
-    }
-
     public void SetOutlineColor(Color color)
     {
         m_outlineImage.color = color;
     }
 
+
+    //Drag Interfaces
+    public void OnBeginDrag(PointerEventData pointerEventData)
+    {
+        EventsManager.Fire_evt_OnCardDragStarted(this, pointerEventData);
+    }
+
+    public void OnDrag(PointerEventData pointerEventData)
+    {
+        EventsManager.Fire_evt_OnCardDragUpdate(this, pointerEventData);
+    }
+
+    public void OnEndDrag(PointerEventData pointerEventData)
+    {
+        EventsManager.Fire_evt_OnCardDragEnded(this, pointerEventData);
+    }
+
+    //DROP Interface
     public void OnDrop(PointerEventData eventData)
     {
         if (m_cardPile == null)
@@ -151,20 +168,41 @@ public class Card : MonoBehaviour, IDropHandler
             return;
         }
 
-        if (m_isTopCard)
+        if (eventData.pointerDrag.GetComponent<Card>() != null)
         {
-            if (eventData.pointerDrag.GetComponent<Card>() != null)
-            {
-                Card card = eventData.pointerDrag.GetComponent<Card>();
+            Card card = eventData.pointerDrag.GetComponent<Card>();
 
-                m_cardPile.AddCardToPile(card);
-
-                Debug.Log( "Droping " + card.name + " on top of " + this.name + " stack check = " + CardHelper.Instance.CheckIfCanStack( card, this ) );
-            }
+            m_cardPile.DropCardOnPile(card);
         }
-        else
-        {
+    }
 
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (!m_isFaceUp && m_isTopCard)
+        {
+            Flip();
+        }
+        EventsManager.Fire_evt_OnClickedOnCard(this, eventData);
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (eventData.pointerEnter != this)
+        {
+            SetOutlineColor(m_highlightColor);
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        SetOutlineColor(m_normalColor);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            Flip();
         }
     }
 }
