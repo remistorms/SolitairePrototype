@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using DG.Tweening;
 
 public class CardPile : MonoBehaviour, IDropHandler
 {
@@ -26,7 +27,7 @@ public class CardPile : MonoBehaviour, IDropHandler
     {
         m_cardsInPile.Add(cardToAdd);
 
-        cardToAdd.GetComponent<Draggable>().SetReturningPosition(this.transform.position);
+        //cardToAdd.GetComponent<Draggable>().SetReturningPosition(this.transform.position);
 
         StartCoroutine(UpdatePositions());
     }
@@ -41,7 +42,7 @@ public class CardPile : MonoBehaviour, IDropHandler
         StartCoroutine(UpdatePositions());
     }
 
-    public void RemoveFromPile(List<Card> cardsToRemove)
+    public void RemoveCardsFromPile(List<Card> cardsToRemove)
     {
         for (int i = 0; i < cardsToRemove.Count; i++)
         {
@@ -60,13 +61,12 @@ public class CardPile : MonoBehaviour, IDropHandler
     {
         yield return null;
 
-        Transform currentParent = this.transform;
-
         for (int i = 0; i < m_cardsInPile.Count; i++)
         {
             m_cardsInPile[i].transform.SetParent(this.transform);
 
-            m_cardsInPile[i].transform.localPosition = new Vector3( i * m_pilingOffset.x, i * m_pilingOffset.y, i * m_pilingOffset.z) ;
+            m_cardsInPile[i].transform.DOLocalMove(new Vector3(i * m_pilingOffset.x, i * m_pilingOffset.y, i * m_pilingOffset.z), 0.1f);
+            //m_cardsInPile[i].transform.localPosition = new Vector3( i * m_pilingOffset.x, i * m_pilingOffset.y, i * m_pilingOffset.z) ;
             //m_cardsInPile[i].transform.localPosition = m_pilingOffset;
 
             m_cardsInPile[i].m_cardPile = this;
@@ -112,8 +112,11 @@ public class CardPile : MonoBehaviour, IDropHandler
                 cardsAbove.Add(m_cardsInPile[i]);
             }
         }
-     
-
         return cardsAbove;
+    }
+
+    public Card GetTopCard()
+    {
+        return m_cardsInPile[m_cardsInPile.Count - 1];
     }
 }

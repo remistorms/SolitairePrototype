@@ -21,9 +21,9 @@ public class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        m_returningPosition = transform.position;
+        //m_returningPosition = transform.position;
         m_canvasGroup.blocksRaycasts = false;
-        m_card.SetOutlineColor(Color.cyan);
+        //m_card.SetOutlineColor(Color.cyan);
         EventsManager.Fire_evt_OnCardBeginDrag(m_card);
     }
 
@@ -36,17 +36,19 @@ public class Draggable : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDra
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log(this.gameObject.name + ": End Drag");
+        //Debug.Log(this.gameObject.name + ": End Drag");
         m_canvasGroup.blocksRaycasts = true;
-        transform.position = m_returningPosition;
-        m_card.SetOutlineColor(Color.white);
+        //transform.position = m_returningPosition;
+        //m_card.SetOutlineColor(Color.white);
         EventsManager.Fire_evt_OnCardEndedDrag(m_card);
     }
 
+    /*
     public void SetReturningPosition(Vector3 position)
     {
         m_returningPosition = position;
     }
+    */
 
     public void OnPointerClick(PointerEventData eventData)
     {

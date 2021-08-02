@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerHand : MonoBehaviour
 {
@@ -13,6 +14,11 @@ public class PlayerHand : MonoBehaviour
         EventsManager.OnCardEndedDrag += OnCardEndedDrag;
     }
 
+    private void Update()
+    {
+
+    }
+
     private void OnCardEndedDrag(Card card)
     {
         m_cardsInHand.Clear();
@@ -20,6 +26,11 @@ public class PlayerHand : MonoBehaviour
 
     private void OnCardBeginDrag(Card card)
     {
-        m_cardsInHand = card.m_cardPile.GetAllCardsAboveSelected(card);
+        CardPile pile = card.m_cardPile;
+
+        m_cardsInHand = pile.GetAllCardsAboveSelected(card);
+
+        pile.RemoveCardsFromPile(m_cardsInHand);
+
     }
 }
