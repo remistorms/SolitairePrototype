@@ -30,11 +30,13 @@ public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler
     [SerializeField] private Color m_rejectColor;
 
     private Image m_outlineImage;
+    private CanvasGroup m_canvasGroup;
 
     private void Awake()
     {
         m_outlineImage = GetComponent<Image>();
         SetOutlineColor(m_normalColor);
+        m_canvasGroup = GetComponent<CanvasGroup>();
     }
 
     private bool m_isLerping = false;
@@ -148,6 +150,7 @@ public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler
     public void OnBeginDrag(PointerEventData pointerEventData)
     {
         EventsManager.Fire_evt_OnCardDragStarted(this, pointerEventData);
+        m_canvasGroup.blocksRaycasts = false;
     }
 
     public void OnDrag(PointerEventData pointerEventData)
@@ -158,11 +161,14 @@ public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler
     public void OnEndDrag(PointerEventData pointerEventData)
     {
         EventsManager.Fire_evt_OnCardDragEnded(this, pointerEventData);
+        m_canvasGroup.blocksRaycasts = true;
     }
 
     //DROP Interface
     public void OnDrop(PointerEventData eventData)
     {
+        Debug.Log("Card dropped on top of another card !!");
+
         if (m_cardPile == null)
         {
             return;
@@ -170,6 +176,8 @@ public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler
 
         if (eventData.pointerDrag.GetComponent<Card>() != null)
         {
+            Debug.Log("Card dropped on top of another card !!");
+
             Card card = eventData.pointerDrag.GetComponent<Card>();
 
             m_cardPile.DropCardOnPile(card);
@@ -204,5 +212,10 @@ public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler
         {
             Flip();
         }
+    }
+
+    public void SetCanvasGroupState(bool state)
+    {
+        m_canvasGroup.blocksRaycasts = state;
     }
 }

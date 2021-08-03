@@ -11,6 +11,7 @@ public class CardPile : MonoBehaviour, IDropHandler
     public int m_topIndex;
     public Vector3 m_pilingOffset;
     public bool m_isFinalPile = false;
+    public CardSuit m_finalPileSuit;
 
     private void Awake()
     {
@@ -109,9 +110,54 @@ public class CardPile : MonoBehaviour, IDropHandler
         }
     }
 
+    //TO DO CLEAN UP THIS
     public void DropCardOnPile(Card card)
     {
         EventsManager.Fire_evt_OnCardDroppedOnPile(card, this);
+
+        //Check rules here
+        Debug.Log( card.name + " is being dropped onto " + this.gameObject.name );
+
+        //Case pile contains at least one card
+        if (m_cardsInPile.Count > 0)
+        {
+            bool canStack = CardHelper.Instance.CheckIfCanStack(card, m_cardsInPile[m_cardsInPile.Count - 1]);
+            EventsManager.Fire_evt_OnCardStackCheck(card, this, canStack);
+
+            /*
+            if (canStack)
+            {
+                Debug.Log(card.name + " CAN be stacked on top of " + m_cardsInPile[m_cardsInPile.Count].name);
+            }
+            else
+            {
+                Debug.Log(card.name + " CAN NOT be stacked on top of " + m_cardsInPile[m_cardsInPile.Count].name);
+            }
+            */
+        }
+        //If pile is empty and is final pile
+        //Only accept 
+        else if (m_cardsInPile.Count == 0 && m_isFinalPile)
+        {
+            if (card.m_cardSuit == m_finalPileSuit && card.m_cardValue == CardValue.Ace)
+            {
+                //Final pile got its first card
+                EventsManager.Fire_evt_OnCardStackCheckOnEmptyPile(card, this, true);
+            }
+        }
+        //Only place card inside pile if its a king
+        else if (m_cardsInPile.Count == 0 && !m_isFinalPile)
+        {
+            if (card.m_cardValue == CardValue.King)
+            {
+                //Final pile got its first card
+                EventsManager.Fire_evt_OnCardStackCheckOnEmptyPile(card, this, true);
+            }
+        }
+        else
+        {
+            EventsManager.Fire_evt_OnCardStackCheckOnEmptyPile(card, this, false);
+        }
     }
 
     //Events

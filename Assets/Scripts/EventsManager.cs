@@ -45,4 +45,18 @@ public static class EventsManager
         //Debug.Log("EventsManager: " + card.name + " was clicked on");
         OnClickedOnCard(card, pointerEventData);
     }
+
+    public static event Action<Card, CardPile, bool> OnCardStackCheck = delegate { };
+    public static void Fire_evt_OnCardStackCheck(Card card, CardPile pile, bool canStack)
+    {
+        Debug.Log( "Checking card stacking Card:" + card.name + " -> on top of" + pile.GetTopCard().name + " -> canStack: " + canStack );
+        OnCardStackCheck(card, pile, canStack);
+    }
+
+    public static event Action<Card, CardPile, bool> OnCardStackCheckOnEmptyPile = delegate { };
+    public static void Fire_evt_OnCardStackCheckOnEmptyPile(Card card, CardPile pile, bool canStack)
+    {
+        Debug.Log("Checking card stacking Card:" + card.name + " -> on top of" + pile.GetTopCard().name + " -> canStack: " + canStack);
+        OnCardStackCheckOnEmptyPile(card, pile, canStack);
+    }
 }

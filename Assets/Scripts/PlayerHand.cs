@@ -12,13 +12,15 @@ public class PlayerHand : MonoBehaviour
     public CardPile m_destinationPile = null;
     bool m_cardsInHandSwitchedPiles = false;
     Vector3 offset = new Vector3(0, -0.2f, -0.05f);
+    bool m_hasCheckedStackRule = false;
 
     private void Start()
     {
         EventsManager.OnCardDragStarted += OnCardDragStarted;
         EventsManager.OnCardDragUpdate += OnCardDragUpdate;
         EventsManager.OnCardDragEnded += OnCardDragEnded;
-        EventsManager.OnCardDroppedOnPile += OnCardDropped;
+        EventsManager.OnCardStackCheck += OnCardStackCheck;
+        EventsManager.OnCardStackCheckOnEmptyPile += OnCardStackCheckOnEmptyPile;
     }
 
     private void OnCardDragStarted(Card card, PointerEventData pointerEventData)
@@ -33,6 +35,11 @@ public class PlayerHand : MonoBehaviour
         m_cardsInHand = m_originPile.GetAllCardsAboveSelected(card);
 
         m_originPile.RemoveCardsFromPile(m_cardsInHand);
+
+        for (int i = 0; i < m_cardsInHand.Count; i++)
+        {
+            m_cardsInHand[i].SetCanvasGroupState(false);
+        }
     }
 
     private void OnCardDragUpdate(Card card, PointerEventData pointerEventData)
@@ -51,26 +58,52 @@ public class PlayerHand : MonoBehaviour
         }
     }
 
-    private void OnCardDragEnded(Card card, PointerEventData pointerEventData)
+    private void OnCardStackCheck(Card card, CardPile cardPile, bool canStack)
     {
-        if (!m_cardsInHandSwitchedPiles && m_originPile != null)
+        if (canStack)
         {
-            m_originPile.AddCardsToPile(m_cardsInHand);
+            m_destinationPile = cardPile;
         }
-        else if(m_cardsInHandSwitchedPiles && m_destinationPile != null)
+        else
         {
-            m_destinationPile.AddCardsToPile(m_cardsInHand);
+            m_destinationPile = m_originPile;
         }
 
+        m_hasCheckedStackRule = true;
+    }
+
+    private void OnCardStackCheckOnEmptyPile(Card card, CardPile cardPile, bool canStack)
+    {
+        if (canStack)
+        {
+            m_destinationPile = cardPile;
+        }
+        else
+        {
+            m_destinationPile = m_originPile;
+        }
+
+        m_hasCheckedStackRule = true;
+    }
+
+    private void OnCardDragEnded(Card card, PointerEventData pointerEventData)
+    {
+        if (!m_hasCheckedStackRule)
+        {
+            m_destinationPile = m_originPile;
+        }
+
+        m_destinationPile.AddCardsToPile(m_cardsInHand);
         m_originPile = null;
         m_destinationPile = null;
         m_cardsInHand.Clear();
+        m_hasCheckedStackRule = false;
+
+        for (int i = 0; i < m_cardsInHand.Count; i++)
+        {
+            m_cardsInHand[i].SetCanvasGroupState(true);
+        }
+
     }
 
-
-
-    private void OnCardDropped(Card card, CardPile pile)
-    {
-
-    }
 }

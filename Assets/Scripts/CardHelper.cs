@@ -256,7 +256,7 @@ public class CardHelper : MonoBehaviour
         if (isFinalPile)
         {
             //only return true if both cards are the same suit and if up card value is +1 value from down card
-            if (upCard.m_cardColor == downCard.m_cardColor && CardHelper.Instance.GetValueDifference(upCard.m_cardValue, downCard.m_cardValue) > 0)
+            if (upCard.m_cardColor == downCard.m_cardColor && CardHelper.Instance.GetValueDifference(upCard.m_cardValue, downCard.m_cardValue) == 1)
             {
                 return true;
             }
@@ -269,7 +269,7 @@ public class CardHelper : MonoBehaviour
         else
         {
             //only return true if both cards are different card color and if up card value is -1 value from down card
-            if (upCard.m_cardColor != downCard.m_cardColor && CardHelper.Instance.GetValueDifference(upCard.m_cardValue, downCard.m_cardValue) < 0)
+            if (upCard.m_cardColor != downCard.m_cardColor && CardHelper.Instance.GetValueDifference(upCard.m_cardValue, downCard.m_cardValue) == -1)
             {
                 return true;
             }
