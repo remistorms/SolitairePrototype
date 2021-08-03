@@ -189,7 +189,7 @@ MonoBehaviour:
   m_cardPrefab: {fileID: 6820074323485670485, guid: d249990f43103e34ba1efe13a78ec762,
     type: 3}
   m_deck: []
-  m_deckPile: {fileID: 1758116605}
+  m_deckPile: {fileID: 150013402}
   m_bottomPiles:
   - {fileID: 131480993546242942}
   - {fileID: 2138712160}
@@ -217,6 +217,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &150013402 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930,
+    type: 3}
+  m_PrefabInstance: {fileID: 1283573489}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83eb9448ecd05f049a59c00c402faf22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &166547391
 GameObject:
   m_ObjectHideFlags: 0
@@ -2294,18 +2306,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1283573489}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1758116605 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930,
-    type: 3}
-  m_PrefabInstance: {fileID: 1283573489}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83eb9448ecd05f049a59c00c402faf22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1794167458
 GameObject:
   m_ObjectHideFlags: 0

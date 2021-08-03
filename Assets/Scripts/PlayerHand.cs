@@ -20,7 +20,6 @@ public class PlayerHand : MonoBehaviour
         EventsManager.OnCardDragUpdate += OnCardDragUpdate;
         EventsManager.OnCardDragEnded += OnCardDragEnded;
         EventsManager.OnCardStackCheck += OnCardStackCheck;
-        EventsManager.OnCardStackCheckOnEmptyPile += OnCardStackCheckOnEmptyPile;
     }
 
     private void OnCardDragStarted(Card card, PointerEventData pointerEventData)
@@ -60,20 +59,7 @@ public class PlayerHand : MonoBehaviour
 
     private void OnCardStackCheck(Card card, CardPile cardPile, bool canStack)
     {
-        if (canStack)
-        {
-            m_destinationPile = cardPile;
-        }
-        else
-        {
-            m_destinationPile = m_originPile;
-        }
-
-        m_hasCheckedStackRule = true;
-    }
-
-    private void OnCardStackCheckOnEmptyPile(Card card, CardPile cardPile, bool canStack)
-    {
+        Debug.Log("PlayerHand: OnCardStackCheck result: " + canStack );
         if (canStack)
         {
             m_destinationPile = cardPile;

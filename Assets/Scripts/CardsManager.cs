@@ -36,6 +36,8 @@ public class CardsManager : MonoBehaviour
 
                 Card card = clonedCard.GetComponent<Card>();
 
+                card.Flip(0);
+
                 card.InitializeCard(v, currentSuit);
 
                 clonedCard.name = currentCardValue.ToString() + " of " + currentSuit.ToString();
@@ -43,10 +45,14 @@ public class CardsManager : MonoBehaviour
                 m_deck.Add(card);
             }
         }
+
+        m_deckPile.AddCardsToPile(m_deck);
     }
 
     void ShuffleDeck()
     {
+        m_deckPile.RemoveCardsFromPile(m_deck);
+
         List<Card> tempDeck = new List<Card>();
 
         while (m_deck.Count > 0)

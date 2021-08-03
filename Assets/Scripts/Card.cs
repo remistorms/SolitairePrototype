@@ -149,6 +149,11 @@ public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler
     //Drag Interfaces
     public void OnBeginDrag(PointerEventData pointerEventData)
     {
+        if (!m_isFaceUp)
+        {
+            return;
+        }
+
         EventsManager.Fire_evt_OnCardDragStarted(this, pointerEventData);
         m_canvasGroup.blocksRaycasts = false;
     }

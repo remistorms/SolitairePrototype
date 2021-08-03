@@ -49,14 +49,7 @@ public static class EventsManager
     public static event Action<Card, CardPile, bool> OnCardStackCheck = delegate { };
     public static void Fire_evt_OnCardStackCheck(Card card, CardPile pile, bool canStack)
     {
-        Debug.Log( "Checking card stacking Card:" + card.name + " -> on top of" + pile.GetTopCard().name + " -> canStack: " + canStack );
+        Debug.Log(" card " + card.name + " was dropped onto " + pile.gameObject.name + " stackable status -> " + canStack);
         OnCardStackCheck(card, pile, canStack);
-    }
-
-    public static event Action<Card, CardPile, bool> OnCardStackCheckOnEmptyPile = delegate { };
-    public static void Fire_evt_OnCardStackCheckOnEmptyPile(Card card, CardPile pile, bool canStack)
-    {
-        Debug.Log("Checking card stacking Card:" + card.name + " -> on top of" + pile.GetTopCard().name + " -> canStack: " + canStack);
-        OnCardStackCheckOnEmptyPile(card, pile, canStack);
     }
 }
