@@ -154,7 +154,12 @@ public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler
             return;
         }
         //Can only drag card from Game Piles, EndPiles and DrawPiles
-        if (m_cardPile.m_pileType == PileType.GamePile || m_cardPile.m_pileType == PileType.EndPile || m_cardPile.m_pileType == PileType.DrawPile)
+        if (m_cardPile.m_pileType == PileType.GamePile || m_cardPile.m_pileType == PileType.EndPile)
+        {
+            EventsManager.Fire_evt_OnCardDragStarted(this, pointerEventData);
+            m_canvasGroup.blocksRaycasts = false;
+        }
+        else if (m_cardPile.m_pileType == PileType.DrawPile && m_isTopCard )
         {
             EventsManager.Fire_evt_OnCardDragStarted(this, pointerEventData);
             m_canvasGroup.blocksRaycasts = false;
@@ -162,7 +167,7 @@ public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler
         else
         {
             Debug.Log("Trying to drag a card from :" + m_cardPile.m_pileType + " which is not allowed");
-            EventsManager.Fire_evt_RequestDrawCards();
+            
         }
 
     }

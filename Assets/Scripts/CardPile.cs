@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 
-public class CardPile : MonoBehaviour, IDropHandler
+public class CardPile : MonoBehaviour, IDropHandler, IPointerClickHandler
 {
     public PileType m_pileType;
     public List<Card> m_cardsInPile;
@@ -85,9 +85,26 @@ public class CardPile : MonoBehaviour, IDropHandler
         {
             m_cardsInPile[i].transform.SetParent(this.transform);
 
-            m_cardsInPile[i].transform.DOLocalMove(new Vector3(i * m_pilingOffset.x, i * m_pilingOffset.y, i * m_pilingOffset.z), 0.1f);
-            //m_cardsInPile[i].transform.localPosition = new Vector3( i * m_pilingOffset.x, i * m_pilingOffset.y, i * m_pilingOffset.z) ;
-            //m_cardsInPile[i].transform.localPosition = m_pilingOffset;
+            //Only offset the top three cards if is pile type draw
+            if (m_pileType == PileType.DrawPile)
+            {
+                Debug.Log("Update Draw Pile Positions");
+                if (i >= m_cardsInPile.Count - 3)
+                {
+                    int difference =  m_cardsInPile.Count - i - 1;
+                    Debug.Log("Difference: " + difference);
+                    m_cardsInPile[i].transform.DOLocalMove(new Vector3(difference * m_pilingOffset.x, difference * m_pilingOffset.y, difference * m_pilingOffset.z), 0.1f);
+                }
+                else
+                {
+                    m_cardsInPile[i].transform.DOLocalMove(Vector3.zero, 0.1f);
+                }
+            }
+            else
+            {
+                m_cardsInPile[i].transform.DOLocalMove(new Vector3(i * m_pilingOffset.x, i * m_pilingOffset.y, i * m_pilingOffset.z), 0.1f);
+            }
+
 
             m_cardsInPile[i].m_cardPile = this;
 
@@ -98,17 +115,6 @@ public class CardPile : MonoBehaviour, IDropHandler
         }
 
         m_cardsInPile[m_cardsInPile.Count - 1].m_isTopCard = true;
-
-        if (m_pileType == PileType.DrawPile && m_cardsManager.m_drawThreeCardMode)
-        {
-            //OnlyShowThreeTopCards();
-            //Discard all but last 3 cards
-        }
-    }
-
-    private void DiscardAllButTopThreeCards()
-    {
-
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -152,5 +158,14 @@ public class CardPile : MonoBehaviour, IDropHandler
     public Card GetTopCard()
     {
         return m_cardsInPile[m_cardsInPile.Count - 1];
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        Debug.Log("Clicked on empty Deck requesting new cards");
+        if (m_pileType == PileType.DeckPile && m_cardsInPile.Count == 0)
+        {
+            EventsManager.Fire_evt_RequestDrawCards();
+        }
     }
 }

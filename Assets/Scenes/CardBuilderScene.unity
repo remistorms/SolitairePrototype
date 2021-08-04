@@ -153,7 +153,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_pileType: 2
   m_cardsInPile: []
-  m_pilingOffset: {x: 0, y: -150, z: -2}
+  m_pilingOffset: {x: 0, y: -200, z: -2}
   m_finalPileSuit: 0
 --- !u!1 &137994146
 GameObject:
@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 515de2bf794aabf46aab8f0bc21c2e25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_drawThreeCardMode: 0
+  m_drawThreeCardMode: 1
   m_cardPrefab: {fileID: 6820074323485670485, guid: d249990f43103e34ba1efe13a78ec762,
     type: 3}
   m_deck: []
@@ -607,7 +607,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_pileType: 2
   m_cardsInPile: []
-  m_pilingOffset: {x: 0, y: -150, z: -2}
+  m_pilingOffset: {x: 0, y: -200, z: -2}
   m_finalPileSuit: 0
 --- !u!1 &496876272 stripped
 GameObject:
@@ -629,7 +629,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_pileType: 2
   m_cardsInPile: []
-  m_pilingOffset: {x: 0, y: -150, z: -2}
+  m_pilingOffset: {x: 0, y: -200, z: -2}
   m_finalPileSuit: 0
 --- !u!224 &515011281 stripped
 RectTransform:
@@ -1011,7 +1011,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_pileType: 2
   m_cardsInPile: []
-  m_pilingOffset: {x: 0, y: -150, z: -2}
+  m_pilingOffset: {x: 0, y: -200, z: -2}
   m_finalPileSuit: 0
 --- !u!1001 &886294823
 PrefabInstance:
@@ -1345,7 +1345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_pileType: 2
   m_cardsInPile: []
-  m_pilingOffset: {x: 0, y: -150, z: -2}
+  m_pilingOffset: {x: 0, y: -200, z: -2}
   m_finalPileSuit: 0
 --- !u!1 &971467274
 GameObject:
@@ -1457,7 +1457,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_pileType: 2
   m_cardsInPile: []
-  m_pilingOffset: {x: 0, y: -150, z: -2}
+  m_pilingOffset: {x: 0, y: -200, z: -2}
   m_finalPileSuit: 0
 --- !u!1001 &1275180895
 PrefabInstance:
@@ -2663,7 +2663,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_pileType: 2
   m_cardsInPile: []
-  m_pilingOffset: {x: 0, y: -150, z: -2}
+  m_pilingOffset: {x: 0, y: -200, z: -2}
   m_finalPileSuit: 0
 --- !u!1 &1909180872 stripped
 GameObject:
@@ -2927,6 +2927,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 917714803}
     m_Modifications:
+    - target: {fileID: 2589432359412623145, guid: f9383a2765cb71a49ad490eebc64e930,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 0.2509804
+      objectReference: {fileID: 0}
     - target: {fileID: 8467672672018601040, guid: f9383a2765cb71a49ad490eebc64e930,
         type: 3}
       propertyPath: m_Pivot.x
@@ -3010,7 +3015,7 @@ PrefabInstance:
     - target: {fileID: 8467672672018601040, guid: f9383a2765cb71a49ad490eebc64e930,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -2.4
+      value: -1.8
       objectReference: {fileID: 0}
     - target: {fileID: 8467672672018601040, guid: f9383a2765cb71a49ad490eebc64e930,
         type: 3}
@@ -3081,7 +3086,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_pileType: 4
   m_cardsInPile: []
-  m_pilingOffset: {x: 250, y: 0, z: -2}
+  m_pilingOffset: {x: -250, y: 0, z: -2}
   m_finalPileSuit: 0
 --- !u!224 &2138712159 stripped
 RectTransform:

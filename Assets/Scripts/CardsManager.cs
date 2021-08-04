@@ -112,7 +112,7 @@ public class CardsManager : MonoBehaviour
 
             selectedPile.AddCardToPile(topCard);
 
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.1f);
         }
 
         yield return null;
@@ -121,13 +121,16 @@ public class CardsManager : MonoBehaviour
         {
             m_gamePiles[i].GetTopCard().Flip();
 
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.1f);
         }
-
-
     }
 
     public void DrawCardsFromDeck()
+    {
+        StartCoroutine(DrawCardsFromDeckRoutine());
+    }
+
+    IEnumerator DrawCardsFromDeckRoutine()
     {
         //TODO
         //Check if remaining cards are enought to deal
@@ -149,6 +152,8 @@ public class CardsManager : MonoBehaviour
                 m_drawPile.AddCardToPile(card);
 
                 card.Flip();
+
+                yield return new WaitForSeconds(0.1f);
             }
         }
         else
@@ -161,5 +166,5 @@ public class CardsManager : MonoBehaviour
 
         //Flip them
     }
- 
+
 }
