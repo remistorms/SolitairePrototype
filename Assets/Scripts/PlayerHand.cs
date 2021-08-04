@@ -79,6 +79,11 @@ public class PlayerHand : MonoBehaviour
             m_destinationPile = m_originPile;
         }
 
+        if (m_destinationPile == null)
+        {
+            m_destinationPile = m_originPile;
+        }
+
         m_destinationPile.AddCardsToPile(m_cardsInHand);
         m_originPile = null;
         m_destinationPile = null;

@@ -127,36 +127,34 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1312887344}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &52706443 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930,
-    type: 3}
-  m_PrefabInstance: {fileID: 1312887344}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83eb9448ecd05f049a59c00c402faf22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &57978184 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8467672672018601040, guid: f9383a2765cb71a49ad490eebc64e930,
     type: 3}
   m_PrefabInstance: {fileID: 1702705632}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &57978185 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930,
+--- !u!1 &136543966 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8467672672018601069, guid: f9383a2765cb71a49ad490eebc64e930,
     type: 3}
-  m_PrefabInstance: {fileID: 1702705632}
+  m_PrefabInstance: {fileID: 1275180895}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+--- !u!114 &136543967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 136543966}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 83eb9448ecd05f049a59c00c402faf22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_pileType: 2
+  m_cardsInPile: []
+  m_pilingOffset: {x: 0, y: -150, z: -2}
+  m_finalPileSuit: 0
 --- !u!1 &137994146
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,23 +184,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 515de2bf794aabf46aab8f0bc21c2e25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_drawThreeCardMode: 0
   m_cardPrefab: {fileID: 6820074323485670485, guid: d249990f43103e34ba1efe13a78ec762,
     type: 3}
   m_deck: []
-  m_deckPile: {fileID: 150013402}
-  m_bottomPiles:
-  - {fileID: 131480993546242942}
-  - {fileID: 2138712160}
-  - {fileID: 1022534800}
-  - {fileID: 1587603861}
-  - {fileID: 1892557655}
-  - {fileID: 515011282}
-  - {fileID: 57978185}
-  m_topPiles:
-  - {fileID: 244873773}
-  - {fileID: 804696457}
-  - {fileID: 288022635}
-  - {fileID: 52706443}
+  m_deckPile: {fileID: 1660305508}
+  m_drawPile: {fileID: 2121529204}
+  m_endPiles:
+  - {fileID: 1705111121}
+  - {fileID: 1909180873}
+  - {fileID: 2071773003}
+  - {fileID: 294483743}
+  m_gamePiles:
+  - {fileID: 846881971}
+  - {fileID: 407194640}
+  - {fileID: 964085416}
+  - {fileID: 496876273}
+  - {fileID: 1908873806}
+  - {fileID: 136543967}
+  - {fileID: 1250202235}
 --- !u!4 &137994148
 Transform:
   m_ObjectHideFlags: 0
@@ -217,18 +217,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &150013402 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930,
-    type: 3}
-  m_PrefabInstance: {fileID: 1283573489}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83eb9448ecd05f049a59c00c402faf22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &166547391
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,36 +419,12 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 288939758}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &244873773 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930,
-    type: 3}
-  m_PrefabInstance: {fileID: 288939758}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83eb9448ecd05f049a59c00c402faf22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &288022634 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8467672672018601040, guid: f9383a2765cb71a49ad490eebc64e930,
     type: 3}
   m_PrefabInstance: {fileID: 886294823}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &288022635 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930,
-    type: 3}
-  m_PrefabInstance: {fileID: 886294823}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83eb9448ecd05f049a59c00c402faf22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &288939758
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -576,7 +540,7 @@ PrefabInstance:
     - target: {fileID: 8467672672018601069, guid: f9383a2765cb71a49ad490eebc64e930,
         type: 3}
       propertyPath: m_Name
-      value: CardPile (10)
+      value: EndPileClubs
       objectReference: {fileID: 0}
     - target: {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930,
         type: 3}
@@ -598,26 +562,81 @@ PrefabInstance:
       propertyPath: m_pilingOffset.z
       value: -0.5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f9383a2765cb71a49ad490eebc64e930, type: 3}
+--- !u!1 &294483742 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8467672672018601069, guid: f9383a2765cb71a49ad490eebc64e930,
+    type: 3}
+  m_PrefabInstance: {fileID: 1312887344}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &294483743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294483742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83eb9448ecd05f049a59c00c402faf22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_pileType: 3
+  m_cardsInPile: []
+  m_pilingOffset: {x: 0, y: 0, z: -2}
+  m_finalPileSuit: 3
+--- !u!1 &407194639 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8467672672018601069, guid: f9383a2765cb71a49ad490eebc64e930,
+    type: 3}
+  m_PrefabInstance: {fileID: 1535406538}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &407194640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407194639}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83eb9448ecd05f049a59c00c402faf22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_pileType: 2
+  m_cardsInPile: []
+  m_pilingOffset: {x: 0, y: -150, z: -2}
+  m_finalPileSuit: 0
+--- !u!1 &496876272 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8467672672018601069, guid: f9383a2765cb71a49ad490eebc64e930,
+    type: 3}
+  m_PrefabInstance: {fileID: 889840872}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &496876273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 496876272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83eb9448ecd05f049a59c00c402faf22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_pileType: 2
+  m_cardsInPile: []
+  m_pilingOffset: {x: 0, y: -150, z: -2}
+  m_finalPileSuit: 0
 --- !u!224 &515011281 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8467672672018601040, guid: f9383a2765cb71a49ad490eebc64e930,
     type: 3}
   m_PrefabInstance: {fileID: 1275180895}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &515011282 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930,
-    type: 3}
-  m_PrefabInstance: {fileID: 1275180895}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83eb9448ecd05f049a59c00c402faf22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &525209999
 GameObject:
   m_ObjectHideFlags: 0
@@ -900,7 +919,7 @@ PrefabInstance:
     - target: {fileID: 8467672672018601069, guid: f9383a2765cb71a49ad490eebc64e930,
         type: 3}
       propertyPath: m_Name
-      value: CardPile (4)
+      value: GamePile
       objectReference: {fileID: 0}
     - target: {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930,
         type: 3}
@@ -917,7 +936,8 @@ PrefabInstance:
       propertyPath: m_pilingOffset.z
       value: -2.5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f9383a2765cb71a49ad490eebc64e930, type: 3}
 --- !u!1 &635907522
 GameObject:
@@ -971,18 +991,28 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1956298313}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &804696457 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930,
+--- !u!1 &846881970 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8467672672018601069, guid: f9383a2765cb71a49ad490eebc64e930,
     type: 3}
-  m_PrefabInstance: {fileID: 1956298313}
+  m_PrefabInstance: {fileID: 8381245267000270608}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+--- !u!114 &846881971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 846881970}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 83eb9448ecd05f049a59c00c402faf22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_pileType: 2
+  m_cardsInPile: []
+  m_pilingOffset: {x: 0, y: -150, z: -2}
+  m_finalPileSuit: 0
 --- !u!1001 &886294823
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1098,7 +1128,7 @@ PrefabInstance:
     - target: {fileID: 8467672672018601069, guid: f9383a2765cb71a49ad490eebc64e930,
         type: 3}
       propertyPath: m_Name
-      value: CardPile (12)
+      value: EndPileHearts
       objectReference: {fileID: 0}
     - target: {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930,
         type: 3}
@@ -1125,7 +1155,8 @@ PrefabInstance:
       propertyPath: m_pilingOffset.z
       value: -0.5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f9383a2765cb71a49ad490eebc64e930, type: 3}
 --- !u!1001 &889840872
 PrefabInstance:
@@ -1242,7 +1273,7 @@ PrefabInstance:
     - target: {fileID: 8467672672018601069, guid: f9383a2765cb71a49ad490eebc64e930,
         type: 3}
       propertyPath: m_Name
-      value: CardPile (3)
+      value: GamePile
       objectReference: {fileID: 0}
     - target: {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930,
         type: 3}
@@ -1259,7 +1290,8 @@ PrefabInstance:
       propertyPath: m_pilingOffset.z
       value: -2.5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f9383a2765cb71a49ad490eebc64e930, type: 3}
 --- !u!1 &917714802
 GameObject:
@@ -1271,7 +1303,7 @@ GameObject:
   m_Component:
   - component: {fileID: 917714803}
   m_Layer: 0
-  m_Name: DeckPile
+  m_Name: DeckPiles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1289,9 +1321,32 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1758116604}
+  - {fileID: 2121529202}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &964085415 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8467672672018601069, guid: f9383a2765cb71a49ad490eebc64e930,
+    type: 3}
+  m_PrefabInstance: {fileID: 1295829075}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &964085416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964085415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83eb9448ecd05f049a59c00c402faf22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_pileType: 2
+  m_cardsInPile: []
+  m_pilingOffset: {x: 0, y: -150, z: -2}
+  m_finalPileSuit: 0
 --- !u!1 &971467274
 GameObject:
   m_ObjectHideFlags: 0
@@ -1302,7 +1357,7 @@ GameObject:
   m_Component:
   - component: {fileID: 971467275}
   m_Layer: 0
-  m_Name: BottomPiles
+  m_Name: Game Piles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1335,18 +1390,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1295829075}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1022534800 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930,
-    type: 3}
-  m_PrefabInstance: {fileID: 1295829075}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83eb9448ecd05f049a59c00c402faf22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1230882717
 GameObject:
   m_ObjectHideFlags: 0
@@ -1394,6 +1437,28 @@ MonoBehaviour:
   m_diamondSprite: {fileID: 21300000, guid: cf01bd845ed89ab45a34fdd0eef1a60a, type: 3}
   m_heartSprite: {fileID: 21300000, guid: f04bd1ed40f703e49933498c6213b5f3, type: 3}
   m_spadeSprite: {fileID: 21300000, guid: 2102697c63558724ba12c30d6aff75cf, type: 3}
+--- !u!1 &1250202234 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8467672672018601069, guid: f9383a2765cb71a49ad490eebc64e930,
+    type: 3}
+  m_PrefabInstance: {fileID: 1702705632}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1250202235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1250202234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83eb9448ecd05f049a59c00c402faf22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_pileType: 2
+  m_cardsInPile: []
+  m_pilingOffset: {x: 0, y: -150, z: -2}
+  m_finalPileSuit: 0
 --- !u!1001 &1275180895
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1509,7 +1574,7 @@ PrefabInstance:
     - target: {fileID: 8467672672018601069, guid: f9383a2765cb71a49ad490eebc64e930,
         type: 3}
       propertyPath: m_Name
-      value: CardPile (5)
+      value: GamePile
       objectReference: {fileID: 0}
     - target: {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930,
         type: 3}
@@ -1526,7 +1591,8 @@ PrefabInstance:
       propertyPath: m_pilingOffset.z
       value: -2.5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f9383a2765cb71a49ad490eebc64e930, type: 3}
 --- !u!1001 &1283573489
 PrefabInstance:
@@ -1660,7 +1726,8 @@ PrefabInstance:
       propertyPath: m_pilingOffset.z
       value: -5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f9383a2765cb71a49ad490eebc64e930, type: 3}
 --- !u!1001 &1295829075
 PrefabInstance:
@@ -1777,7 +1844,7 @@ PrefabInstance:
     - target: {fileID: 8467672672018601069, guid: f9383a2765cb71a49ad490eebc64e930,
         type: 3}
       propertyPath: m_Name
-      value: CardPile (2)
+      value: GamePile
       objectReference: {fileID: 0}
     - target: {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930,
         type: 3}
@@ -1794,7 +1861,8 @@ PrefabInstance:
       propertyPath: m_pilingOffset.z
       value: -2.5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f9383a2765cb71a49ad490eebc64e930, type: 3}
 --- !u!1001 &1312887344
 PrefabInstance:
@@ -1911,7 +1979,7 @@ PrefabInstance:
     - target: {fileID: 8467672672018601069, guid: f9383a2765cb71a49ad490eebc64e930,
         type: 3}
       propertyPath: m_Name
-      value: CardPile (13)
+      value: EndPileSpades
       objectReference: {fileID: 0}
     - target: {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930,
         type: 3}
@@ -1938,7 +2006,8 @@ PrefabInstance:
       propertyPath: m_pilingOffset.z
       value: -0.5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f9383a2765cb71a49ad490eebc64e930, type: 3}
 --- !u!1 &1440105018
 GameObject:
@@ -2129,7 +2198,7 @@ PrefabInstance:
     - target: {fileID: 8467672672018601069, guid: f9383a2765cb71a49ad490eebc64e930,
         type: 3}
       propertyPath: m_Name
-      value: CardPile (1)
+      value: GamePile
       objectReference: {fileID: 0}
     - target: {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930,
         type: 3}
@@ -2146,7 +2215,8 @@ PrefabInstance:
       propertyPath: m_pilingOffset.z
       value: -2.5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f9383a2765cb71a49ad490eebc64e930, type: 3}
 --- !u!224 &1587603860 stripped
 RectTransform:
@@ -2154,18 +2224,28 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 889840872}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1587603861 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930,
+--- !u!1 &1660305501 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8467672672018601069, guid: f9383a2765cb71a49ad490eebc64e930,
     type: 3}
-  m_PrefabInstance: {fileID: 889840872}
+  m_PrefabInstance: {fileID: 1283573489}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+--- !u!114 &1660305508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660305501}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 83eb9448ecd05f049a59c00c402faf22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_pileType: 1
+  m_cardsInPile: []
+  m_pilingOffset: {x: 0, y: 0, z: -2}
+  m_finalPileSuit: 0
 --- !u!1001 &1702705632
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2281,7 +2361,7 @@ PrefabInstance:
     - target: {fileID: 8467672672018601069, guid: f9383a2765cb71a49ad490eebc64e930,
         type: 3}
       propertyPath: m_Name
-      value: CardPile (6)
+      value: GamePile
       objectReference: {fileID: 0}
     - target: {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930,
         type: 3}
@@ -2298,8 +2378,31 @@ PrefabInstance:
       propertyPath: m_pilingOffset.z
       value: -2.5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f9383a2765cb71a49ad490eebc64e930, type: 3}
+--- !u!1 &1705111120 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8467672672018601069, guid: f9383a2765cb71a49ad490eebc64e930,
+    type: 3}
+  m_PrefabInstance: {fileID: 288939758}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1705111121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1705111120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83eb9448ecd05f049a59c00c402faf22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_pileType: 3
+  m_cardsInPile: []
+  m_pilingOffset: {x: 0, y: 0, z: -2}
+  m_finalPileSuit: 0
 --- !u!224 &1758116604 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8467672672018601040, guid: f9383a2765cb71a49ad490eebc64e930,
@@ -2316,7 +2419,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1794167459}
   m_Layer: 0
-  m_Name: GoalPiles
+  m_Name: End Piles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2540,18 +2643,50 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 554995101}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1892557655 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930,
+--- !u!1 &1908873805 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8467672672018601069, guid: f9383a2765cb71a49ad490eebc64e930,
     type: 3}
   m_PrefabInstance: {fileID: 554995101}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+--- !u!114 &1908873806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1908873805}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 83eb9448ecd05f049a59c00c402faf22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_pileType: 2
+  m_cardsInPile: []
+  m_pilingOffset: {x: 0, y: -150, z: -2}
+  m_finalPileSuit: 0
+--- !u!1 &1909180872 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8467672672018601069, guid: f9383a2765cb71a49ad490eebc64e930,
+    type: 3}
+  m_PrefabInstance: {fileID: 1956298313}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1909180873
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1909180872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83eb9448ecd05f049a59c00c402faf22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_pileType: 3
+  m_cardsInPile: []
+  m_pilingOffset: {x: 0, y: 0, z: -2}
+  m_finalPileSuit: 1
 --- !u!1 &1946088727
 GameObject:
   m_ObjectHideFlags: 0
@@ -2733,7 +2868,7 @@ PrefabInstance:
     - target: {fileID: 8467672672018601069, guid: f9383a2765cb71a49ad490eebc64e930,
         type: 3}
       propertyPath: m_Name
-      value: CardPile (11)
+      value: EndPileDiamonds
       objectReference: {fileID: 0}
     - target: {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930,
         type: 3}
@@ -2760,44 +2895,206 @@ PrefabInstance:
       propertyPath: m_pilingOffset.z
       value: -0.5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f9383a2765cb71a49ad490eebc64e930, type: 3}
+--- !u!1 &2071773002 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8467672672018601069, guid: f9383a2765cb71a49ad490eebc64e930,
+    type: 3}
+  m_PrefabInstance: {fileID: 886294823}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2071773003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2071773002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83eb9448ecd05f049a59c00c402faf22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_pileType: 3
+  m_cardsInPile: []
+  m_pilingOffset: {x: 0, y: 0, z: -2}
+  m_finalPileSuit: 2
+--- !u!1001 &2121529201
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 917714803}
+    m_Modifications:
+    - target: {fileID: 8467672672018601040, guid: f9383a2765cb71a49ad490eebc64e930,
+        type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467672672018601040, guid: f9383a2765cb71a49ad490eebc64e930,
+        type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467672672018601040, guid: f9383a2765cb71a49ad490eebc64e930,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467672672018601040, guid: f9383a2765cb71a49ad490eebc64e930,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467672672018601040, guid: f9383a2765cb71a49ad490eebc64e930,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467672672018601040, guid: f9383a2765cb71a49ad490eebc64e930,
+        type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467672672018601040, guid: f9383a2765cb71a49ad490eebc64e930,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467672672018601040, guid: f9383a2765cb71a49ad490eebc64e930,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 1100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467672672018601040, guid: f9383a2765cb71a49ad490eebc64e930,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1650
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467672672018601040, guid: f9383a2765cb71a49ad490eebc64e930,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467672672018601040, guid: f9383a2765cb71a49ad490eebc64e930,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467672672018601040, guid: f9383a2765cb71a49ad490eebc64e930,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467672672018601040, guid: f9383a2765cb71a49ad490eebc64e930,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467672672018601040, guid: f9383a2765cb71a49ad490eebc64e930,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467672672018601040, guid: f9383a2765cb71a49ad490eebc64e930,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467672672018601040, guid: f9383a2765cb71a49ad490eebc64e930,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467672672018601040, guid: f9383a2765cb71a49ad490eebc64e930,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -2.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467672672018601040, guid: f9383a2765cb71a49ad490eebc64e930,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467672672018601040, guid: f9383a2765cb71a49ad490eebc64e930,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467672672018601040, guid: f9383a2765cb71a49ad490eebc64e930,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467672672018601040, guid: f9383a2765cb71a49ad490eebc64e930,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467672672018601069, guid: f9383a2765cb71a49ad490eebc64e930,
+        type: 3}
+      propertyPath: m_Name
+      value: DrawPile
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930,
+        type: 3}
+      propertyPath: m_pilingOffset.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930,
+        type: 3}
+      propertyPath: m_pilingOffset.y
+      value: -200
+      objectReference: {fileID: 0}
+    - target: {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930,
+        type: 3}
+      propertyPath: m_pilingOffset.z
+      value: -2.5
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: f9383a2765cb71a49ad490eebc64e930, type: 3}
+--- !u!224 &2121529202 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8467672672018601040, guid: f9383a2765cb71a49ad490eebc64e930,
+    type: 3}
+  m_PrefabInstance: {fileID: 2121529201}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2121529203 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8467672672018601069, guid: f9383a2765cb71a49ad490eebc64e930,
+    type: 3}
+  m_PrefabInstance: {fileID: 2121529201}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2121529204
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121529203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 83eb9448ecd05f049a59c00c402faf22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_pileType: 4
+  m_cardsInPile: []
+  m_pilingOffset: {x: 250, y: 0, z: -2}
+  m_finalPileSuit: 0
 --- !u!224 &2138712159 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8467672672018601040, guid: f9383a2765cb71a49ad490eebc64e930,
     type: 3}
   m_PrefabInstance: {fileID: 1535406538}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2138712160 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930,
-    type: 3}
-  m_PrefabInstance: {fileID: 1535406538}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83eb9448ecd05f049a59c00c402faf22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &131480993546242880 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8467672672018601040, guid: f9383a2765cb71a49ad490eebc64e930,
     type: 3}
   m_PrefabInstance: {fileID: 8381245267000270608}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &131480993546242942 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930,
-    type: 3}
-  m_PrefabInstance: {fileID: 8381245267000270608}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83eb9448ecd05f049a59c00c402faf22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &8381245267000270608
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2913,7 +3210,7 @@ PrefabInstance:
     - target: {fileID: 8467672672018601069, guid: f9383a2765cb71a49ad490eebc64e930,
         type: 3}
       propertyPath: m_Name
-      value: CardPile (0)
+      value: GamePile
       objectReference: {fileID: 0}
     - target: {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930,
         type: 3}
@@ -2930,5 +3227,6 @@ PrefabInstance:
       propertyPath: m_pilingOffset.z
       value: -2.5
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8467672672018601070, guid: f9383a2765cb71a49ad490eebc64e930, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f9383a2765cb71a49ad490eebc64e930, type: 3}

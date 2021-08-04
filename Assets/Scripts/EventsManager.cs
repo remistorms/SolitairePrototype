@@ -52,4 +52,10 @@ public static class EventsManager
         Debug.Log(" card " + card.name + " was dropped onto " + pile.gameObject.name + " stackable status -> " + canStack);
         OnCardStackCheck(card, pile, canStack);
     }
+
+    public static event Action OnRequestDrawCards = delegate { };
+    public static void Fire_evt_RequestDrawCards()
+    {
+        OnRequestDrawCards();
+    }
 }

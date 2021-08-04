@@ -7,15 +7,18 @@ using DG.Tweening;
 
 public class CardPile : MonoBehaviour, IDropHandler
 {
+    public PileType m_pileType;
     public List<Card> m_cardsInPile;
-    public int m_topIndex;
+    //public int m_topIndex;
     public Vector3 m_pilingOffset;
-    public bool m_isFinalPile = false;
+    //public bool m_isFinalPile = false;
     public CardSuit m_finalPileSuit;
+    private CardsManager m_cardsManager;
 
     private void Awake()
     {
-        m_topIndex = -1;
+        m_cardsManager = FindObjectOfType<CardsManager>();
+        //m_topIndex = -1;
         m_cardsInPile = new List<Card>();
     }
 
@@ -96,7 +99,16 @@ public class CardPile : MonoBehaviour, IDropHandler
 
         m_cardsInPile[m_cardsInPile.Count - 1].m_isTopCard = true;
 
-        m_topIndex = m_cardsInPile.Count - 1;
+        if (m_pileType == PileType.DrawPile && m_cardsManager.m_drawThreeCardMode)
+        {
+            //OnlyShowThreeTopCards();
+            //Discard all but last 3 cards
+        }
+    }
+
+    private void DiscardAllButTopThreeCards()
+    {
+
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -108,7 +120,7 @@ public class CardPile : MonoBehaviour, IDropHandler
     }
 
     //TO DO CLEAN UP THIS
-    public void DropCardOnPile(Card card)
+    public virtual void DropCardOnPile(Card card)
     {
         EventsManager.Fire_evt_OnCardDroppedOnPile(card, this);
 
@@ -118,13 +130,6 @@ public class CardPile : MonoBehaviour, IDropHandler
     }
 
     //Events
-    private void OnCardDragStarted(Card card, PointerEventData pointerEventData)
-    {
-        if (m_cardsInPile.Contains(card))
-        {
-            Debug.Log("Here");
-        }
-    }
 
     public List<Card> GetAllCardsAboveSelected(Card selectedCard)
     {

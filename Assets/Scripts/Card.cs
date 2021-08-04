@@ -153,9 +153,18 @@ public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler
         {
             return;
         }
+        //Can only drag card from Game Piles, EndPiles and DrawPiles
+        if (m_cardPile.m_pileType == PileType.GamePile || m_cardPile.m_pileType == PileType.EndPile || m_cardPile.m_pileType == PileType.DrawPile)
+        {
+            EventsManager.Fire_evt_OnCardDragStarted(this, pointerEventData);
+            m_canvasGroup.blocksRaycasts = false;
+        }
+        else
+        {
+            Debug.Log("Trying to drag a card from :" + m_cardPile.m_pileType + " which is not allowed");
+            EventsManager.Fire_evt_RequestDrawCards();
+        }
 
-        EventsManager.Fire_evt_OnCardDragStarted(this, pointerEventData);
-        m_canvasGroup.blocksRaycasts = false;
     }
 
     public void OnDrag(PointerEventData pointerEventData)
@@ -191,11 +200,23 @@ public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (!m_isFaceUp && m_isTopCard)
+        //Do nothing if card is not placed on pile
+        if (m_cardPile == null)
+        {
+            return;
+        }
+        //Flip card if its top card of a game pile and is face down
+        else if (m_cardPile.m_pileType == PileType.GamePile && !m_isFaceUp && m_isTopCard)
         {
             Flip();
         }
-        EventsManager.Fire_evt_OnClickedOnCard(this, eventData);
+        else if (m_cardPile.m_pileType == PileType.DeckPile && !m_isFaceUp && m_isTopCard)
+        {
+            //Debug.Log("Draw card here");
+            EventsManager.Fire_evt_RequestDrawCards();
+        }
+ 
+        //EventsManager.Fire_evt_OnClickedOnCard(this, eventData);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -211,6 +232,7 @@ public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler
         SetOutlineColor(m_normalColor);
     }
 
+    /*
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.F))
@@ -218,6 +240,7 @@ public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler
             Flip();
         }
     }
+    */
 
     public void SetCanvasGroupState(bool state)
     {

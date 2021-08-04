@@ -28,3 +28,12 @@ public enum CardColor
     Black,
     Red
 }
+
+public enum PileType
+{
+    None,
+    DeckPile,
+    GamePile,
+    EndPile,
+    DrawPile
+}

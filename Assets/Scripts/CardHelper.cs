@@ -286,8 +286,8 @@ public class CardHelper : MonoBehaviour
     {
         bool stackResult = false;
 
-        //Receiving Pile is Empty and Is Final Pile
-        if (pile.m_cardsInPile.Count <= 0 && pile.m_isFinalPile)
+        //Receiving Pile is Empty and Is END Pile
+        if (pile.m_cardsInPile.Count <= 0 && pile.m_pileType == PileType.EndPile)
         {
             //Only return true if is an ace of same suit
             if (card.m_cardSuit == pile.m_finalPileSuit && card.m_cardValue == CardValue.Ace)
@@ -295,8 +295,8 @@ public class CardHelper : MonoBehaviour
                 stackResult = true;
             }
         }
-        //Receiving Pile is Empty and Is NOT Final Pile
-        else if (pile.m_cardsInPile.Count <= 0 && !pile.m_isFinalPile)
+        //Receiving Pile is Empty and Is GAME PILE
+        else if (pile.m_cardsInPile.Count <= 0 && pile.m_pileType == PileType.GamePile)
         {
             //Only return true if is a KING
             if (card.m_cardValue == CardValue.King)
@@ -304,8 +304,8 @@ public class CardHelper : MonoBehaviour
                 stackResult = true;
             }
         }
-        //Receiving Pile is NOT Empty and Is Final Pile
-        else if (pile.m_cardsInPile.Count > 0 && pile.m_isFinalPile)
+        //Receiving Pile is NOT Empty and Is END PILE
+        else if (pile.m_cardsInPile.Count > 0 && pile.m_pileType == PileType.EndPile)
         {
             //Only return true if ascending order and same suit
             if (card.m_cardSuit == pile.m_finalPileSuit && GetValueDifference(card.m_cardValue, pile.GetTopCard().m_cardValue) == 1)
@@ -313,8 +313,8 @@ public class CardHelper : MonoBehaviour
                 stackResult = true;
             }
         }
-        //Receiving Pile is NOT Empty and Is NOT Final Pile
-        else if (pile.m_cardsInPile.Count > 0 && !pile.m_isFinalPile)
+        //Receiving Pile is NOT Empty and Is GAME PILE
+        else if (pile.m_cardsInPile.Count > 0 && pile.m_pileType == PileType.GamePile)
         {
             //Only return true if descending order and different color
             if (card.m_cardColor != pile.GetTopCard().m_cardColor && GetValueDifference(card.m_cardValue, pile.GetTopCard().m_cardValue) == -1)
