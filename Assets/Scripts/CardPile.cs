@@ -10,7 +10,9 @@ public class CardPile : MonoBehaviour, IDropHandler, IPointerClickHandler
     public PileType m_pileType;
     public List<Card> m_cardsInPile;
     //public int m_topIndex;
-    public Vector3 m_pilingOffset;
+    private Vector3 m_pilingOffset;
+    public Vector3 m_pilingOffsetPortrait;
+    public Vector3 m_pilingOffsetLandscape;
     //public bool m_isFinalPile = false;
     public CardSuit m_finalPileSuit;
     private CardsManager m_cardsManager;
@@ -21,6 +23,13 @@ public class CardPile : MonoBehaviour, IDropHandler, IPointerClickHandler
         m_cardsManager = FindObjectOfType<CardsManager>();
         //m_topIndex = -1;
         m_cardsInPile = new List<Card>();
+
+        m_pilingOffset = m_pilingOffsetLandscape;
+    }
+
+    private void Start()
+    {
+        EventsManager.OnScreenOrientationChanged += OnScreenOrientationChanged;
     }
 
     public void AddCardToPile(Card cardToAdd, bool autoUpdatePositions = true)
@@ -214,5 +223,21 @@ public class CardPile : MonoBehaviour, IDropHandler, IPointerClickHandler
         }
 
         m_isAnimating = false;
+    }
+
+    private void OnScreenOrientationChanged(ScreenOrientation orientation)
+    {
+        if (m_pileType == PileType.GamePile)
+        {
+            if (orientation == ScreenOrientation.Portrait || orientation == ScreenOrientation.PortraitUpsideDown)
+            {
+                m_pilingOffset = m_pilingOffsetPortrait;
+            }
+            else if(orientation == ScreenOrientation.Landscape || orientation == ScreenOrientation.LandscapeLeft || orientation == ScreenOrientation.LandscapeRight)
+            {
+                m_pilingOffset = m_pilingOffsetLandscape;
+            }
+        }
+        UpdatePositions();
     }
 }

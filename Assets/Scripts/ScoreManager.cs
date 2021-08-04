@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    [SerializeField] private int m_score = 0;
+    [SerializeField] private IntVariable m_scoreVariable;
+    [SerializeField] private FloatVariable m_timeVariable;
     [SerializeField] private int m_awardedPointsForGamePileDrop = 5;
     [SerializeField] private int m_awardedPointsForEndPileDrop = 15;
     [SerializeField] private int m_pointsDeductedFromReshuffle = 100;
@@ -29,17 +30,17 @@ public class ScoreManager : MonoBehaviour
 
     void InitScore()
     {
-        m_score = 0;
+        m_scoreVariable.value = 0;
         m_cardsCountedTowardsScoreFromGamePiles = new List<Card>();
         m_cardsCountedTowardsScoreFromEndPiles  = new List<Card>();
     }
 
     void UpdateScore(int score)
     {
-        m_score += score;
+        m_scoreVariable.value += score;
 
-        if (m_score <= 0)
-            m_score = 0;
+        if (m_scoreVariable.value <= 0)
+            m_scoreVariable.value = 0;
     }
 
     //Events callbacks

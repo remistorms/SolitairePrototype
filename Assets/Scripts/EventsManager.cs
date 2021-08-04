@@ -64,4 +64,17 @@ public static class EventsManager
     {
         OnDeckReshuffled();
     }
+
+    public static event Action<ScreenOrientation> OnScreenOrientationChanged = delegate { };
+    public static void Fire_evt_ScreenOrientationChanged(ScreenOrientation newOrientation)
+    {
+        OnScreenOrientationChanged(newOrientation);
+    }
+
+    public static event Action OnUndoMovement = delegate { };
+    public static void Fire_event_UndoMovement()
+    {
+        Debug.Log("Event player undo");
+        OnUndoMovement();
+    }
 }
