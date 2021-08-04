@@ -157,6 +157,23 @@ public class CardsManager : MonoBehaviour
                 yield return new WaitForSeconds(0.1f);
             }
         }
+        else if (m_deckPile.m_cardsInPile.Count < amountOfCardsToDraw && m_deckPile.m_cardsInPile.Count > 0 && m_drawThreeCardMode)
+        {
+            //Not enought to deal three cards so we will deal all we get here
+            Debug.Log(" cards in pile is less than 3 and we are playing three mode, so we will deal 1 or two cards max ");
+            for (int i = m_deckPile.m_cardsInPile.Count - 1; i >= 0; i--)
+            {
+                Card card = m_deckPile.m_cardsInPile[i];
+
+                m_deckPile.RemoveCardFromPile(card);
+
+                m_drawPile.AddCardToPile(card);
+
+                card.Flip();
+
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
         else
         {
             StartCoroutine(RefillDeck());

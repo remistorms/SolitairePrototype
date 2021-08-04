@@ -92,12 +92,36 @@ public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler
         //this.gameObject.name = m_cardValue.ToString() + " of " + m_cardSuit.ToString();
     }
 
-    public void Flip(float flipTime = 0.15f )
+    public void Flip(float flipTime = 0.15f)
     {
         if (m_isLerping)
             return;
 
         StartCoroutine(FlipRoutine(flipTime));
+    }
+
+    public void FlipUp(float flipTime = 0.15f)
+    {
+        if (m_isFaceUp)
+        {
+            return;
+        }
+        else
+        {
+            Flip(flipTime);
+        }
+    }
+
+    public void FlipDown(float flipTime = 0.15f)
+    {
+        if (m_isFaceUp)
+        {
+            Flip(flipTime);
+        }
+        else
+        {
+            return;
+        }
     }
 
     IEnumerator FlipRoutine(float flipTime = 0.15f)
