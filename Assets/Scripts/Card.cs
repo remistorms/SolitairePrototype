@@ -15,6 +15,7 @@ public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler
     public CardSuit m_cardSuit;
     public CardColor m_cardColor;
     public CardPile m_cardPile = null;
+    public CardPile m_lastPile = null;
 
     [Header("Card Objects")]
 
@@ -198,6 +199,8 @@ public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler
 
     public void OnDrag(PointerEventData pointerEventData)
     {
+        m_lastPile = m_cardPile;
+        m_cardPile = null;
         EventsManager.Fire_evt_OnCardDragUpdate(this, pointerEventData);
     }
 

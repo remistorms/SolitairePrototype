@@ -151,6 +151,8 @@ public class CardPile : MonoBehaviour, IDropHandler, IPointerClickHandler
 
         bool canStack = CardHelper.Instance.CheckIfCanStack(card, this);
 
+        bool hasSwitchedPiles = //Check if card switched here
+
         EventsManager.Fire_evt_OnCardStackCheck(card, this, canStack);
     }
 

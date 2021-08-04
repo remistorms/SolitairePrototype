@@ -57,7 +57,7 @@ public class PlayerHand : MonoBehaviour
         }
     }
 
-    private void OnCardStackCheck(Card card, CardPile cardPile, bool canStack)
+    private void OnCardStackCheck(Card card, CardPile cardPile, bool canStack, bool hasSwitchedPiles)
     {
         Debug.Log("PlayerHand: OnCardStackCheck result: " + canStack );
         if (canStack)

@@ -46,11 +46,11 @@ public static class EventsManager
         OnClickedOnCard(card, pointerEventData);
     }
 
-    public static event Action<Card, CardPile, bool> OnCardStackCheck = delegate { };
-    public static void Fire_evt_OnCardStackCheck(Card card, CardPile pile, bool canStack)
+    public static event Action<Card, CardPile, bool, bool> OnCardStackCheck = delegate { };
+    public static void Fire_evt_OnCardStackCheck(Card card, CardPile pile, bool canStack, bool hasSwitchedPiles)
     {
         Debug.Log(" card " + card.name + " was dropped onto " + pile.gameObject.name + " stackable status -> " + canStack);
-        OnCardStackCheck(card, pile, canStack);
+        OnCardStackCheck(card, pile, canStack, hasSwitchedPiles);
     }
 
     public static event Action OnRequestDrawCards = delegate { };
