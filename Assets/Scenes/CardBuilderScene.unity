@@ -155,6 +155,7 @@ MonoBehaviour:
   m_cardsInPile: []
   m_pilingOffset: {x: 0, y: -200, z: -2}
   m_finalPileSuit: 0
+  m_isAnimating: 0
 --- !u!1 &137994146
 GameObject:
   m_ObjectHideFlags: 0
@@ -184,7 +185,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 515de2bf794aabf46aab8f0bc21c2e25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_drawThreeCardMode: 0
+  m_drawThreeCardMode: 1
   m_cardPrefab: {fileID: 6820074323485670485, guid: d249990f43103e34ba1efe13a78ec762,
     type: 3}
   m_deck: []
@@ -325,13 +326,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 166547391}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -5}
+  m_LocalRotation: {x: -0.13052624, y: 0, z: 0, w: 0.9914449}
+  m_LocalPosition: {x: 0, y: -1.75, z: -5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -15, y: 0, z: 0}
 --- !u!1 &176643855
 GameObject:
   m_ObjectHideFlags: 0
@@ -587,6 +588,7 @@ MonoBehaviour:
   m_cardsInPile: []
   m_pilingOffset: {x: 0, y: 0, z: -2}
   m_finalPileSuit: 3
+  m_isAnimating: 0
 --- !u!1 &407194639 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8467672672018601069, guid: f9383a2765cb71a49ad490eebc64e930,
@@ -609,6 +611,7 @@ MonoBehaviour:
   m_cardsInPile: []
   m_pilingOffset: {x: 0, y: -200, z: -2}
   m_finalPileSuit: 0
+  m_isAnimating: 0
 --- !u!1 &496876272 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8467672672018601069, guid: f9383a2765cb71a49ad490eebc64e930,
@@ -631,6 +634,7 @@ MonoBehaviour:
   m_cardsInPile: []
   m_pilingOffset: {x: 0, y: -200, z: -2}
   m_finalPileSuit: 0
+  m_isAnimating: 0
 --- !u!224 &515011281 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8467672672018601040, guid: f9383a2765cb71a49ad490eebc64e930,
@@ -1013,6 +1017,7 @@ MonoBehaviour:
   m_cardsInPile: []
   m_pilingOffset: {x: 0, y: -200, z: -2}
   m_finalPileSuit: 0
+  m_isAnimating: 0
 --- !u!1001 &886294823
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1347,6 +1352,7 @@ MonoBehaviour:
   m_cardsInPile: []
   m_pilingOffset: {x: 0, y: -200, z: -2}
   m_finalPileSuit: 0
+  m_isAnimating: 0
 --- !u!1 &971467274
 GameObject:
   m_ObjectHideFlags: 0
@@ -1459,6 +1465,7 @@ MonoBehaviour:
   m_cardsInPile: []
   m_pilingOffset: {x: 0, y: -200, z: -2}
   m_finalPileSuit: 0
+  m_isAnimating: 0
 --- !u!1001 &1275180895
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2244,8 +2251,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_pileType: 1
   m_cardsInPile: []
-  m_pilingOffset: {x: 0, y: 0, z: -2}
+  m_pilingOffset: {x: 0, y: 0, z: -10}
   m_finalPileSuit: 0
+  m_isAnimating: 0
 --- !u!1001 &1702705632
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2403,6 +2411,7 @@ MonoBehaviour:
   m_cardsInPile: []
   m_pilingOffset: {x: 0, y: 0, z: -2}
   m_finalPileSuit: 0
+  m_isAnimating: 0
 --- !u!224 &1758116604 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8467672672018601040, guid: f9383a2765cb71a49ad490eebc64e930,
@@ -2665,6 +2674,7 @@ MonoBehaviour:
   m_cardsInPile: []
   m_pilingOffset: {x: 0, y: -200, z: -2}
   m_finalPileSuit: 0
+  m_isAnimating: 0
 --- !u!1 &1909180872 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8467672672018601069, guid: f9383a2765cb71a49ad490eebc64e930,
@@ -2687,6 +2697,7 @@ MonoBehaviour:
   m_cardsInPile: []
   m_pilingOffset: {x: 0, y: 0, z: -2}
   m_finalPileSuit: 1
+  m_isAnimating: 0
 --- !u!1 &1946088727
 GameObject:
   m_ObjectHideFlags: 0
@@ -2920,6 +2931,7 @@ MonoBehaviour:
   m_cardsInPile: []
   m_pilingOffset: {x: 0, y: 0, z: -2}
   m_finalPileSuit: 2
+  m_isAnimating: 0
 --- !u!1001 &2121529201
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3088,6 +3100,7 @@ MonoBehaviour:
   m_cardsInPile: []
   m_pilingOffset: {x: -250, y: 0, z: -2}
   m_finalPileSuit: 0
+  m_isAnimating: 0
 --- !u!224 &2138712159 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8467672672018601040, guid: f9383a2765cb71a49ad490eebc64e930,

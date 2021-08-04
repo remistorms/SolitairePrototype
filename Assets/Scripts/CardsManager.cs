@@ -140,6 +140,7 @@ public class CardsManager : MonoBehaviour
             amountOfCardsToDraw = 3;
         }
 
+        //If 
         if (m_deckPile.m_cardsInPile.Count >= amountOfCardsToDraw)
         {
             Debug.Log("Enough cards on deck to draw");
@@ -158,13 +159,43 @@ public class CardsManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not Enough cards on deck to draw");
+            StartCoroutine(RefillDeck());
         }
-        //grab the top 3 cards from the deck
+        /*
+        else if (m_deckPile.m_cardsInPile.Count == amountOfCardsToDraw - 1)
+        {
+            Debug.Log("Playing 3 card draw and only TWO ARE left");
+            StartCoroutine(RefillDeck());
+        }
+        else if (m_deckPile.m_cardsInPile.Count == amountOfCardsToDraw - 2)
+        {
+            Debug.Log("Playing 3 card draw and only ONE IS left");
+            StartCoroutine(RefillDeck());
+        }
+        else if (m_deckPile.m_cardsInPile.Count == 0)
+        {
+            StartCoroutine(RefillDeck());
+        }
+        */
+    }
 
-        //Move them into the draw pile
+    IEnumerator RefillDeck()
+    {
+        yield return null;
 
-        //Flip them
+        List<Card> allCards = m_drawPile.GetAllCardsAboveSelected(m_drawPile.m_cardsInPile[0]);
+
+        m_deckPile.RestackPile(allCards);
+
+        while (m_deckPile.m_isAnimating)
+        {
+            yield return null;
+        }
+
+        m_drawPile.m_cardsInPile.Clear();
+
+        m_deckPile.UpdatePositions();
+
     }
 
 }

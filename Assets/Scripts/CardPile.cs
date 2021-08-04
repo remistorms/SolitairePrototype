@@ -14,6 +14,7 @@ public class CardPile : MonoBehaviour, IDropHandler, IPointerClickHandler
     //public bool m_isFinalPile = false;
     public CardSuit m_finalPileSuit;
     private CardsManager m_cardsManager;
+    public bool m_isAnimating = false;
 
     private void Awake()
     {
@@ -22,7 +23,7 @@ public class CardPile : MonoBehaviour, IDropHandler, IPointerClickHandler
         m_cardsInPile = new List<Card>();
     }
 
-    public void AddCardToPile(Card cardToAdd)
+    public void AddCardToPile(Card cardToAdd, bool autoUpdatePositions = true)
     {
         if (m_cardsInPile.Contains(cardToAdd))
         {
@@ -33,10 +34,14 @@ public class CardPile : MonoBehaviour, IDropHandler, IPointerClickHandler
 
         //cardToAdd.GetComponent<Draggable>().SetReturningPosition(this.transform.position);
 
-        StartCoroutine(UpdatePositions());
+        if (autoUpdatePositions)
+        {
+            UpdatePositions();
+        }
+   
     }
 
-    public void AddCardsToPile(List<Card> cardsToAdd)
+    public void AddCardsToPile(List<Card> cardsToAdd, bool autoUpdatePositions = true)
     {
         for (int i = 0; i < cardsToAdd.Count; i++)
         {
@@ -49,20 +54,26 @@ public class CardPile : MonoBehaviour, IDropHandler, IPointerClickHandler
                 m_cardsInPile.Add(cardsToAdd[i]);
             }
         }
-        StartCoroutine(UpdatePositions());
+        if (autoUpdatePositions)
+        {
+            UpdatePositions();
+        }
     }
 
-    public void RemoveCardFromPile(Card cardToRemove)
+    public void RemoveCardFromPile(Card cardToRemove, bool autoUpdatePositions = true)
     {
         if (m_cardsInPile.Contains(cardToRemove))
         {
             m_cardsInPile.Remove(cardToRemove);
         }
 
-        StartCoroutine(UpdatePositions());
+        if (autoUpdatePositions)
+        {
+            UpdatePositions();
+        }
     }
 
-    public void RemoveCardsFromPile(List<Card> cardsToRemove)
+    public void RemoveCardsFromPile(List<Card> cardsToRemove, bool autoUpdatePositions = true)
     {
         for (int i = 0; i < cardsToRemove.Count; i++)
         {
@@ -74,10 +85,18 @@ public class CardPile : MonoBehaviour, IDropHandler, IPointerClickHandler
             }
         }
 
-        StartCoroutine( UpdatePositions());
+        if (autoUpdatePositions)
+        {
+            UpdatePositions();
+        }
     }
 
-    IEnumerator UpdatePositions()
+    public void UpdatePositions()
+    {
+        StartCoroutine(UpdatePositionsRoutine());
+    }
+
+    IEnumerator UpdatePositionsRoutine()
     {
         yield return null;
 
@@ -167,5 +186,33 @@ public class CardPile : MonoBehaviour, IDropHandler, IPointerClickHandler
         {
             EventsManager.Fire_evt_RequestDrawCards();
         }
+    }
+
+    public void RestackPile(List<Card> cards)
+    {
+        StartCoroutine(RestackPileRoutine(cards));
+    }
+
+    IEnumerator RestackPileRoutine(List<Card> cards)
+    {
+        m_isAnimating = true;
+
+        for (int i = 0; i < cards.Count; i++)
+        {
+            cards[i].Flip();
+            m_cardsInPile.Add(cards[i]);
+            cards[i].transform.DOLocalMove(Vector3.zero, 0.1f);
+        }
+
+        yield return new WaitForSeconds(0.1f);
+
+        for (int i = 0; i < cards.Count; i++)
+        {
+            cards[i].transform.SetParent(this.transform);
+            cards[i].transform.DOLocalMove(Vector3.zero, 0.1f);
+            yield return new WaitForSeconds(0.05f);
+        }
+
+        m_isAnimating = false;
     }
 }
