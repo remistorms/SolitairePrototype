@@ -58,4 +58,10 @@ public static class EventsManager
     {
         OnRequestDrawCards();
     }
+
+    public static event Action OnDeckReshuffled = delegate { };
+    public static void Fire_evt_OnDeckReshuffled()
+    {
+        OnDeckReshuffled();
+    }
 }

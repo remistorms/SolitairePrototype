@@ -178,22 +178,7 @@ public class CardsManager : MonoBehaviour
         {
             StartCoroutine(RefillDeck());
         }
-        /*
-        else if (m_deckPile.m_cardsInPile.Count == amountOfCardsToDraw - 1)
-        {
-            Debug.Log("Playing 3 card draw and only TWO ARE left");
-            StartCoroutine(RefillDeck());
-        }
-        else if (m_deckPile.m_cardsInPile.Count == amountOfCardsToDraw - 2)
-        {
-            Debug.Log("Playing 3 card draw and only ONE IS left");
-            StartCoroutine(RefillDeck());
-        }
-        else if (m_deckPile.m_cardsInPile.Count == 0)
-        {
-            StartCoroutine(RefillDeck());
-        }
-        */
+
     }
 
     IEnumerator RefillDeck()
@@ -212,6 +197,8 @@ public class CardsManager : MonoBehaviour
         m_drawPile.m_cardsInPile.Clear();
 
         m_deckPile.UpdatePositions();
+
+        EventsManager.Fire_evt_OnDeckReshuffled();
 
     }
 
