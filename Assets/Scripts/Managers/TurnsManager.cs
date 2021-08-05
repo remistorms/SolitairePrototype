@@ -17,6 +17,10 @@ public class TurnsManager : MonoBehaviour
 
     public List<TurnData> m_allTurnsData = new List<TurnData>();
 
+    [Header("Debugging")]
+    public int debugPileIndex;
+    public int debugTurnIndex;
+
     private void Awake()
     {
         m_turn.value = 0;
@@ -27,7 +31,7 @@ public class TurnsManager : MonoBehaviour
     private void Start()
     {
         EventsManager.OnCardStackCheck      += OnCardStackCheck;
-        EventsManager.OnCardFlipped         += OnCardFlipped;
+        //EventsManager.OnCardFlipped         += OnCardFlipped;
         EventsManager.OnRequestDrawCards    += OnRequestedDrawCards;
     }
 
@@ -158,8 +162,32 @@ public class TurnsManager : MonoBehaviour
     private void OnDisable()
     {
         EventsManager.OnCardStackCheck -= OnCardStackCheck;
-        EventsManager.OnCardFlipped -= OnCardFlipped;
+        //EventsManager.OnCardFlipped -= OnCardFlipped;
         EventsManager.OnRequestDrawCards -= OnRequestedDrawCards;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            DebugSnapshot();
+        }
+    }
+
+    private void DebugSnapshot()
+    {
+
+
+        TurnData turnData = m_allTurnsData[debugTurnIndex];
+
+        CardPileSnapshot cardPileSnapshot = turnData.GetCardPileSnapshot(m_allCardPiles[debugPileIndex]);
+
+        Debug.Log("Cardpile Snapshot Card Count:" + cardPileSnapshot.m_snapshotCards.Count);
+
+        for (int i = 0; i < cardPileSnapshot.m_snapshotCards.Count; i++)
+        {
+            Debug.Log( "snapshot card at turn : " + debugTurnIndex + " " +  cardPileSnapshot.m_snapshotCards[i].gameObject.name);
+        }
     }
 }
 
@@ -177,7 +205,7 @@ public struct Turn
 
 
 [System.Serializable]
-public class TurnData
+public struct TurnData
 {
     public int turn;
     public Dictionary<CardPile, CardPileSnapshot> m_cardPileAndSnapshotDictionary;
@@ -195,7 +223,7 @@ public class TurnData
 
     public CardPileSnapshot GetCardPileSnapshot(CardPile wantedPile)
     {
-        CardPileSnapshot snapshot = null;
+        CardPileSnapshot snapshot = new CardPileSnapshot();
 
         m_cardPileAndSnapshotDictionary.TryGetValue(wantedPile, out snapshot);
 

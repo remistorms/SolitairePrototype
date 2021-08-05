@@ -246,23 +246,32 @@ public class CardPile : MonoBehaviour, IDropHandler, IPointerClickHandler
 
     public CardPileSnapshot GetCurrentSnapshot()
     {
+        CardPileSnapshot returningSnapshot = new CardPileSnapshot();
+
         if (m_cardsInPile.Count <= 0)
         {
             List<Card> emptyCards = new List<Card>();
             List<bool> emptyBools = new List<bool>();
-            return new CardPileSnapshot(this, emptyCards, emptyBools);
+            returningSnapshot.m_snapshotCardPile = this;
+            returningSnapshot.m_snapshotCards = emptyCards;
+            returningSnapshot.m_snapshotFlipStates = emptyBools;
+            return returningSnapshot;
         }
 
         else
         {
+  
+            returningSnapshot.m_snapshotCards = m_cardsInPile;
+            returningSnapshot.m_snapshotCardPile = this;
+
             List<bool> flipStateSnapshot = new List<bool>();
             for (int i = 0; i < m_cardsInPile.Count; i++)
             {
                 flipStateSnapshot.Add(m_cardsInPile[i].m_isFaceUp);
             }
-            CardPileSnapshot snapshot = new CardPileSnapshot(this, m_cardsInPile, flipStateSnapshot);
+            returningSnapshot.m_snapshotFlipStates = flipStateSnapshot;
 
-            return snapshot;
+            return returningSnapshot;
         }
 
         
@@ -270,40 +279,44 @@ public class CardPile : MonoBehaviour, IDropHandler, IPointerClickHandler
 
     public void SetSnapshot(CardPileSnapshot snapshot)
     {
-
-
-        List<Card> snapshopCards = snapshot.GetSnapshotCards();
-        Debug.Log("Seting Specific Snapshot: ");
-        for (int i = 0; i < snapshopCards.Count; i++)
-        {
-            Debug.Log("Snapshot Cards i: " + snapshopCards[i].name );
-        }
-
         //Clear all cards at the moment 
-        m_cardsInPile.Clear();
-
         //Add cards from snapshot
-        if (snapshot.GetSnapshotCards().Count <= 0)
+        if (snapshot.m_snapshotCards.Count <= 0)
         {
             return;
         }
         else
         {
-            AddCardsToPile(snapshot.GetSnapshotCards());
+            m_cardsInPile.Clear();
 
-            //Set the flip state per card
-            List<bool> flipStates = snapshot.GetSnapshotCardFlipStates();
-            for (int i = 0; i < m_cardsInPile.Count; i++)
+            List<Card> cardsToadd = new List<Card>();
+            cardsToadd = snapshot.m_snapshotCards;
+            List<bool> flipStates = new List<bool>();
+            flipStates = snapshot.m_snapshotFlipStates;
+
+            Debug.Log("CardPile " + this.gameObject.name + cardsToadd[0].name + " FlipState: " + flipStates[0]);
+
+            /*
+            for (int i = 0; i < cardsToadd.Count; i++)
             {
+                Debug.Log("adding " + cardsToadd[i].name + " to pile " + this.gameObject.name);
+                Debug.Log("adding " + cardsToadd[i].name + " isFaceUp = " + flipStates[i]);
+                
+                /*
+                AddCardToPile(cardsToadd[i]);
+
                 if (flipStates[i])
                 {
-                    m_cardsInPile[i].FlipUp();
+                    m_cardsInPile[i].FlipUp(0);
                 }
                 else
                 {
-                    m_cardsInPile[i].FlipDown();
+                    m_cardsInPile[i].FlipDown(0);
                 }
+
             }
+            */
+        
         }
 
         //UpdatePositions
