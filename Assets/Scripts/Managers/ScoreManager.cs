@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
+    public static ScoreManager Instance;
     [SerializeField] private IntVariable m_scoreVariable;
-    [SerializeField] private FloatVariable m_timeVariable;
     [SerializeField] private int m_awardedPointsForGamePileDrop = 5;
     [SerializeField] private int m_awardedPointsForEndPileDrop = 15;
     [SerializeField] private int m_pointsDeductedFromReshuffle = 100;
@@ -14,12 +14,21 @@ public class ScoreManager : MonoBehaviour
     //This lists keeps track of cards that awarded points to the player to avoid multiple points
     [SerializeField] private List<Card> m_cardsCountedTowardsScoreFromGamePiles;
     [SerializeField] private List<Card> m_cardsCountedTowardsScoreFromEndPiles;
+
     private int lastPointsAwarded;
     private Card lastCard;
 
 
     private void Awake()
     {
+        if (Instance != null)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
         InitScore();
     }
 
@@ -33,7 +42,6 @@ public class ScoreManager : MonoBehaviour
 
     private void OnUndoMovement(PlayerMovement move)
     {
-        lastCard = move.cardsMoved[0];
         if (m_cardsCountedTowardsScoreFromEndPiles.Contains(lastCard))
         {
             m_cardsCountedTowardsScoreFromEndPiles.Remove(lastCard);
@@ -42,7 +50,8 @@ public class ScoreManager : MonoBehaviour
         {
             m_cardsCountedTowardsScoreFromGamePiles.Remove(lastCard);
         }
-        UpdateScore(-lastPointsAwarded);
+        SetScore(move.recordedScore);
+
     }
 
     void InitScore()
@@ -93,6 +102,16 @@ public class ScoreManager : MonoBehaviour
     private void OnDeckReshuffled()
     {
         UpdateScore(-m_pointsDeductedFromReshuffle);
+    }
+
+    public int GetScore()
+    {
+        return m_scoreVariable.value;
+    }
+
+    void SetScore(int score)
+    {
+        m_scoreVariable.value = score;
     }
 
     private void OnDisable()

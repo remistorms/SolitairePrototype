@@ -109,6 +109,11 @@ public class CardPile : MonoBehaviour, IDropHandler, IPointerClickHandler
 
         for (int i = 0; i < m_cardsInPile.Count; i++)
         {
+            if (m_pileType == PileType.DeckPile)
+            {
+                m_cardsInPile[i].FlipDown();
+            }
+
             m_cardsInPile[i].transform.SetParent(this.transform);
 
             //Only offset the top three cards if is pile type draw

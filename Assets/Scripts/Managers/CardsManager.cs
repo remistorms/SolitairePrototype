@@ -12,7 +12,12 @@ public class CardsManager : MonoBehaviour
     [SerializeField] private CardPile m_drawPile;
     [SerializeField] private CardPile[] m_endPiles;
     [SerializeField] private CardPile[] m_gamePiles;
+    GameManager m_gameManager;
 
+    private void Awake()
+    {
+        m_gameManager = FindObjectOfType<GameManager>();
+    }
 
     private void Start()
     {
@@ -132,6 +137,11 @@ public class CardsManager : MonoBehaviour
 
     IEnumerator DrawCardsFromDeckRoutine()
     {
+        PlayerMovement move = new PlayerMovement();
+        move.originalPile = m_deckPile;
+        move.endPile = m_drawPile;
+        List<Card> drawnCards = new List<Card>();
+        move.cardsMoved = drawnCards;
         //TODO
         //Check if remaining cards are enought to deal
         int amountOfCardsToDraw = 1;
@@ -148,6 +158,8 @@ public class CardsManager : MonoBehaviour
             {
                 Card card = m_deckPile.GetTopCard();
 
+                drawnCards.Add(card);
+
                 m_deckPile.RemoveCardFromPile(card);
 
                 m_drawPile.AddCardToPile(card);
@@ -156,6 +168,7 @@ public class CardsManager : MonoBehaviour
 
                 yield return new WaitForSeconds(0.1f);
             }
+            m_gameManager.AddMoveToStack(move);
         }
         else if (m_deckPile.m_cardsInPile.Count < amountOfCardsToDraw && m_deckPile.m_cardsInPile.Count > 0 && m_drawThreeCardMode)
         {
@@ -165,6 +178,8 @@ public class CardsManager : MonoBehaviour
             {
                 Card card = m_deckPile.m_cardsInPile[i];
 
+                drawnCards.Add(card);
+
                 m_deckPile.RemoveCardFromPile(card);
 
                 m_drawPile.AddCardToPile(card);
@@ -173,11 +188,14 @@ public class CardsManager : MonoBehaviour
 
                 yield return new WaitForSeconds(0.1f);
             }
+            m_gameManager.AddMoveToStack(move);
         }
         else
         {
             StartCoroutine(RefillDeck());
         }
+
+
 
     }
 

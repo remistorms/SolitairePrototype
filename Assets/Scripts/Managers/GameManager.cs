@@ -6,10 +6,9 @@ using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
-    public int m_maxUndoMovements = 3;
+    [Header("Undo Movement")]
     public IntVariable m_movesIntVariable;
     public IntVariable m_scoreIntVariable;
-
     private Stack<PlayerMovement> m_recordedMovements;
     public List<PlayerMovement> m_recordedPlayerMovements;
   
@@ -23,9 +22,10 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        EventsManager.OnCardDragStarted += OnCardDragStarted;
         EventsManager.OnCardStackCheck += OnCardStackCheck;
     }
+
+
 
     public void StartGame()
     {
@@ -67,37 +67,40 @@ public class GameManager : MonoBehaviour
 
     }
 
-    //Creates a move when draggin
-    private void OnCardDragStarted(Card card, PointerEventData pointerData)
-    {
-
-    }
-
     private void OnCardStackCheck(Card card, CardPile pile, bool canStack)
     {
+        PlayerMovement move = new PlayerMovement();
+        move.cardsMoved = card.m_cardAndAllAbove;
+        move.originalPile = card.m_previousPile;
+        move.endPile = pile;
+        move.recordedScore = ScoreManager.Instance.GetScore();
+
         if (canStack)
         {
-            Debug.Log("Record player movement here");
-
-            PlayerMovement move = new PlayerMovement();
-            move.cardsMoved = card.m_cardAndAllAbove;
-            move.originalPile = card.m_previousPile;
-            move.endPile = pile;
-
-            m_recordedMovements.Push(move);
-            //Debug only
-            m_recordedPlayerMovements.Add(m_recordedMovements.Peek());
-
-            m_movesIntVariable.value++;
-
+            AddMoveToStack(move);
         }
 
     }
 
     private void OnDisable()
     {
-        EventsManager.OnCardDragStarted -= OnCardDragStarted;
         EventsManager.OnCardStackCheck -= OnCardStackCheck;
+    }
+
+    public void AddMoveToStack(PlayerMovement move)
+    {
+        Debug.Log("Aded new move");
+
+        m_recordedMovements.Push(move);
+
+        //Delete this
+        PlayerMovement[] tempMovements = m_recordedMovements.ToArray();
+        m_recordedPlayerMovements.Clear();
+        for (int i = 0; i < tempMovements.Length; i++)
+        {
+            m_recordedPlayerMovements.Add(tempMovements[i]);
+        }
+        m_movesIntVariable.value++;
     }
 }
 
@@ -108,6 +111,5 @@ public struct PlayerMovement
     public List<Card> cardsMoved;
     public CardPile originalPile;
     public CardPile endPile;
-    public int scoreBeforeMove;
-    public int scoreAfterMove;
+    public int recordedScore;
 }
