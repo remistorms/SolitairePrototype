@@ -17,8 +17,8 @@ public class InGameScreen : UIScreen
 
     private void Update()
     {
-        m_scoreLabel.text = m_scoreVariable.value.ToString() + " pts";
-        m_timeLabel.text = m_timeVariable.value.ToString("F2");
+        m_scoreLabel.text = m_scoreVariable.value.ToString();
+        m_timeLabel.text = m_timeVariable.value.ToString("F0");
         m_moveLabel.text = m_movesVariable.value.ToString();
     }
 }

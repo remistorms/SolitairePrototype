@@ -12,25 +12,27 @@ public class CardsManager : MonoBehaviour
     [SerializeField] private CardPile m_drawPile;
     [SerializeField] private CardPile[] m_endPiles;
     [SerializeField] private CardPile[] m_gamePiles;
-    TurnsManager m_gameManager;
+    TurnsManager m_turnsManager;
+
+    public bool hasFinishedDealing = false;
 
     private void Awake()
     {
-        m_gameManager = FindObjectOfType<TurnsManager>();
+        m_turnsManager = FindObjectOfType<TurnsManager>();
     }
 
     private void Start()
     {
         EventsManager.OnRequestDrawCards += DrawCardsFromDeck;
 
-        GenerateDeck();
+        //GenerateDeck();
 
-        ShuffleDeck();
+        //ShuffleDeck();
 
-        StartCoroutine(DealCards());
+        //StartCoroutine(DealCards());
     }
 
-    void GenerateDeck()
+    public void GenerateDeck()
     {
         m_deck = new List<Card>();
 
@@ -59,7 +61,7 @@ public class CardsManager : MonoBehaviour
         m_deckPile.AddCardsToPile(m_deck);
     }
 
-    void ShuffleDeck()
+    public void ShuffleDeck()
     {
         m_deckPile.RemoveCardsFromPile(m_deck);
 
@@ -86,9 +88,14 @@ public class CardsManager : MonoBehaviour
         Debug.Log("Deck Shuffled");
     }
 
-    IEnumerator DealCards()
+    public void DealCards()
     {
+        StartCoroutine(DealCardsRoutine());
+    }
 
+    IEnumerator DealCardsRoutine()
+    {
+        hasFinishedDealing = false;
         //Face downCards
         for (int i = 0; i < 7; i++)
         {
@@ -128,6 +135,8 @@ public class CardsManager : MonoBehaviour
 
             yield return new WaitForSeconds(0.1f);
         }
+
+        hasFinishedDealing = true;
     }
 
     public void DrawCardsFromDeck()
@@ -168,7 +177,7 @@ public class CardsManager : MonoBehaviour
 
                 yield return new WaitForSeconds(0.1f);
             }
-            m_gameManager.AddMoveToStack(move);
+            m_turnsManager.AddMoveToStack(move);
         }
         else if (m_deckPile.m_cardsInPile.Count < amountOfCardsToDraw && m_deckPile.m_cardsInPile.Count > 0 && m_drawThreeCardMode)
         {
@@ -188,7 +197,7 @@ public class CardsManager : MonoBehaviour
 
                 yield return new WaitForSeconds(0.1f);
             }
-            m_gameManager.AddMoveToStack(move);
+            m_turnsManager.AddMoveToStack(move);
         }
         else
         {
