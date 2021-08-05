@@ -6,6 +6,7 @@ public class ScreenAdjustment : MonoBehaviour
 {
     public ScreenOrientation m_currentOrientation;
     Camera m_mainCamera;
+    bool isOnMobile = false;
 
     [Header("Landscape")]
     [SerializeField] private Vector3 m_landscapeCamPosition;
@@ -21,11 +22,20 @@ public class ScreenAdjustment : MonoBehaviour
 
         m_currentOrientation = Screen.orientation;
 
-        SetCameraPosition();
+        if (SystemInfo.deviceType == DeviceType.Handheld)
+        {
+            isOnMobile = true;
+        }
+
+        if (isOnMobile)
+            SetCameraPosition();
     }
 
     void Update()
     {
+        if (!isOnMobile)
+            return;
+
         if (Screen.orientation != m_currentOrientation)
         {
             m_currentOrientation = Screen.orientation;
