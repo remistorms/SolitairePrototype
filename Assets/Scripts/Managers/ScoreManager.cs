@@ -40,7 +40,7 @@ public class ScoreManager : MonoBehaviour
         EventsManager.OnUndoMovement += OnUndoMovement;
     }
 
-    private void OnUndoMovement(PlayerMovement move)
+    private void OnUndoMovement(Turn move)
     {
         if (m_cardsCountedTowardsScoreFromEndPiles.Contains(lastCard))
         {

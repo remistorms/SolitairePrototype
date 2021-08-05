@@ -12,11 +12,11 @@ public class CardsManager : MonoBehaviour
     [SerializeField] private CardPile m_drawPile;
     [SerializeField] private CardPile[] m_endPiles;
     [SerializeField] private CardPile[] m_gamePiles;
-    GameManager m_gameManager;
+    TurnsManager m_gameManager;
 
     private void Awake()
     {
-        m_gameManager = FindObjectOfType<GameManager>();
+        m_gameManager = FindObjectOfType<TurnsManager>();
     }
 
     private void Start()
@@ -137,7 +137,7 @@ public class CardsManager : MonoBehaviour
 
     IEnumerator DrawCardsFromDeckRoutine()
     {
-        PlayerMovement move = new PlayerMovement();
+        Turn move = new Turn();
         move.originalPile = m_deckPile;
         move.endPile = m_drawPile;
         List<Card> drawnCards = new List<Card>();

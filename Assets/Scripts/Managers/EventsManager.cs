@@ -79,10 +79,17 @@ public static class EventsManager
         OnScreenOrientationChanged(newOrientation);
     }
 
-    public static event Action<PlayerMovement> OnUndoMovement = delegate { };
-    public static void Fire_event_UndoMovement(PlayerMovement move)
+    public static event Action<Turn> OnUndoMovement = delegate { };
+    public static void Fire_event_UndoMovement(Turn move)
     {
         Debug.Log("Event player undo");
         OnUndoMovement(move);
+    }
+
+    public static event Action<Card> OnCardFlipped = delegate { };
+    public static void Fire_event_OnCardFlipped(Card card)
+    {
+        Debug.Log("fliped card");
+        OnCardFlipped(card);
     }
 }

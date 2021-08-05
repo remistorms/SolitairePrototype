@@ -98,7 +98,7 @@ public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler
     {
         if (m_isLerping)
             return;
-
+        EventsManager.Fire_event_OnCardFlipped(this);
         StartCoroutine(FlipRoutine(flipTime));
     }
 
