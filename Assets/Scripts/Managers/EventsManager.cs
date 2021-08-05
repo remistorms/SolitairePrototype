@@ -38,6 +38,14 @@ public static class EventsManager
         OnCardDragEnded(card, pointerEventData);
     }
 
+    //Card Drop
+    public static event Action<Card, CardPile> OnCardDropped = delegate { };
+    public static void Fire_evt_CardDroppedOnPile(Card card, CardPile pile)
+    {
+        Debug.Log("EventsManager: " + card.name + " dropped onto " + pile.name);
+        OnCardDropped(card, pile);
+    }
+
     //Fire_evt_ClickedOnCard
     public static event Action<Card, PointerEventData> OnClickedOnCard = delegate { };
     public static void Fire_evt_OnClickedOnCard(Card card, PointerEventData pointerEventData)
@@ -71,10 +79,10 @@ public static class EventsManager
         OnScreenOrientationChanged(newOrientation);
     }
 
-    public static event Action OnUndoMovement = delegate { };
-    public static void Fire_event_UndoMovement()
+    public static event Action<PlayerMovement> OnUndoMovement = delegate { };
+    public static void Fire_event_UndoMovement(PlayerMovement move)
     {
         Debug.Log("Event player undo");
-        OnUndoMovement();
+        OnUndoMovement(move);
     }
 }

@@ -14,6 +14,8 @@ public class ScoreManager : MonoBehaviour
     //This lists keeps track of cards that awarded points to the player to avoid multiple points
     [SerializeField] private List<Card> m_cardsCountedTowardsScoreFromGamePiles;
     [SerializeField] private List<Card> m_cardsCountedTowardsScoreFromEndPiles;
+    private int lastPointsAwarded;
+    private Card lastCard;
 
 
     private void Awake()
@@ -26,6 +28,21 @@ public class ScoreManager : MonoBehaviour
         //subscribe to events
         EventsManager.OnCardStackCheck   += OnCardStackCheck;
         EventsManager.OnDeckReshuffled += OnDeckReshuffled;
+        EventsManager.OnUndoMovement += OnUndoMovement;
+    }
+
+    private void OnUndoMovement(PlayerMovement move)
+    {
+        lastCard = move.cardsMoved[0];
+        if (m_cardsCountedTowardsScoreFromEndPiles.Contains(lastCard))
+        {
+            m_cardsCountedTowardsScoreFromEndPiles.Remove(lastCard);
+        }
+        if (m_cardsCountedTowardsScoreFromGamePiles.Contains(lastCard))
+        {
+            m_cardsCountedTowardsScoreFromGamePiles.Remove(lastCard);
+        }
+        UpdateScore(-lastPointsAwarded);
     }
 
     void InitScore()
@@ -38,6 +55,7 @@ public class ScoreManager : MonoBehaviour
     void UpdateScore(int score)
     {
         m_scoreVariable.value += score;
+        lastPointsAwarded = score;
 
         if (m_scoreVariable.value <= 0)
             m_scoreVariable.value = 0;
@@ -53,6 +71,7 @@ public class ScoreManager : MonoBehaviour
             {
                 m_cardsCountedTowardsScoreFromGamePiles.Add(card);
                 UpdateScore(m_awardedPointsForGamePileDrop);
+                lastCard = card;
             }
         }
         //Check if card is not on the EndPile dictionary and if so, add the points
@@ -62,11 +81,12 @@ public class ScoreManager : MonoBehaviour
             {
                 m_cardsCountedTowardsScoreFromEndPiles.Add(card);
                 UpdateScore(m_awardedPointsForEndPileDrop);
+                lastCard = card;
             }
         }
         else
         {
-            Debug.Log("No points awarded");
+            //Debug.Log("No points awarded");
         }
     }
 
@@ -80,5 +100,6 @@ public class ScoreManager : MonoBehaviour
         //Unsubscribe from events
         EventsManager.OnCardStackCheck   -= OnCardStackCheck;
         EventsManager.OnDeckReshuffled -= OnDeckReshuffled;
+        EventsManager.OnUndoMovement -= OnUndoMovement;
     }
 }

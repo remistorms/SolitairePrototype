@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 public class PlayerHand : MonoBehaviour
 {
     public List<Card> m_cardsInHand = new List<Card>();
+    public List<Card> m_lastCardsInHand = new List<Card>();
     public CardPile m_originPile = null;
     public CardPile m_destinationPile = null;
     bool m_cardsInHandSwitchedPiles = false;
@@ -59,7 +60,9 @@ public class PlayerHand : MonoBehaviour
 
     private void OnCardStackCheck(Card card, CardPile cardPile, bool canStack)
     {
-        Debug.Log("PlayerHand: OnCardStackCheck result: " + canStack );
+        m_lastCardsInHand = m_cardsInHand;
+
+        //Debug.Log("PlayerHand: OnCardStackCheck result: " + canStack );
         if (canStack)
         {
             m_destinationPile = cardPile;
@@ -74,6 +77,8 @@ public class PlayerHand : MonoBehaviour
 
     private void OnCardDragEnded(Card card, PointerEventData pointerEventData)
     {
+        //Debug.Log("Save the card to previous here");
+
         if (!m_hasCheckedStackRule)
         {
             m_destinationPile = m_originPile;
@@ -83,7 +88,6 @@ public class PlayerHand : MonoBehaviour
         {
             m_destinationPile = m_originPile;
         }
-
         m_destinationPile.AddCardsToPile(m_cardsInHand);
         m_originPile = null;
         m_destinationPile = null;

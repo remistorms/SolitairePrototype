@@ -15,6 +15,8 @@ public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler
     public CardSuit m_cardSuit;
     public CardColor m_cardColor;
     public CardPile m_cardPile = null;
+    public CardPile m_previousPile = null;
+    public List<Card> m_cardAndAllAbove = null;
 
     [Header("Card Objects")]
 
@@ -177,16 +179,24 @@ public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler
         {
             return;
         }
+
+        m_cardAndAllAbove = m_cardPile.GetAllCardsAboveSelected(this);
+
         //Can only drag card from Game Piles, EndPiles and DrawPiles
         if (m_cardPile.m_pileType == PileType.GamePile || m_cardPile.m_pileType == PileType.EndPile)
         {
             EventsManager.Fire_evt_OnCardDragStarted(this, pointerEventData);
             m_canvasGroup.blocksRaycasts = false;
+            //Added this to save previous pile
+            m_previousPile = m_cardPile;
+            m_cardPile = null;
         }
         else if (m_cardPile.m_pileType == PileType.DrawPile && m_isTopCard )
         {
             EventsManager.Fire_evt_OnCardDragStarted(this, pointerEventData);
             m_canvasGroup.blocksRaycasts = false;
+            m_previousPile = m_cardPile;
+            m_cardPile = null;
         }
         else
         {
@@ -224,6 +234,8 @@ public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler
             Card card = eventData.pointerDrag.GetComponent<Card>();
 
             m_cardPile.DropCardOnPile(card);
+
+            EventsManager.Fire_evt_CardDroppedOnPile(this, m_cardPile);
         }
     }
 
@@ -260,16 +272,6 @@ public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler
     {
         SetOutlineColor(m_normalColor);
     }
-
-    /*
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            Flip();
-        }
-    }
-    */
 
     public void SetCanvasGroupState(bool state)
     {

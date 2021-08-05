@@ -41,8 +41,6 @@ public class CardPile : MonoBehaviour, IDropHandler, IPointerClickHandler
 
         m_cardsInPile.Add(cardToAdd);
 
-        //cardToAdd.GetComponent<Draggable>().SetReturningPosition(this.transform.position);
-
         if (autoUpdatePositions)
         {
             UpdatePositions();
