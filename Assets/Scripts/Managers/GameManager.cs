@@ -6,7 +6,7 @@ public class GameManager : MonoBehaviour
 {
     [Header("Main Objects")]
     public bool hasWon = false;
-    bool isGamePaused = false;
+    public bool isGamePaused = false;
     [SerializeField] private CardsManager m_cardsManager;
     [SerializeField] private FloatVariable m_timer;
     [SerializeField] private CardPile[] endPiles;
@@ -21,8 +21,16 @@ public class GameManager : MonoBehaviour
         StartCoroutine(StartGameLoop());
     }
 
-    public void PauseGame()
+    private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            TogglePause();
+        }
+    }
+    public void TogglePause()
+    {
+        isGamePaused = !isGamePaused;
     }
 
     bool CheckWinCondition()
