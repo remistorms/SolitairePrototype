@@ -4688,12 +4688,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f5eeea9466302746882e2ac84371c2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_currentScore: 0
+  m_previousScore: 0
   m_scoreVariable: {fileID: 11400000, guid: 640bd2c41b3835b4ea8ad71fb8a3ce09, type: 2}
   m_awardedPointsForGamePileDrop: 5
   m_awardedPointsForEndPileDrop: 15
   m_pointsDeductedFromReshuffle: 100
   m_cardsCountedTowardsScoreFromGamePiles: []
   m_cardsCountedTowardsScoreFromEndPiles: []
+  lastCard: {fileID: 0}
 --- !u!4 &1958753224
 Transform:
   m_ObjectHideFlags: 0
@@ -4753,8 +4756,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isRecordingMoves: 0
   m_movesIntVariable: {fileID: 11400000, guid: 420f56e35900b834eaaec2d8bcc69e2c, type: 2}
-  m_scoreIntVariable: {fileID: 11400000, guid: 640bd2c41b3835b4ea8ad71fb8a3ce09, type: 2}
-  m_recordedPlayerMovements: []
+  m_recordedMovements: []
 --- !u!1 &2029790739
 GameObject:
   m_ObjectHideFlags: 0

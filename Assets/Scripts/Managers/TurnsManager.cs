@@ -9,7 +9,7 @@ public class TurnsManager : MonoBehaviour
     [Header("Undo Movement")]
     public bool isRecordingMoves = false;
     public IntVariable m_movesIntVariable;
-    public IntVariable m_scoreIntVariable;
+    //public IntVariable m_scoreIntVariable;
     //private Stack<Turn> m_recordedMovements;
     public List<Turn> m_recordedMovements;
   
@@ -30,7 +30,7 @@ public class TurnsManager : MonoBehaviour
     private void OnCardFlipped(Card card)
     {
         Turn move = new Turn();
-        move.recordedScore = m_scoreIntVariable.value;
+        move.recordedScore = ScoreManager.Instance.GetPreviousScore();
 
         List<Card> flippedCards = new List<Card>();
         flippedCards.Add(card);
@@ -61,56 +61,13 @@ public class TurnsManager : MonoBehaviour
 
     }
 
-    public void UndoLastMove()
-    {
-        if (m_recordedMovements.Count > 0)
-        {
-            Turn move = m_recordedMovements[m_recordedMovements.Count - 1];
-
-            if (move.endPile != null)
-                move.endPile.RemoveCardsFromPile(move.cardsMoved);
-
-            if (move.originalPile != null)
-                move.originalPile.AddCardsToPile(move.cardsMoved);
-
-            for (int i = 0; i < move.cardsMoved.Count; i++)
-            {
-                bool flipStateDuringTurn = false;
-                move.cardFlipState.TryGetValue(move.cardsMoved[i], out flipStateDuringTurn);
-                if (flipStateDuringTurn)
-                {
-                    //move.cardsMoved[i].FlipUp();
-                    move.cardsMoved[i].SetFlipState(true);
-                }
-                else
-                {
-                    //move.cardsMoved[i].FlipDown();
-                    move.cardsMoved[i].SetFlipState(false);
-                }
-            }
-
-            if (move.endPile != null)
-                move.endPile.UpdatePositions();
-
-            if (move.originalPile != null)
-                move.originalPile.UpdatePositions();
-
-            m_scoreIntVariable.value = move.recordedScore;
-
-            m_movesIntVariable.value--;
-
-            Debug.Log("Remove lAst here");
-            m_recordedMovements.Remove( m_recordedMovements[m_recordedMovements.Count - 1]);
-
-        }
-
-    }
+    
 
     private void OnCardStackCheck(Card card, CardPile pile, bool canStack)
     {
         Turn move = new Turn();
         move.cardsMoved = card.m_cardAndAllAbove;
-        move.recordedScore = m_scoreIntVariable.value;
+        move.recordedScore = ScoreManager.Instance.GetPreviousScore();
 
         Dictionary<Card, bool> flipState = new Dictionary<Card, bool>();
         for (int i = 0; i < move.cardsMoved.Count; i++)
@@ -147,6 +104,8 @@ public class TurnsManager : MonoBehaviour
         if (!isRecordingMoves)
             return;
 
+        move.recordedScore = ScoreManager.Instance.GetPreviousScore();
+
         Debug.Log("Added move to stack: " + move.cardsMoved[0].name);
 
         //THis will save the flip state of each card
@@ -177,6 +136,54 @@ public class TurnsManager : MonoBehaviour
             m_recordedMovements.Add(tempMovements[i]);
         }
         m_movesIntVariable.value++;
+    }
+
+    public void UndoLastMove()
+    {
+        if (m_recordedMovements.Count > 0)
+        {
+            Turn move = m_recordedMovements[m_recordedMovements.Count - 1];
+
+            if (move.endPile != null)
+                move.endPile.RemoveCardsFromPile(move.cardsMoved);
+
+            if (move.originalPile != null)
+                move.originalPile.AddCardsToPile(move.cardsMoved);
+
+            for (int i = 0; i < move.cardsMoved.Count; i++)
+            {
+                bool flipStateDuringTurn = false;
+                move.cardFlipState.TryGetValue(move.cardsMoved[i], out flipStateDuringTurn);
+                if (flipStateDuringTurn)
+                {
+                    //move.cardsMoved[i].FlipUp();
+                    move.cardsMoved[i].SetFlipState(true);
+                }
+                else
+                {
+                    //move.cardsMoved[i].FlipDown();
+                    move.cardsMoved[i].SetFlipState(false);
+                }
+            }
+
+            if (move.endPile != null)
+                move.endPile.UpdatePositions();
+
+            if (move.originalPile != null)
+                move.originalPile.UpdatePositions();
+
+            ScoreManager.Instance.SetPreviousScore(0);
+            ScoreManager.Instance.SetScore(move.recordedScore);
+
+            m_movesIntVariable.value--;
+
+            Debug.Log("Remove lAst here");
+            m_recordedMovements.Remove(m_recordedMovements[m_recordedMovements.Count - 1]);
+
+            EventsManager.Fire_event_UndoMovement(move);
+
+        }
+
     }
 }
 

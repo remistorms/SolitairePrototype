@@ -6,6 +6,9 @@ using UnityEngine;
 public class ScoreManager : MonoBehaviour
 {
     public static ScoreManager Instance;
+
+    [SerializeField] private int m_currentScore;
+    [SerializeField] private int m_previousScore;
     [SerializeField] private IntVariable m_scoreVariable;
     [SerializeField] private int m_awardedPointsForGamePileDrop = 5;
     [SerializeField] private int m_awardedPointsForEndPileDrop = 15;
@@ -16,8 +19,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private List<Card> m_cardsCountedTowardsScoreFromEndPiles;
 
     private int lastPointsAwarded;
-    private Card lastCard;
-
+    [SerializeField] private Card lastCard;
 
     private void Awake()
     {
@@ -45,29 +47,37 @@ public class ScoreManager : MonoBehaviour
         if (m_cardsCountedTowardsScoreFromEndPiles.Contains(lastCard))
         {
             m_cardsCountedTowardsScoreFromEndPiles.Remove(lastCard);
+            lastCard = m_cardsCountedTowardsScoreFromEndPiles[m_cardsCountedTowardsScoreFromEndPiles.Count - 1];
         }
         if (m_cardsCountedTowardsScoreFromGamePiles.Contains(lastCard))
         {
             m_cardsCountedTowardsScoreFromGamePiles.Remove(lastCard);
+            lastCard = m_cardsCountedTowardsScoreFromGamePiles[m_cardsCountedTowardsScoreFromGamePiles.Count - 1];
         }
-        SetScore(move.recordedScore);
 
     }
 
     void InitScore()
     {
-        m_scoreVariable.value = 0;
+        //m_scoreVariable.value = 0;
+        m_currentScore = 0;
+        m_previousScore = 0;
+        m_scoreVariable.value = m_currentScore;
         m_cardsCountedTowardsScoreFromGamePiles = new List<Card>();
         m_cardsCountedTowardsScoreFromEndPiles  = new List<Card>();
     }
 
     void UpdateScore(int score)
     {
-        m_scoreVariable.value += score;
+        //m_scoreVariable.value += score;
+        m_previousScore = m_currentScore;
+        m_currentScore += score;
         lastPointsAwarded = score;
 
-        if (m_scoreVariable.value <= 0)
-            m_scoreVariable.value = 0;
+        if (m_currentScore <= 0)
+            m_currentScore = 0;
+
+        m_scoreVariable.value = m_currentScore;
     }
 
     //Events callbacks
@@ -104,14 +114,28 @@ public class ScoreManager : MonoBehaviour
         UpdateScore(-m_pointsDeductedFromReshuffle);
     }
 
-    public int GetScore()
+    public int GetCurrentScore()
     {
-        return m_scoreVariable.value;
+        //return m_scoreVariable.value;
+        return m_currentScore;
     }
 
-    void SetScore(int score)
+    public int GetPreviousScore()
     {
-        m_scoreVariable.value = score;
+        //return m_scoreVariable.value;
+        return m_previousScore;
+    }
+
+    public void SetScore(int score)
+    {
+        //m_scoreVariable.value = score;
+        m_currentScore = score;
+        m_scoreVariable.value = m_currentScore;
+    }
+
+    public void SetPreviousScore(int prevScore)
+    {
+        m_previousScore = prevScore;
     }
 
     private void OnDisable()
