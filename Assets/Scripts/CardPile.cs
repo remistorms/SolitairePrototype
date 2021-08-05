@@ -243,4 +243,70 @@ public class CardPile : MonoBehaviour, IDropHandler, IPointerClickHandler
         }
         UpdatePositions();
     }
+
+    public CardPileSnapshot GetCurrentSnapshot()
+    {
+        if (m_cardsInPile.Count <= 0)
+        {
+            List<Card> emptyCards = new List<Card>();
+            List<bool> emptyBools = new List<bool>();
+            return new CardPileSnapshot(this, emptyCards, emptyBools);
+        }
+
+        else
+        {
+            List<bool> flipStateSnapshot = new List<bool>();
+            for (int i = 0; i < m_cardsInPile.Count; i++)
+            {
+                flipStateSnapshot.Add(m_cardsInPile[i].m_isFaceUp);
+            }
+            CardPileSnapshot snapshot = new CardPileSnapshot(this, m_cardsInPile, flipStateSnapshot);
+
+            return snapshot;
+        }
+
+        
+    }
+
+    public void SetSnapshot(CardPileSnapshot snapshot)
+    {
+
+
+        List<Card> snapshopCards = snapshot.GetSnapshotCards();
+        Debug.Log("Seting Specific Snapshot: ");
+        for (int i = 0; i < snapshopCards.Count; i++)
+        {
+            Debug.Log("Snapshot Cards i: " + snapshopCards[i].name );
+        }
+
+        //Clear all cards at the moment 
+        m_cardsInPile.Clear();
+
+        //Add cards from snapshot
+        if (snapshot.GetSnapshotCards().Count <= 0)
+        {
+            return;
+        }
+        else
+        {
+            AddCardsToPile(snapshot.GetSnapshotCards());
+
+            //Set the flip state per card
+            List<bool> flipStates = snapshot.GetSnapshotCardFlipStates();
+            for (int i = 0; i < m_cardsInPile.Count; i++)
+            {
+                if (flipStates[i])
+                {
+                    m_cardsInPile[i].FlipUp();
+                }
+                else
+                {
+                    m_cardsInPile[i].FlipDown();
+                }
+            }
+        }
+
+        //UpdatePositions
+        UpdatePositions();
+    }
 }

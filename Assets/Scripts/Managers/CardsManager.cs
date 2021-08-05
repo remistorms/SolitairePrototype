@@ -5,8 +5,10 @@ using DG.Tweening;
 
 public class CardsManager : MonoBehaviour
 {
+    public static CardsManager Instance;
     public bool m_drawThreeCardMode = false;
     [SerializeField] private GameObject m_cardPrefab;
+    public List<Card> m_allCardsInPlay;
     public List<Card> m_deck;
     [SerializeField] private CardPile m_deckPile;
     [SerializeField] private CardPile m_drawPile;
@@ -18,6 +20,14 @@ public class CardsManager : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance != null)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
         m_turnsManager = FindObjectOfType<TurnsManager>();
     }
 
@@ -55,6 +65,8 @@ public class CardsManager : MonoBehaviour
                 clonedCard.name = currentCardValue.ToString() + " of " + currentSuit.ToString();
 
                 m_deck.Add(card);
+
+                m_allCardsInPlay.Add(card);
             }
         }
 

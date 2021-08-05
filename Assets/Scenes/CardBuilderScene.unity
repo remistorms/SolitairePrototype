@@ -189,6 +189,7 @@ MonoBehaviour:
   m_drawThreeCardMode: 0
   m_cardPrefab: {fileID: 6820074323485670485, guid: d249990f43103e34ba1efe13a78ec762,
     type: 3}
+  m_allCardsInPlay: []
   m_deck: []
   m_deckPile: {fileID: 1660305508}
   m_drawPile: {fileID: 2121529204}
@@ -825,7 +826,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1963122981}
-        m_MethodName: UndoLastMove
+        m_MethodName: GoToPreviousMove
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4751,9 +4752,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a67e05c7e00e7f4fb8060b28b4a5f9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_movesIntVariable: {fileID: 11400000, guid: 420f56e35900b834eaaec2d8bcc69e2c, type: 2}
+  m_turn: {fileID: 11400000, guid: 420f56e35900b834eaaec2d8bcc69e2c, type: 2}
   m_scoreIntVariable: {fileID: 11400000, guid: 640bd2c41b3835b4ea8ad71fb8a3ce09, type: 2}
   m_recordedPlayerMovements: []
+  canRecord: 0
+  m_allCardPiles:
+  - {fileID: 1660305508}
+  - {fileID: 2121529204}
+  - {fileID: 1705111121}
+  - {fileID: 1909180873}
+  - {fileID: 2071773003}
+  - {fileID: 294483743}
+  - {fileID: 846881971}
+  - {fileID: 407194640}
+  - {fileID: 964085416}
+  - {fileID: 496876273}
+  - {fileID: 1908873806}
+  - {fileID: 136543967}
+  - {fileID: 1250202235}
+  m_allTurnsData: []
 --- !u!1 &2029790739
 GameObject:
   m_ObjectHideFlags: 0
@@ -4806,6 +4823,7 @@ MonoBehaviour:
   - {fileID: 1909180873}
   - {fileID: 2071773003}
   - {fileID: 294483743}
+  m_turnsManager: {fileID: 0}
 --- !u!1 &2071773002 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8467672672018601069, guid: f9383a2765cb71a49ad490eebc64e930,
