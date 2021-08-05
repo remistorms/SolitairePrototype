@@ -42,7 +42,7 @@ public static class EventsManager
     public static event Action<Card, CardPile> OnCardDropped = delegate { };
     public static void Fire_evt_CardDroppedOnPile(Card card, CardPile pile)
     {
-        Debug.Log("EventsManager: " + card.name + " dropped onto " + pile.name);
+        //Debug.Log("EventsManager: " + card.name + " dropped onto " + pile.name);
         OnCardDropped(card, pile);
     }
 
@@ -57,7 +57,7 @@ public static class EventsManager
     public static event Action<Card, CardPile, bool> OnCardStackCheck = delegate { };
     public static void Fire_evt_OnCardStackCheck(Card card, CardPile pile, bool canStack)
     {
-        Debug.Log(" card " + card.name + " was dropped onto " + pile.gameObject.name + " stackable status -> " + canStack);
+        //Debug.Log(" card " + card.name + " was dropped onto " + pile.gameObject.name + " stackable status -> " + canStack);
         OnCardStackCheck(card, pile, canStack);
     }
 
@@ -82,14 +82,14 @@ public static class EventsManager
     public static event Action<Turn> OnUndoMovement = delegate { };
     public static void Fire_event_UndoMovement(Turn move)
     {
-        Debug.Log("Event player undo");
+        //Debug.Log("Event player undo");
         OnUndoMovement(move);
     }
 
     public static event Action<Card> OnCardFlipped = delegate { };
     public static void Fire_event_OnCardFlipped(Card card)
     {
-        Debug.Log("fliped card");
+        //Debug.Log("fliped card");
         OnCardFlipped(card);
     }
 }

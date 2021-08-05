@@ -111,7 +111,9 @@ public class CardPile : MonoBehaviour, IDropHandler, IPointerClickHandler
         {
             if (m_pileType == PileType.DeckPile)
             {
-                m_cardsInPile[i].FlipDown();
+                m_cardsInPile[i].SetFlipState(false);
+                //m_cardsInPile[i].FlipDown();
+                //m_cardsInPile[i].FlipNoSignal();
             }
 
             m_cardsInPile[i].transform.SetParent(this.transform);

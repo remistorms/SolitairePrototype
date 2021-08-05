@@ -94,37 +94,33 @@ public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler
         //this.gameObject.name = m_cardValue.ToString() + " of " + m_cardSuit.ToString();
     }
 
+    /*
+    public void FlipNoSignal(float flipTime = 0.15f)
+    {
+        if (m_isLerping)
+            return;
+        StartCoroutine(FlipRoutine(flipTime));
+    }
+    */
+    
+    
     public void Flip(float flipTime = 0.15f)
     {
         if (m_isLerping)
             return;
-        EventsManager.Fire_event_OnCardFlipped(this);
+        //EventsManager.Fire_event_OnCardFlipped(this);
         StartCoroutine(FlipRoutine(flipTime));
     }
+    
 
-    public void FlipUp(float flipTime = 0.15f)
+        /*
+    public void FlipCardNoSignal(float flipTime = 0.15f)
     {
-        if (m_isFaceUp)
-        {
+        if (m_isLerping)
             return;
-        }
-        else
-        {
-            Flip(flipTime);
-        }
+        StartCoroutine(FlipRoutine(flipTime));
     }
-
-    public void FlipDown(float flipTime = 0.15f)
-    {
-        if (m_isFaceUp)
-        {
-            Flip(flipTime);
-        }
-        else
-        {
-            return;
-        }
-    }
+    */
 
     IEnumerator FlipRoutine(float flipTime = 0.15f)
     {
@@ -171,6 +167,23 @@ public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler
         m_outlineImage.color = color;
     }
 
+    public void SetFlipState(bool flipState)
+    {
+        if (flipState)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+            m_frontSide.gameObject.SetActive(true);
+            m_backSide.gameObject.SetActive(false);
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+            m_frontSide.gameObject.SetActive(false);
+            m_backSide.gameObject.SetActive(true);
+        }
+
+        m_isFaceUp = flipState;
+    }
 
     //Drag Interfaces
     public void OnBeginDrag(PointerEventData pointerEventData)
@@ -250,6 +263,7 @@ public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler
         else if (m_cardPile.m_pileType == PileType.GamePile && !m_isFaceUp && m_isTopCard)
         {
             Flip();
+            EventsManager.Fire_event_OnCardFlipped(this);
         }
         else if (m_cardPile.m_pileType == PileType.DeckPile && !m_isFaceUp && m_isTopCard)
         {

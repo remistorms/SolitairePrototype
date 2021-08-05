@@ -8,8 +8,15 @@ public class GameManager : MonoBehaviour
     public bool hasWon = false;
     public bool isGamePaused = false;
     [SerializeField] private CardsManager m_cardsManager;
+    [SerializeField] private TurnsManager m_turnsManager;
     [SerializeField] private FloatVariable m_timer;
     [SerializeField] private CardPile[] endPiles;
+
+    private void Awake()
+    {
+        m_turnsManager.isRecordingMoves = false;
+        m_timer.value = 0.0f;
+    }
 
     private void Start()
     {
@@ -68,6 +75,8 @@ public class GameManager : MonoBehaviour
             yield return null;
         }
 
+        m_turnsManager.isRecordingMoves = true;
+
         while (!hasWon)
         {
             if (isGamePaused)
@@ -82,6 +91,8 @@ public class GameManager : MonoBehaviour
 
             hasWon = CheckWinCondition();
         }
+
+        m_turnsManager.isRecordingMoves = false;
 
         Debug.Log("YOU WIN");
     }

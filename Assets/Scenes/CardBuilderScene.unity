@@ -4751,6 +4751,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a67e05c7e00e7f4fb8060b28b4a5f9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isRecordingMoves: 0
   m_movesIntVariable: {fileID: 11400000, guid: 420f56e35900b834eaaec2d8bcc69e2c, type: 2}
   m_scoreIntVariable: {fileID: 11400000, guid: 640bd2c41b3835b4ea8ad71fb8a3ce09, type: 2}
   m_recordedPlayerMovements: []
@@ -4800,6 +4801,7 @@ MonoBehaviour:
   hasWon: 0
   isGamePaused: 0
   m_cardsManager: {fileID: 137994147}
+  m_turnsManager: {fileID: 1963122981}
   m_timer: {fileID: 11400000, guid: 153eac9b8347cb945b2d2c18367f5ff3, type: 2}
   endPiles:
   - {fileID: 1705111121}

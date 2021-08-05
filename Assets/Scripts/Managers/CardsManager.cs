@@ -48,7 +48,8 @@ public class CardsManager : MonoBehaviour
 
                 Card card = clonedCard.GetComponent<Card>();
 
-                card.Flip(0);
+                //card.Flip();
+                card.SetFlipState(false);
 
                 card.InitializeCard(v, currentSuit);
 
@@ -82,7 +83,7 @@ public class CardsManager : MonoBehaviour
         {
             m_deckPile.AddCardToPile(card);
 
-            card.Flip(0);
+            card.Flip();
         }
 
         Debug.Log("Deck Shuffled");
@@ -174,6 +175,7 @@ public class CardsManager : MonoBehaviour
                 m_drawPile.AddCardToPile(card);
 
                 card.Flip();
+                //card.FlipNoSignal();
 
                 yield return new WaitForSeconds(0.1f);
             }
@@ -193,6 +195,7 @@ public class CardsManager : MonoBehaviour
 
                 m_drawPile.AddCardToPile(card);
 
+                //card.Flip();
                 card.Flip();
 
                 yield return new WaitForSeconds(0.1f);
