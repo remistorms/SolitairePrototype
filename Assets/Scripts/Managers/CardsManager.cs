@@ -287,6 +287,10 @@ public class CardsManager : MonoBehaviour
 
         EventsManager.Fire_evt_OnDeckReshuffled();
 
+        Turn move = new Turn();
+
+        m_turnsManager.AddMoveToStack(move);
+
     }
 
     private void OnDisable()

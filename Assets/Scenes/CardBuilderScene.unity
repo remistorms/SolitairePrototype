@@ -5901,7 +5901,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -1080}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1477110882
@@ -8193,6 +8193,7 @@ MonoBehaviour:
   m_pointsDeductedFromReshuffle: 100
   m_cardsCountedTowardsScoreFromGamePiles: []
   m_cardsCountedTowardsScoreFromEndPiles: []
+  m_scoreHistory: 
   lastCard: {fileID: 0}
 --- !u!4 &1958753224
 Transform:
@@ -8251,6 +8252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a67e05c7e00e7f4fb8060b28b4a5f9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_currentTurn: 0
   isRecordingMoves: 0
   m_movesIntVariable: {fileID: 11400000, guid: 420f56e35900b834eaaec2d8bcc69e2c, type: 2}
   m_recordedMovements: []

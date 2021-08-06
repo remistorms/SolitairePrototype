@@ -17,8 +17,10 @@ public class ScoreManager : MonoBehaviour
     //This lists keeps track of cards that awarded points to the player to avoid multiple points
     [SerializeField] private List<Card> m_cardsCountedTowardsScoreFromGamePiles;
     [SerializeField] private List<Card> m_cardsCountedTowardsScoreFromEndPiles;
+    [SerializeField] private List<int> m_scoreHistory;
 
-    private int lastPointsAwarded;
+    private int m_currentScoreIndex;
+    //private int lastPointsAwarded;
     [SerializeField] private Card lastCard;
 
     private void Awake()
@@ -40,6 +42,18 @@ public class ScoreManager : MonoBehaviour
         EventsManager.OnCardStackCheck   += OnCardStackCheck;
         EventsManager.OnDeckReshuffled += OnDeckReshuffled;
         EventsManager.OnUndoMovement += OnUndoMovement;
+        EventsManager.OnTurnSaved += OnTurnSaved;
+
+        m_scoreHistory = new List<int>();
+
+        //m_scoreHistory.Add(0);
+        m_currentScoreIndex = -1;
+    }
+
+    private void OnTurnSaved(Turn turn)
+    {
+        m_scoreHistory.Add(m_currentScore);
+        m_currentScoreIndex++;
     }
 
     private void OnUndoMovement(Turn move)
@@ -54,7 +68,10 @@ public class ScoreManager : MonoBehaviour
             m_cardsCountedTowardsScoreFromGamePiles.Remove(lastCard);
             lastCard = m_cardsCountedTowardsScoreFromGamePiles[m_cardsCountedTowardsScoreFromGamePiles.Count - 1];
         }
+        m_currentScoreIndex--;
+        SetScore(m_scoreHistory[m_currentScoreIndex]);
 
+        m_scoreHistory.Remove(m_scoreHistory[m_scoreHistory.Count -1]);
     }
 
     void InitScore()
@@ -72,7 +89,7 @@ public class ScoreManager : MonoBehaviour
         //m_scoreVariable.value += score;
         m_previousScore = m_currentScore;
         m_currentScore += score;
-        lastPointsAwarded = score;
+        //lastPointsAwarded = score;
 
         if (m_currentScore <= 0)
             m_currentScore = 0;
@@ -144,5 +161,6 @@ public class ScoreManager : MonoBehaviour
         EventsManager.OnCardStackCheck   -= OnCardStackCheck;
         EventsManager.OnDeckReshuffled -= OnDeckReshuffled;
         EventsManager.OnUndoMovement -= OnUndoMovement;
+        EventsManager.OnTurnSaved -= OnTurnSaved;
     }
 }

@@ -92,4 +92,11 @@ public static class EventsManager
         //Debug.Log("fliped card");
         OnCardFlipped(card);
     }
+
+    public static event Action<Turn> OnTurnSaved = delegate { };
+    public static void Fire_evt_TurnSaved(Turn turn)
+    {
+        Debug.Log("Saved new turn " + turn.turnIndex);
+        OnTurnSaved(turn);
+    }
 }

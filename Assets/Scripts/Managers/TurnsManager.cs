@@ -7,15 +7,18 @@ using UnityEngine.EventSystems;
 public class TurnsManager : MonoBehaviour
 {
     [Header("Undo Movement")]
+    [SerializeField] private int m_currentTurn;
     public bool isRecordingMoves = false;
     public IntVariable m_movesIntVariable;
     //public IntVariable m_scoreIntVariable;
     //private Stack<Turn> m_recordedMovements;
     public List<Turn> m_recordedMovements;
+    
   
 
     private void Awake()
     {
+        m_currentTurn = 0;
         m_movesIntVariable.value = 0;
         //m_recordedMovements = new Stack<Turn>();
         m_recordedMovements = new List<Turn>();
@@ -58,10 +61,7 @@ public class TurnsManager : MonoBehaviour
         move.cardFlipState = flipState;
 
         AddMoveToStack(move);
-
     }
-
-    
 
     private void OnCardStackCheck(Card card, CardPile pile, bool canStack)
     {
@@ -137,7 +137,10 @@ public class TurnsManager : MonoBehaviour
         {
             m_recordedMovements.Add(tempMovements[i]);
         }
+
         m_movesIntVariable.value++;
+
+        EventsManager.Fire_evt_TurnSaved(move);
     }
 
     public void UndoLastMove()
@@ -193,7 +196,7 @@ public class TurnsManager : MonoBehaviour
 [System.Serializable]
 public struct Turn
 {
-    string turnName;
+    public int turnIndex;
     public List<Card> cardsMoved;
     public Dictionary<Card, bool> cardFlipState;
     public CardPile originalPile;
