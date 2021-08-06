@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     [Header("Main Objects")]
     public bool hasWon = false;
     public bool isGamePaused = false;
+    [SerializeField] private UIManager m_uiManager;
     [SerializeField] private CardsManager m_cardsManager;
     [SerializeField] private TurnsManager m_turnsManager;
     [SerializeField] private FloatVariable m_timer;
@@ -20,7 +21,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        StartGame();
+
     }
 
     public void StartGame()

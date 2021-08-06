@@ -11,7 +11,7 @@ public class PlayerHand : MonoBehaviour
     public List<Card> m_lastCardsInHand = new List<Card>();
     public CardPile m_originPile = null;
     public CardPile m_destinationPile = null;
-    bool m_cardsInHandSwitchedPiles = false;
+    //bool m_cardsInHandSwitchedPiles = false;
     Vector3 offset = new Vector3(0, -0.2f, -0.05f);
     bool m_hasCheckedStackRule = false;
 
