@@ -24,6 +24,8 @@ public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler
     [SerializeField] private GameObject m_backSide;
     [SerializeField] private Image[] m_suitSprites;
     [SerializeField] private TextMeshProUGUI[] m_valueLabels;
+    [SerializeField] private AudioSource m_audioSource;
+    [SerializeField] private AudioClip m_audioClip;
 
     [Header("Outline Colors")]
     [SerializeField] private Color m_normalColor;
@@ -39,6 +41,17 @@ public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler
         m_outlineImage = GetComponent<Image>();
         SetOutlineColor(m_normalColor);
         m_canvasGroup = GetComponent<CanvasGroup>();
+        //Audio stuff
+        if (m_audioSource == null)
+            m_audioSource = GetComponent<AudioSource>();
+
+        m_audioSource.clip = m_audioClip;
+        m_audioSource.playOnAwake = false;
+    }
+
+    private void Start()
+    {
+        EventsManager.OnSFXVolumeChanged += SetFlipSoundVolume;
     }
 
     private bool m_isLerping = false;
@@ -134,6 +147,8 @@ public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler
 
         Quaternion initRotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y, transform.eulerAngles.z);
         Quaternion endRotation = Quaternion.Euler(transform.eulerAngles.x, transform.eulerAngles.y + 180, transform.eulerAngles.z);
+
+        PlayFlipSound();
 
         while (percent < 1.0f)
         {
@@ -290,5 +305,20 @@ public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler
     public void SetCanvasGroupState(bool state)
     {
         m_canvasGroup.blocksRaycasts = state;
+    }
+
+    public void PlayFlipSound()
+    {
+        m_audioSource.Play();
+    }
+
+    public void SetFlipSoundVolume(float volume)
+    {
+        m_audioSource.volume = volume;
+    }
+
+    private void OnDisable()
+    {
+        EventsManager.OnSFXVolumeChanged -= SetFlipSoundVolume;
     }
 }

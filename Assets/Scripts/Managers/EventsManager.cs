@@ -99,4 +99,10 @@ public static class EventsManager
         Debug.Log("Saved new turn " + turn.turnIndex);
         OnTurnSaved(turn);
     }
+
+    public static event Action<float> OnSFXVolumeChanged = delegate { };
+    public static void Fire_evt_SFXVolumeChanged(float vol)
+    {
+        OnSFXVolumeChanged(vol);
+    }
 }

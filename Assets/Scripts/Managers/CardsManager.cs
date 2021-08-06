@@ -170,6 +170,8 @@ public class CardsManager : MonoBehaviour
 
                 selectedPile.AddCardToPile(topCard);
 
+                topCard.PlayFlipSound();
+
                 yield return new WaitForSeconds(0.1f);
             }
      
@@ -184,6 +186,8 @@ public class CardsManager : MonoBehaviour
             m_deckPile.RemoveCardFromPile(topCard);
 
             selectedPile.AddCardToPile(topCard);
+
+            topCard.PlayFlipSound();
 
             yield return new WaitForSeconds(0.1f);
         }
