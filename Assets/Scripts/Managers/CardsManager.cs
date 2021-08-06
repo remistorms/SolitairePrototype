@@ -5,35 +5,82 @@ using DG.Tweening;
 
 public class CardsManager : MonoBehaviour
 {
+    public static CardsManager Instance;
+
     public bool m_drawThreeCardMode = false;
     [SerializeField] private GameObject m_cardPrefab;
     public List<Card> m_deck;
+    [SerializeField] private List<Card> m_allCardsInPlay;
     [SerializeField] private CardPile m_deckPile;
     [SerializeField] private CardPile m_drawPile;
     [SerializeField] private CardPile[] m_endPiles;
     [SerializeField] private CardPile[] m_gamePiles;
     TurnsManager m_turnsManager;
 
-    public bool hasFinishedDealing = false;
+    public bool resetCompleted;
+    public bool deckGenerated;
+    public bool dealCompleted;
+    public bool deckShuffled;
 
     private void Awake()
     {
-        m_turnsManager = FindObjectOfType<TurnsManager>();
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+
     }
 
     private void Start()
     {
+        m_turnsManager = FindObjectOfType<TurnsManager>();
+        m_allCardsInPlay = new List<Card>();
         EventsManager.OnRequestDrawCards += DrawCardsFromDeck;
+    }
 
-        //GenerateDeck();
+    public void ResetCardsManager()
+    {
+        resetCompleted = false;
+        deckGenerated = false;
+        dealCompleted = false;
+        deckShuffled = false;
+        StartCoroutine(ResetCardsManagerRoutine());
+    }
 
-        //ShuffleDeck();
+    IEnumerator ResetCardsManagerRoutine()
+    {
+        resetCompleted = false;
 
-        //StartCoroutine(DealCards());
+        /*
+        if (m_allCardsInPlay.Count > 0)
+        {
+            for (int i = 0; i < m_allCardsInPlay.Count; i++)
+            {
+                Destroy(m_allCardsInPlay[i].gameObject);
+            }
+        }
+
+        m_allCardsInPlay.Clear();
+
+        */
+        yield return null;
+
+        resetCompleted = true;
     }
 
     public void GenerateDeck()
     {
+        StartCoroutine(GenerateDeckRoutine());
+    }
+
+    IEnumerator GenerateDeckRoutine()
+    {
+        deckGenerated = false;
+        yield return null;
         m_deck = new List<Card>();
 
         for (int s = 0; s < 4; s++)
@@ -47,7 +94,6 @@ public class CardsManager : MonoBehaviour
                 GameObject clonedCard = Instantiate(m_cardPrefab, m_deckPile.transform.position, Quaternion.identity);
 
                 Card card = clonedCard.GetComponent<Card>();
-
                 //card.Flip();
                 card.SetFlipState(false);
 
@@ -56,14 +102,26 @@ public class CardsManager : MonoBehaviour
                 clonedCard.name = currentCardValue.ToString() + " of " + currentSuit.ToString();
 
                 m_deck.Add(card);
+
+                m_allCardsInPlay.Add(card);
+
+                yield return null;
             }
         }
 
         m_deckPile.AddCardsToPile(m_deck);
+
+        deckGenerated = true;
     }
 
     public void ShuffleDeck()
     {
+        StartCoroutine(ShuffleDeckRoutine());
+    }
+
+    IEnumerator ShuffleDeckRoutine()
+    {
+        deckShuffled = false;
         m_deckPile.RemoveCardsFromPile(m_deck);
 
         List<Card> tempDeck = new List<Card>();
@@ -83,10 +141,12 @@ public class CardsManager : MonoBehaviour
         {
             m_deckPile.AddCardToPile(card);
 
-            card.Flip();
+            card.SetFlipState(false);
         }
+      
+        yield return null;
 
-        Debug.Log("Deck Shuffled");
+        deckShuffled = true;
     }
 
     public void DealCards()
@@ -96,7 +156,7 @@ public class CardsManager : MonoBehaviour
 
     IEnumerator DealCardsRoutine()
     {
-        hasFinishedDealing = false;
+        dealCompleted = false;
         //Face downCards
         for (int i = 0; i < 7; i++)
         {
@@ -110,7 +170,7 @@ public class CardsManager : MonoBehaviour
 
                 selectedPile.AddCardToPile(topCard);
 
-                yield return new WaitForSeconds(0.01f);
+                yield return new WaitForSeconds(0.1f);
             }
      
         }
@@ -128,8 +188,6 @@ public class CardsManager : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
 
-        yield return null;
-
         for (int i = 0; i < m_gamePiles.Length; i++)
         {
             m_gamePiles[i].GetTopCard().Flip();
@@ -137,7 +195,9 @@ public class CardsManager : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
 
-        hasFinishedDealing = true;
+        yield return null;
+
+        dealCompleted = true;
     }
 
     public void DrawCardsFromDeck()
@@ -206,9 +266,6 @@ public class CardsManager : MonoBehaviour
         {
             StartCoroutine(RefillDeck());
         }
-
-
-
     }
 
     IEnumerator RefillDeck()
@@ -232,4 +289,8 @@ public class CardsManager : MonoBehaviour
 
     }
 
+    private void OnDisable()
+    {
+        EventsManager.OnRequestDrawCards -= DrawCardsFromDeck;
+    }
 }

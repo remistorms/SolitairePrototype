@@ -101,4 +101,12 @@ public class PlayerHand : MonoBehaviour
 
     }
 
+    private void OnDisable()
+    {
+        EventsManager.OnCardDragStarted -= OnCardDragStarted;
+        EventsManager.OnCardDragUpdate -= OnCardDragUpdate;
+        EventsManager.OnCardDragEnded -= OnCardDragEnded;
+        EventsManager.OnCardStackCheck -= OnCardStackCheck;
+    }
+
 }

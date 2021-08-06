@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 3977400277934361804}
   - component: {fileID: 633161579246079761}
   - component: {fileID: 5838714934462894802}
-  - component: {fileID: 6820074323485670484}
   m_Layer: 0
   m_Name: CardPrefab
   m_TagString: Untagged
@@ -173,6 +172,8 @@ MonoBehaviour:
   m_cardSuit: 0
   m_cardColor: 0
   m_cardPile: {fileID: 0}
+  m_previousPile: {fileID: 0}
+  m_cardAndAllAbove: []
   m_frontSide: {fileID: 6820074324306352472}
   m_backSide: {fileID: 6820074323830175519}
   m_suitSprites:
@@ -184,18 +185,6 @@ MonoBehaviour:
   m_highlightColor: {r: 1, g: 0.97164285, b: 0, a: 0.5019608}
   m_acceptColor: {r: 0.10617685, g: 1, b: 0, a: 0.5019608}
   m_rejectColor: {r: 1, g: 0, b: 0, a: 0.5019608}
---- !u!114 &6820074323485670484
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6820074323485670485}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53921800aeb64e14d9367af89ed76b54, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6820074323830175519
 GameObject:
   m_ObjectHideFlags: 0

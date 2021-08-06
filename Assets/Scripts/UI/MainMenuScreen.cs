@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class MainMenuScreen : UIScreen
 {
-
+    public void OnPlayButtonPressed()
+    {
+        GameManager.instance.StartGame();
+    }
 }

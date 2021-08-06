@@ -245,4 +245,9 @@ public class CardPile : MonoBehaviour, IDropHandler, IPointerClickHandler
         }
         UpdatePositions();
     }
+
+    private void OnDisable()
+    {
+        EventsManager.OnScreenOrientationChanged -= OnScreenOrientationChanged;
+    }
 }

@@ -23,8 +23,8 @@ public class TurnsManager : MonoBehaviour
 
     private void Start()
     {
-        EventsManager.OnCardStackCheck += OnCardStackCheck;
-        EventsManager.OnCardFlipped += OnCardFlipped;
+        EventsManager.OnCardStackCheck  += OnCardStackCheck;
+        EventsManager.OnCardFlipped     += OnCardFlipped;
     }
 
     private void OnCardFlipped(Card card)
@@ -96,7 +96,9 @@ public class TurnsManager : MonoBehaviour
 
     private void OnDisable()
     {
-        EventsManager.OnCardStackCheck -= OnCardStackCheck;
+        EventsManager.OnCardStackCheck  -= OnCardStackCheck;
+        EventsManager.OnCardFlipped     -= OnCardFlipped;
+
     }
 
     public void AddMoveToStack(Turn move)
