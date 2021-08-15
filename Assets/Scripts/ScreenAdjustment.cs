@@ -4,66 +4,23 @@ using UnityEngine;
 
 public class ScreenAdjustment : MonoBehaviour
 {
-    public ScreenOrientation m_currentOrientation;
-    Camera m_mainCamera;
-    bool isOnMobile = false;
+    [SerializeField] GameBounds m_gameBounds;
+    [SerializeField] Camera m_camera;
 
-    [Header("Landscape")]
-    [SerializeField] private Vector3 m_landscapeCamPosition;
-    [SerializeField] private Vector3 m_landscapeCamRotation;
-    [Header("Portrait")]             
-    [SerializeField] private Vector3 m_portraitCamPosition;
-    [SerializeField] private Vector3 m_portraitCamRotation;
-
-
-    private void Awake()
+    private void Start()
     {
-        m_mainCamera = Camera.main;
-
-        m_currentOrientation = Screen.orientation;
-
-        if (SystemInfo.deviceType == DeviceType.Handheld)
-        {
-            isOnMobile = true;
-        }
-
-        if (isOnMobile)
-            SetCameraPosition();
+        m_camera = Camera.main;
+        m_gameBounds = FindObjectOfType<GameBounds>();
     }
 
-    void Update()
+    private void Update()
     {
-        if (!isOnMobile)
-            return;
-
-        if (Screen.orientation != m_currentOrientation)
-        {
-            m_currentOrientation = Screen.orientation;
-
-            OrientationChanged(m_currentOrientation);
-        }
+        
     }
 
-    void OrientationChanged(ScreenOrientation newOrientation)
+    void UpdateScreenBounds()
     {
-        SetCameraPosition();
-
-        EventsManager.Fire_evt_ScreenOrientationChanged(newOrientation);
+       
     }
-
-    private void SetCameraPosition()
-    {
-        if (m_currentOrientation == ScreenOrientation.Portrait || m_currentOrientation == ScreenOrientation.PortraitUpsideDown)
-        {
-            m_mainCamera.transform.position = m_portraitCamPosition;
-            m_mainCamera.transform.rotation = Quaternion.Euler(m_portraitCamRotation);
-        }
-        else if (m_currentOrientation == ScreenOrientation.Landscape || m_currentOrientation == ScreenOrientation.LandscapeLeft || m_currentOrientation == ScreenOrientation.LandscapeRight)
-        {
-            m_mainCamera.transform.position = m_landscapeCamPosition;
-            m_mainCamera.transform.rotation = Quaternion.Euler(m_landscapeCamRotation);
-        }
-    }
-
 }
 
