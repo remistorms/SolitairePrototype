@@ -335,6 +335,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 515de2bf794aabf46aab8f0bc21c2e25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backCardImageIndex: 0
   m_drawThreeCardMode: 0
   m_cardPrefab: {fileID: 6820074323485670485, guid: d249990f43103e34ba1efe13a78ec762,
     type: 3}
@@ -2727,7 +2728,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 642286824}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 803d27e1e1d6d4648ac058ce2167f322, type: 3}
   m_Name: 
