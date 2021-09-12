@@ -54,12 +54,23 @@ public static class EventsManager
         OnClickedOnCard(card, pointerEventData);
     }
 
+    //Fire_evt_DoubleClickedOnCard
+    public static event Action<Card, PointerEventData> OnDoubleClickedOnCard = delegate { };
+    public static void Fire_evt_OnDoubleClickedOnCard(Card card, PointerEventData pointerEventData)
+    {
+        Debug.Log("Double clicked on: " + card.name);
+        //Debug.Log("EventsManager: " + card.name + " was clicked on");
+        OnDoubleClickedOnCard(card, pointerEventData);
+    }
+
+    
     public static event Action<Card, CardPile, bool> OnCardStackCheck = delegate { };
     public static void Fire_evt_OnCardStackCheck(Card card, CardPile pile, bool canStack)
     {
         //Debug.Log(" card " + card.name + " was dropped onto " + pile.gameObject.name + " stackable status -> " + canStack);
         OnCardStackCheck(card, pile, canStack);
     }
+    
 
     public static event Action OnRequestDrawCards = delegate { };
     public static void Fire_evt_RequestDrawCards()

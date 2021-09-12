@@ -31,7 +31,42 @@ public class CardPile : MonoBehaviour, IDropHandler, IPointerClickHandler
     private void Start()
     {
         EventsManager.OnScreenOrientationChanged += OnScreenOrientationChanged;
+
+        EventsManager.OnDoubleClickedOnCard += OnDoubleClickedOnCard;
     }
+
+
+    //Check for double click Card
+    private void OnDoubleClickedOnCard(Card card, PointerEventData pointerEventData)
+    {
+        if (!card.m_isFaceUp)
+        {
+            Debug.Log("Double clicked on face down card");
+            return;
+        }
+
+        //Check if this pile is end pile
+        if (m_pileType == PileType.EndPile)
+        {
+            bool canStack = CardHelper.Instance.CheckIfCanStack(card, this);
+
+            if (canStack)
+            {
+                Debug.Log("Double clicked on card:" + card.name + " stackable to " + this.m_finalPileSuit);
+
+                card.RemoveCardFromPile();
+
+                //DropCardOnPile(card);
+
+                AddCardToPile(card);
+
+                //Add points here
+                EventsManager.Fire_evt_OnCardStackCheck(card, this, true);
+            }
+        
+        }
+    }
+
 
     public void AddCardToPile(Card cardToAdd, bool autoUpdatePositions = true)
     {
@@ -254,5 +289,7 @@ public class CardPile : MonoBehaviour, IDropHandler, IPointerClickHandler
     private void OnDisable()
     {
         EventsManager.OnScreenOrientationChanged -= OnScreenOrientationChanged;
+
+        EventsManager.OnDoubleClickedOnCard -= OnDoubleClickedOnCard;
     }
 }

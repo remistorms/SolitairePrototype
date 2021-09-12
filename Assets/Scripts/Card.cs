@@ -273,24 +273,60 @@ public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        //Do nothing if card is not placed on pile
-        if (m_cardPile == null)
+        if (hasClickedOnce)
         {
-            return;
+            Debug.Log("Double Click");
+            EventsManager.Fire_evt_OnDoubleClickedOnCard(this, eventData);
         }
-        //Flip card if its top card of a game pile and is face down
-        else if (m_cardPile.m_pileType == PileType.GamePile && !m_isFaceUp && m_isTopCard)
+        else
         {
-            Flip();
-            EventsManager.Fire_event_OnCardFlipped(this);
+            StartCoroutine(OnPointerClickRoutine());
+
+            Debug.Log("Single Click");
+
+            //Do nothing if card is not placed on pile
+            if (m_cardPile == null)
+            {
+                return;
+            }
+            //Flip card if its top card of a game pile and is face down
+            else if (m_cardPile.m_pileType == PileType.GamePile && !m_isFaceUp && m_isTopCard)
+            {
+                Flip();
+                EventsManager.Fire_event_OnCardFlipped(this);
+            }
+            else if (m_cardPile.m_pileType == PileType.DeckPile && !m_isFaceUp && m_isTopCard)
+            {
+                //Debug.Log("Draw card here");
+                EventsManager.Fire_evt_RequestDrawCards();
+            }
         }
-        else if (m_cardPile.m_pileType == PileType.DeckPile && !m_isFaceUp && m_isTopCard)
-        {
-            //Debug.Log("Draw card here");
-            EventsManager.Fire_evt_RequestDrawCards();
-        }
+        
  
         //EventsManager.Fire_evt_OnClickedOnCard(this, eventData);
+    }
+
+    public void RemoveCardFromPile()
+    {
+        this.m_cardPile.RemoveCardFromPile(this);
+    }
+
+    public bool hasClickedOnce;
+
+    IEnumerator OnPointerClickRoutine()
+    {
+        hasClickedOnce = true;
+        float currentTime = 0f;
+        float doubleClickTime = 0.2f;
+
+        while (currentTime < doubleClickTime)
+        {
+            currentTime += Time.deltaTime;
+
+            yield return null;
+        }
+
+        hasClickedOnce = false;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
