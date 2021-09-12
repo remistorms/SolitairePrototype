@@ -17,6 +17,7 @@ public class CardPile : MonoBehaviour, IDropHandler, IPointerClickHandler
     public CardSuit m_finalPileSuit;
     private CardsManager m_cardsManager;
     public bool m_isAnimating = false;
+    public float m_animTime = 0.1f;
 
     private void Awake()
     {
@@ -105,6 +106,8 @@ public class CardPile : MonoBehaviour, IDropHandler, IPointerClickHandler
 
     IEnumerator UpdatePositionsRoutine()
     {
+        m_isAnimating = true;
+
         yield return null;
 
         for (int i = 0; i < m_cardsInPile.Count; i++)
@@ -148,6 +151,8 @@ public class CardPile : MonoBehaviour, IDropHandler, IPointerClickHandler
         }
 
         m_cardsInPile[m_cardsInPile.Count - 1].m_isTopCard = true;
+
+        m_isAnimating = true;
     }
 
     public void OnDrop(PointerEventData eventData)

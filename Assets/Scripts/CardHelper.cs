@@ -12,6 +12,8 @@ public class CardHelper : MonoBehaviour
     [SerializeField] private Sprite m_heartSprite;
     [SerializeField] private Sprite m_spadeSprite;
 
+    [SerializeField] private Sprite[] m_catImages;
+
 
     private void Awake()
     {
@@ -248,6 +250,11 @@ public class CardHelper : MonoBehaviour
         int valueDifference = (int)topValue - (int)botValue;
         Debug.Log( "value difference = " + valueDifference);
         return valueDifference;
+    }
+
+    public Sprite GetCatPictureFromIndex(int index)
+    {
+        return m_catImages[index];
     }
 
     //

@@ -36,8 +36,12 @@ public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler
     private Image m_outlineImage;
     private CanvasGroup m_canvasGroup;
 
+   [SerializeField] private Image m_backImage;
+
     private void Awake()
     {
+        m_backImage.sprite = CardHelper.Instance.GetCatPictureFromIndex( CardsManager.Instance.backCardImageIndex );
+
         m_outlineImage = GetComponent<Image>();
         SetOutlineColor(m_normalColor);
         m_canvasGroup = GetComponent<CanvasGroup>();
