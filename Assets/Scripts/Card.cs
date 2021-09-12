@@ -8,6 +8,7 @@ using TMPro;
 public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler, IEndDragHandler, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
     [Header("Card Properties")]
+    public bool m_isReady = false;
     public bool m_isFaceUp = true;
     public bool m_isTopCard = false;
     public int m_value;
@@ -273,6 +274,11 @@ public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (!m_isReady)
+        {
+            return;
+        }
+
         if (hasClickedOnce)
         {
             Debug.Log("Double Click");

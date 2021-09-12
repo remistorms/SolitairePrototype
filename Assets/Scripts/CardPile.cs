@@ -60,6 +60,8 @@ public class CardPile : MonoBehaviour, IDropHandler, IPointerClickHandler
 
                 AddCardToPile(card);
 
+                card.PlayFlipSound();
+
                 //Add points here
                 EventsManager.Fire_evt_OnCardStackCheck(card, this, true);
             }

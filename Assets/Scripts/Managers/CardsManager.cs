@@ -205,6 +205,11 @@ public class CardsManager : MonoBehaviour
         yield return null;
 
         dealCompleted = true;
+
+        foreach (var card in m_deck)
+        {
+            card.m_isReady = true;
+        }
     }
 
     public void DrawCardsFromDeck()
