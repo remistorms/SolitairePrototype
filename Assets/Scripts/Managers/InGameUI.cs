@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class InGameUI : MonoBehaviour
 {
     public UIScreen[] m_allScreens;
     [SerializeField] private float m_screenTransitionTime = 0.2f;
@@ -14,7 +14,8 @@ public class UIManager : MonoBehaviour
         {
             m_allScreens[i].HideScreen(0);
         }
-        m_currentScreen.ShowScreen(0);
+
+        SwitchScreens(1);
     }
 
     public void SwitchScreens(int screenIndex)

@@ -39,9 +39,9 @@ public class CardPile : MonoBehaviour, IDropHandler, IPointerClickHandler
     //Check for double click Card
     private void OnDoubleClickedOnCard(Card card, PointerEventData pointerEventData)
     {
-        if (!card.m_isFaceUp)
+        if (!card.m_isFaceUp || !card.m_isTopCard)
         {
-            Debug.Log("Double clicked on face down card");
+            Debug.Log("Double clicked on card but is not available");
             return;
         }
 

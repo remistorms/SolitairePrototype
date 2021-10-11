@@ -5,9 +5,9 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
+  - enabled: 1
+    path: Assets/Scenes/Loading.unity
+    guid: 2448499594e90384e8da7292ccf5becc
   - enabled: 1
     path: Assets/Scenes/CardBuilderScene.unity
     guid: cc1e693bf1c096a49ad0f27334101673

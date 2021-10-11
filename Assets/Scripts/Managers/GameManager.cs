@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager instance;
 
-    [SerializeField] private UIManager m_uiManager;
+    [SerializeField] private InGameUI m_uiManager;
     [SerializeField] private CardsManager m_cardsManager;
     [SerializeField] private TurnsManager m_turnsManager;
     [SerializeField] private FloatVariable m_timer;
@@ -35,11 +35,13 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         m_cardsManager = FindObjectOfType<CardsManager>();
+
+        StartGame();
     }
 
     public void ResetGame()
     {
-        SceneManager.LoadScene(0);
+        //SceneManager.LoadScene(0);
     }
 
     public void StartGame(bool threeCardMode = false, bool shuffleCards = true)
