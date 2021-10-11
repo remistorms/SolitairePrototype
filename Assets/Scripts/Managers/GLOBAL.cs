@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ using UnityEngine.SceneManagement;
 public class GLOBAL : MonoBehaviour
 {
     public static GLOBAL Instance;
+
+    public UnityAdsManager unityAdsManager;
 
     private void Awake()
     {
@@ -18,10 +21,10 @@ public class GLOBAL : MonoBehaviour
         {
             Instance = this;
         }
-    }
 
-    private void Start()
-    {
-        SceneManager.LoadScene(1, LoadSceneMode.Additive);
+        if (unityAdsManager == null)
+            unityAdsManager = FindObjectOfType<UnityAdsManager>();
+
+        unityAdsManager.InitializeAds();
     }
 }
