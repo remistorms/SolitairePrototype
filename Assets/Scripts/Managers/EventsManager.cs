@@ -6,6 +6,12 @@ using UnityEngine.EventSystems;
 
 public static class EventsManager
 {
+    public static event Action OnGameStarted = delegate{};
+    public static void Fire_evt_GameStarted()
+    {
+        OnGameStarted();
+    }
+
     public static event Action<Card, CardPile> OnCardDroppedOnPile = delegate{};
     public static void Fire_evt_OnCardDroppedOnPile(Card card, CardPile pile)
     {
@@ -71,17 +77,28 @@ public static class EventsManager
         OnCardStackCheck(card, pile, canStack);
     }
     
-
     public static event Action OnRequestDrawCards = delegate { };
     public static void Fire_evt_RequestDrawCards()
     {
         OnRequestDrawCards();
     }
 
-    public static event Action OnDeckReshuffled = delegate { };
-    public static void Fire_evt_OnDeckReshuffled()
+    public static event Action OnRefillDeckRequested = delegate { };
+    public static void Fire_evt_RefillDeckRequested()
     {
-        OnDeckReshuffled();
+        OnRefillDeckRequested();
+    }
+
+    public static event Action<bool> OnReshuffleWithAd = delegate { };
+    public static void Fire_evt_ShuffleWithAd(bool adAccepted)
+    {
+        OnReshuffleWithAd(adAccepted);
+    }
+
+    public static event Action<bool> OnDeckReshuffled = delegate { };
+    public static void Fire_evt_OnDeckReshuffled(bool watchedAd)
+    {
+        OnDeckReshuffled(watchedAd);
     }
 
     public static event Action<ScreenOrientation> OnScreenOrientationChanged = delegate { };

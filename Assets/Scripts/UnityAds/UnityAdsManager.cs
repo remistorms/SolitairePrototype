@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Advertisements;
 
@@ -17,6 +18,24 @@ public class UnityAdsManager : MonoBehaviour, IUnityAdsInitializationListener, I
     [SerializeField] string _androidAdUnitId = "Rewarded_Android";
     [SerializeField] string _iOsAdUnitId = "Rewarded_iOS";
     string _rewardedAdUnityId;
+
+    private void OnEnable()
+    {
+        EventsManager.OnReshuffleWithAd += ReshuffleWithAd;
+    }
+
+    private void OnDisable()
+    {
+        EventsManager.OnReshuffleWithAd -= ReshuffleWithAd;
+    }
+
+    private void ReshuffleWithAd(bool showAd)
+    {
+        if (showAd)
+        {
+            ShowAd();
+        }
+    }
 
     public void InitializeAds()
     {

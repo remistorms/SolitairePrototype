@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +16,21 @@ public class InGameUI : MonoBehaviour
             m_allScreens[i].HideScreen(0);
         }
 
+        m_allScreens[0].ShowScreen(0);
+
+        EventsManager.OnRefillDeckRequested += ShowShuffleWithAdScreen;
+        EventsManager.OnReshuffleWithAd += ReturnToGameScreen;
+
+    }
+
+    private void ReturnToGameScreen(bool watchedAd)
+    {
         SwitchScreens(1);
+    }
+
+    private void ShowShuffleWithAdScreen()
+    {
+        SwitchScreens(4);
     }
 
     public void SwitchScreens(int screenIndex)

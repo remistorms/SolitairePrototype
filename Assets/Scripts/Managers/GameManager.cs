@@ -36,12 +36,12 @@ public class GameManager : MonoBehaviour
     {
         m_cardsManager = FindObjectOfType<CardsManager>();
 
-        StartGame();
+        //StartGame();
     }
 
     public void ResetGame()
     {
-        //SceneManager.LoadScene(0);
+
     }
 
     public void StartGame(bool threeCardMode = false, bool shuffleCards = true)
@@ -90,6 +90,8 @@ public class GameManager : MonoBehaviour
 
     IEnumerator StartGameLoop(bool threeCardMode = false, bool shuffleCards = true)
     {
+        m_uiManager.SwitchScreens(1);
+
         m_cardsManager.m_drawThreeCardMode = threeCardMode;
         m_timer.value = 0;
         //Initialize Stuff here
@@ -136,4 +138,9 @@ public class GameManager : MonoBehaviour
         Debug.Log("YOU WIN");
     }
 
+}
+
+public struct GameSettings
+{
+    
 }

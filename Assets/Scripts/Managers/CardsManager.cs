@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using System;
 
 public class CardsManager : MonoBehaviour
 {
@@ -35,14 +36,25 @@ public class CardsManager : MonoBehaviour
             Destroy(this.gameObject);
         }
 
-        backCardImageIndex = Random.Range(0, 13);
+        
+    }
+
+    void SetBackCardImage()
+    {
+        backCardImageIndex = UnityEngine.Random.Range(0, 13);
     }
 
     private void Start()
     {
         m_turnsManager = FindObjectOfType<TurnsManager>();
         m_allCardsInPlay = new List<Card>();
+     
+    }
+
+    private void OnEnable()
+    {
         EventsManager.OnRequestDrawCards += DrawCardsFromDeck;
+        EventsManager.OnReshuffleWithAd += ReshuffleDeckWithAd;
     }
 
     public void ResetCardsManager()
@@ -58,7 +70,6 @@ public class CardsManager : MonoBehaviour
     {
         resetCompleted = false;
 
-        /*
         if (m_allCardsInPlay.Count > 0)
         {
             for (int i = 0; i < m_allCardsInPlay.Count; i++)
@@ -69,7 +80,6 @@ public class CardsManager : MonoBehaviour
 
         m_allCardsInPlay.Clear();
 
-        */
         yield return null;
 
         resetCompleted = true;
@@ -131,7 +141,7 @@ public class CardsManager : MonoBehaviour
 
         while (m_deck.Count > 0)
         {
-            int randomInt = Random.Range(0, m_deck.Count);
+            int randomInt = UnityEngine.Random.Range(0, m_deck.Count);
 
             tempDeck.Add(m_deck[randomInt]);
 
@@ -276,11 +286,17 @@ public class CardsManager : MonoBehaviour
         }
         else
         {
-            StartCoroutine(RefillDeck());
+            //StartCoroutine(RefillDeck());
+            EventsManager.Fire_evt_RefillDeckRequested();
         }
     }
 
-    IEnumerator RefillDeck()
+    private void ReshuffleDeckWithAd(bool watchedAd)
+    {
+        StartCoroutine(RefillDeck(watchedAd));
+    }
+
+    IEnumerator RefillDeck(bool watchedAd)
     {
         yield return null;
 
@@ -297,7 +313,7 @@ public class CardsManager : MonoBehaviour
 
         m_deckPile.UpdatePositions();
 
-        EventsManager.Fire_evt_OnDeckReshuffled();
+        EventsManager.Fire_evt_OnDeckReshuffled(watchedAd);
 
         Turn move = new Turn();
 

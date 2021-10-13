@@ -126,9 +126,17 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    private void OnDeckReshuffled()
+    private void OnDeckReshuffled(bool watchedAd)
     {
-        UpdateScore(-m_pointsDeductedFromReshuffle);
+        if (watchedAd)
+        {
+            Debug.Log("No penalty of points");
+        }
+        else
+        {
+            UpdateScore(-m_pointsDeductedFromReshuffle);
+        }
+      
     }
 
     public int GetCurrentScore()

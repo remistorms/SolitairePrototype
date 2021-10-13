@@ -69,7 +69,6 @@ public class CardPile : MonoBehaviour, IDropHandler, IPointerClickHandler
         }
     }
 
-
     public void AddCardToPile(Card cardToAdd, bool autoUpdatePositions = true)
     {
         if (m_cardsInPile.Contains(cardToAdd))

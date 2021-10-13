@@ -68,6 +68,8 @@ public abstract class UIScreen : MonoBehaviour
         m_canvasGroup.interactable = true;
         m_isTransitioning = false;
         m_isShown = true;
+
+        OnScreenShown();
     }
 
     public void HideScreen(float animTime = 0.2f)
@@ -100,5 +102,17 @@ public abstract class UIScreen : MonoBehaviour
         m_canvasGroup.interactable = false;
         m_isTransitioning = false;
         m_isShown = false;
+
+        OnScreenHide();
+    }
+
+    protected virtual void OnScreenShown()
+    {
+
+    }
+
+    protected virtual void OnScreenHide()
+    {
+
     }
 }
