@@ -363,6 +363,11 @@ public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler
         m_audioSource.volume = volume;
     }
 
+    private void OnDestroy()
+    {
+        EventsManager.Fire_evt_CardDestroyed(this);
+    }
+
     private void OnDisable()
     {
         EventsManager.OnSFXVolumeChanged -= SetFlipSoundVolume;

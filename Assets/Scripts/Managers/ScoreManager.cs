@@ -74,7 +74,7 @@ public class ScoreManager : MonoBehaviour
         m_scoreHistory.Remove(m_scoreHistory[m_scoreHistory.Count -1]);
     }
 
-    void InitScore()
+    public void InitScore()
     {
         //m_scoreVariable.value = 0;
         m_currentScore = 0;

@@ -133,4 +133,10 @@ public static class EventsManager
     {
         OnSFXVolumeChanged(vol);
     }
+
+    public static event Action<Card> OnCardDestroyed = delegate { };
+    public static void Fire_evt_CardDestroyed(Card destroyedCard)
+    {
+        OnCardDestroyed(destroyedCard);
+    }
 }

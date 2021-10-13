@@ -51,11 +51,23 @@ public class ShuffleScreen : UIScreen
         else
         {
             DisableAdButton();
+            StartCoroutine(CheckForAdReadyRoutine());
         }
+    }
+
+    IEnumerator CheckForAdReadyRoutine()
+    {
+        while (!GLOBAL.Instance.unityAdsManager.m_isRewardedAdReady)
+        {
+            yield return new WaitForSeconds(0.2f);
+        }
+        EnableAdButton();
     }
 
     protected override void OnScreenHide()
     {
         base.OnScreenHide();
+
+        StopAllCoroutines();
     }
 }

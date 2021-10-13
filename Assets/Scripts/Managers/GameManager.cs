@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TurnsManager m_turnsManager;
     [SerializeField] private FloatVariable m_timer;
     [SerializeField] private CardPile[] endPiles;
+    [SerializeField] private ScoreManager m_scoreManager;
 
     private void Awake()
     {
@@ -35,13 +36,34 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         m_cardsManager = FindObjectOfType<CardsManager>();
+        m_scoreManager = FindObjectOfType<ScoreManager>();
 
         //StartGame();
     }
 
+    public void GoToMainMenu()
+    {
+        StopAllCoroutines();
+
+        //Reset Timer
+        m_timer.value = 0.0f;
+        //Reset Score
+        m_scoreManager.InitScore();
+        //Cards Manager Reset
+        m_cardsManager.ResetCardsManager();
+        //Go to main menu screen
+        m_uiManager.SwitchScreens(0);
+
+    }
+
     public void ResetGame()
     {
-
+        //Reset Timer
+        m_timer.value = 0.0f;
+        //Reset Score
+        m_scoreManager.InitScore();
+        //Start game
+        StartGame();
     }
 
     public void StartGame(bool threeCardMode = false, bool shuffleCards = true)

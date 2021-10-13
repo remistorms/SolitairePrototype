@@ -28,13 +28,22 @@ public class CardPile : MonoBehaviour, IDropHandler, IPointerClickHandler
         m_pilingOffset = m_pilingOffsetLandscape;
     }
 
-    private void Start()
+    private void OnEnable()
     {
         EventsManager.OnScreenOrientationChanged += OnScreenOrientationChanged;
 
         EventsManager.OnDoubleClickedOnCard += OnDoubleClickedOnCard;
+
+        EventsManager.OnCardDestroyed += OnCardDestroyed;
     }
 
+    private void OnCardDestroyed(Card destroyedCard)
+    {
+        if (m_cardsInPile.Contains (destroyedCard))
+        {
+            RemoveCardFromPile(destroyedCard);
+        }
+    }
 
     //Check for double click Card
     private void OnDoubleClickedOnCard(Card card, PointerEventData pointerEventData)
@@ -292,5 +301,7 @@ public class CardPile : MonoBehaviour, IDropHandler, IPointerClickHandler
         EventsManager.OnScreenOrientationChanged -= OnScreenOrientationChanged;
 
         EventsManager.OnDoubleClickedOnCard -= OnDoubleClickedOnCard;
+
+        EventsManager.OnCardDestroyed -= OnCardDestroyed;
     }
 }
