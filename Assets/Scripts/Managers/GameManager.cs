@@ -58,16 +58,22 @@ public class GameManager : MonoBehaviour
 
     public void ResetGame()
     {
+        hasWon = false;
         //Reset Timer
         m_timer.value = 0.0f;
         //Reset Score
         m_scoreManager.InitScore();
         //Start game
-        StartGame();
+        StartGame(_threeCardMode, _shuffleCards);
     }
+
+    private bool _threeCardMode;
+    private bool _shuffleCards;
 
     public void StartGame(bool threeCardMode = false, bool shuffleCards = true)
     {
+        _threeCardMode = threeCardMode;
+        _shuffleCards = shuffleCards;
         StopAllCoroutines();
         StartCoroutine(StartGameRoutine(threeCardMode, shuffleCards));
     }
