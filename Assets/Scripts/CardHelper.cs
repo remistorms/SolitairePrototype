@@ -2,29 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CardHelper : MonoBehaviour
+public class CardHelper : Singleton<CardHelper>
 {
-    public static CardHelper Instance;
-
     [Header("Suit Sprites")]
     [SerializeField] private Sprite m_clubSprite;
     [SerializeField] private Sprite m_diamondSprite;
     [SerializeField] private Sprite m_heartSprite;
     [SerializeField] private Sprite m_spadeSprite;
 
-    [SerializeField] private Sprite[] m_catImages;
+    private StoreItemData m_currentItemData;
 
+    //public int m_currentDeckImageIndex = 0;
+    // public Sprite[] m_deckImages;
+    //public StoreItem[] m_deckStoreInfo;
 
-    private void Awake()
+    public override void Awake()
     {
-        if (Instance == null)
+        base.Awake();
+
+        if (m_currentItemData == null)
         {
-            Instance = this;
+            //m_currentItemData = StoreManager.Instance.m_allStoreItemData[0];
         }
-        else
-        {
-            Destroy(this.gameObject);
-        }
+
+        EventsManager.Fire_evt_OnDeckEquiped(m_currentItemData);
     }
 
     public Sprite GetSuitSprite(CardSuit suit)
@@ -252,43 +253,6 @@ public class CardHelper : MonoBehaviour
         return valueDifference;
     }
 
-    public Sprite GetCatPictureFromIndex(int index)
-    {
-        return m_catImages[index];
-    }
-
-    //
-    /*
-    public bool CheckIfCanStack(Card upCard, Card downCard, bool isFinalPile = false)
-    {
-        if (isFinalPile)
-        {
-            //only return true if both cards are the same suit and if up card value is +1 value from down card
-            if (upCard.m_cardColor == downCard.m_cardColor && CardHelper.Instance.GetValueDifference(upCard.m_cardValue, downCard.m_cardValue) == 1)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-
-        }
-        else
-        {
-            //only return true if both cards are different card color and if up card value is -1 value from down card
-            if (upCard.m_cardColor != downCard.m_cardColor && CardHelper.Instance.GetValueDifference(upCard.m_cardValue, downCard.m_cardValue) == -1)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-    }
-    */
-
     public bool CheckIfCanStack(Card card, CardPile pile)
     {
         bool stackResult = false;
@@ -335,5 +299,16 @@ public class CardHelper : MonoBehaviour
         }
 
         return stackResult;
+    }
+
+    public void SetDeckImage(StoreItemData storeItemData)
+    {
+        m_currentItemData = storeItemData;
+        EventsManager.Fire_evt_OnDeckEquiped(storeItemData);
+    }
+
+    public Sprite GetCurrentDeckImage()
+    {
+        return m_currentItemData.deckImage;
     }
 }

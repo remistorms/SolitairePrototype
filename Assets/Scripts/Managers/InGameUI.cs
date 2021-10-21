@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InGameUI : MonoBehaviour
+public class InGameUI : Singleton<InGameUI>
 {
     public UIScreen[] m_allScreens;
     [SerializeField] private float m_screenTransitionTime = 0.2f;

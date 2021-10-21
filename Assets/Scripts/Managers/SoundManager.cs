@@ -2,22 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoundManager : MonoBehaviour
+public class SoundManager : Singleton<SoundManager>
 {
     [SerializeField] private AudioSource m_audioSource;
     [SerializeField] AudioClip[] availableClips;
 
     private void Start()
     {
-        PlayMusic();
+        ChangeMusic();
     }
 
-    public void PlayMusic()
+    public void ChangeMusic()
     {
-        if (m_audioSource.clip == null)
-        {
-            SelectMusic(Random.Range(0, availableClips.Length));
-        }
+        SelectMusic(Random.Range(0, availableClips.Length));
 
         m_audioSource.Play();
     }

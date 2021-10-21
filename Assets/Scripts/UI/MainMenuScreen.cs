@@ -6,6 +6,6 @@ public class MainMenuScreen : UIScreen
 {
     public void OnPlayButtonPressed()
     {
-        GameManager.instance.StartGame();
+        GameManager.Instance.StartGame();
     }
 }

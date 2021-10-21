@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class TurnsManager : MonoBehaviour
+public class TurnsManager : Singleton<TurnsManager>
 {
     [Header("Undo Movement")]
-    [SerializeField] private int m_currentTurn;
+    public int m_currentTurn;
     public bool isRecordingMoves = false;
     public IntVariable m_movesIntVariable;
     //public IntVariable m_scoreIntVariable;
@@ -16,8 +16,10 @@ public class TurnsManager : MonoBehaviour
     
   
 
-    private void Awake()
+    public override void Awake()
     {
+        base.Awake();
+
         m_currentTurn = 0;
         m_movesIntVariable.value = 0;
         //m_recordedMovements = new Stack<Turn>();
@@ -98,7 +100,6 @@ public class TurnsManager : MonoBehaviour
     {
         EventsManager.OnCardStackCheck  -= OnCardStackCheck;
         EventsManager.OnCardFlipped     -= OnCardFlipped;
-
     }
 
     public void AddMoveToStack(Turn move)

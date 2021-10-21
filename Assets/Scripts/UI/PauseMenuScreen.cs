@@ -16,22 +16,22 @@ public class PauseMenuScreen : UIScreen
 
     public void OnOneCardButtonPressed()
     {
-        GameManager.instance.StartGame();
+        GameManager.Instance.StartGame();
     }
 
     public void OnThreeCardButtonPressed()
     {
-        GameManager.instance.StartGame(true);
+        GameManager.Instance.StartGame(true);
     }
 
     public void OnUnshuffledButtonPressed()
     {
-        GameManager.instance.StartGame(true, false);
+        GameManager.Instance.StartGame(true, false);
     }
 
     public void OnPauseMenuPressed()
     {
-        GameManager.instance.TogglePause();
+        GameManager.Instance.TogglePause();
     }
 
     public void OnVolumeSliderChanged(float value)

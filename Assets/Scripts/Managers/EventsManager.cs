@@ -61,6 +61,7 @@ public static class EventsManager
     }
 
     //Fire_evt_DoubleClickedOnCard
+    
     public static event Action<Card, PointerEventData> OnDoubleClickedOnCard = delegate { };
     public static void Fire_evt_OnDoubleClickedOnCard(Card card, PointerEventData pointerEventData)
     {
@@ -68,6 +69,7 @@ public static class EventsManager
         //Debug.Log("EventsManager: " + card.name + " was clicked on");
         OnDoubleClickedOnCard(card, pointerEventData);
     }
+    
 
     
     public static event Action<Card, CardPile, bool> OnCardStackCheck = delegate { };
@@ -138,5 +140,39 @@ public static class EventsManager
     public static void Fire_evt_CardDestroyed(Card destroyedCard)
     {
         OnCardDestroyed(destroyedCard);
+    }
+
+    public static event Action<PlayerData> OnPlayerDataLoaded = delegate { };
+    public static void Fire_evt_PlayerDataLoade(PlayerData playerData)
+    {
+        Debug.Log("Player data LOADED");
+        OnPlayerDataLoaded(playerData);
+    }
+
+    public static event Action<PlayerData> OnPlayerDataSaved = delegate { };
+    public static void Fire_evt_PlayerDataSaved(PlayerData playerData)
+    {
+        Debug.Log("Player data SAVED");
+        OnPlayerDataSaved(playerData);
+    }
+
+    public static event Action<PlayerData> OnPlayerDataChanged = delegate { };
+    public static void Fire_evt_PlayerDataChanged(PlayerData playerData)
+    {
+        Debug.Log("Player data CHANGED");
+        OnPlayerDataChanged(playerData);
+    }
+
+    public static event Action<StoreItemData> OnStoreItemBought = delegate { };
+    public static void Fire_evt_StoreItemBought(StoreItemData storeItemData)
+    {
+        Debug.Log("Store Item Data Purchased: " +  storeItemData.itemName.ToString());
+        OnStoreItemBought(storeItemData);
+    }
+
+    public static event Action<StoreItemData> OnDeckEquiped = delegate { };
+    public static void Fire_evt_OnDeckEquiped(StoreItemData storeItemData)
+    {
+        OnDeckEquiped(storeItemData);
     }
 }

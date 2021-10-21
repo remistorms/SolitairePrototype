@@ -8,7 +8,7 @@ public class CardsManager : MonoBehaviour
 {
     public static CardsManager Instance;
 
-    public int backCardImageIndex = 0;
+    //public int backCardImageIndex = 0;
 
     public bool m_drawThreeCardMode = false;
     [SerializeField] private GameObject m_cardPrefab;
@@ -35,13 +35,6 @@ public class CardsManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
-        
-    }
-
-    void SetBackCardImage()
-    {
-        backCardImageIndex = UnityEngine.Random.Range(0, 13);
     }
 
     private void Start()

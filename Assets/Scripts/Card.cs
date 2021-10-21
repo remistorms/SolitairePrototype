@@ -41,7 +41,7 @@ public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler
 
     private void Awake()
     {
-        m_backImage.sprite = CardHelper.Instance.GetCatPictureFromIndex( CardsManager.Instance.backCardImageIndex );
+        m_backImage.sprite = CardHelper.Instance.GetCurrentDeckImage();
 
         m_outlineImage = GetComponent<Image>();
         SetOutlineColor(m_normalColor);
@@ -110,17 +110,7 @@ public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler
         }
 
         //this.gameObject.name = m_cardValue.ToString() + " of " + m_cardSuit.ToString();
-    }
-
-    /*
-    public void FlipNoSignal(float flipTime = 0.15f)
-    {
-        if (m_isLerping)
-            return;
-        StartCoroutine(FlipRoutine(flipTime));
-    }
-    */
-    
+    }    
     
     public void Flip(float flipTime = 0.15f)
     {
@@ -130,15 +120,6 @@ public class Card : MonoBehaviour, IDropHandler, IDragHandler, IBeginDragHandler
         StartCoroutine(FlipRoutine(flipTime));
     }
     
-
-        /*
-    public void FlipCardNoSignal(float flipTime = 0.15f)
-    {
-        if (m_isLerping)
-            return;
-        StartCoroutine(FlipRoutine(flipTime));
-    }
-    */
 
     IEnumerator FlipRoutine(float flipTime = 0.15f)
     {

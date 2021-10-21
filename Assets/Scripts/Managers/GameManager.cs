@@ -3,34 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
+    public GameState m_currentGameState = GameState.None;
+
     [Header("Main Objects")]
     public bool hasWon = false;
     public bool isGamePaused = false;
-
-    public static GameManager instance;
+    public FloatVariable m_timer;
 
     [SerializeField] private InGameUI m_uiManager;
     [SerializeField] private CardsManager m_cardsManager;
     [SerializeField] private TurnsManager m_turnsManager;
-    [SerializeField] private FloatVariable m_timer;
     [SerializeField] private CardPile[] endPiles;
     [SerializeField] private ScoreManager m_scoreManager;
 
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
+    private bool _threeCardMode;
+    private bool _shuffleCards;
 
+    public override void Awake()
+    {
+        base.Awake();
+
+        TryChangeState(GameState.Initializing);
+    }
+
+    //Initialization of all pertinent objects to run the game
+    private void InitializeGame()
+    {
+        //Stop recording turns
         m_turnsManager.isRecordingMoves = false;
+        //reset win condition
+        hasWon = false;
+        //Reset Timer
         m_timer.value = 0.0f;
+        //Reset Score
+        m_scoreManager.InitScore();
     }
 
     private void Start()
@@ -44,7 +52,8 @@ public class GameManager : MonoBehaviour
     public void GoToMainMenu()
     {
         StopAllCoroutines();
-
+        //Play a different music
+        SoundManager.Instance.ChangeMusic();
         //Reset Timer
         m_timer.value = 0.0f;
         //Reset Score
@@ -53,22 +62,13 @@ public class GameManager : MonoBehaviour
         m_cardsManager.ResetCardsManager();
         //Go to main menu screen
         m_uiManager.SwitchScreens(0);
-
     }
 
     public void ResetGame()
     {
-        hasWon = false;
-        //Reset Timer
-        m_timer.value = 0.0f;
-        //Reset Score
-        m_scoreManager.InitScore();
         //Start game
         StartGame(_threeCardMode, _shuffleCards);
     }
-
-    private bool _threeCardMode;
-    private bool _shuffleCards;
 
     public void StartGame(bool threeCardMode = false, bool shuffleCards = true)
     {
@@ -159,11 +159,62 @@ public class GameManager : MonoBehaviour
             hasWon = CheckWinCondition();
         }
 
+        GameWon();
+    }
+
+    public void GameWon()
+    {
+        StartCoroutine(GameWonRoutine());
+    }
+
+    IEnumerator GameWonRoutine()
+    {
         m_turnsManager.isRecordingMoves = false;
 
-        m_uiManager.SwitchScreens(3);
+        ScoreManager.Instance.CalculateFinalScore();
 
-        Debug.Log("YOU WIN");
+        yield return null;
+
+        m_uiManager.SwitchScreens(3);
+    }
+
+    public bool TryChangeState(GameState gameState)
+    {
+        if (m_currentGameState == gameState)
+        {
+            Debug.Log("Already in that state...");
+            return false;
+        }
+        else
+        {
+            Debug.Log("GameManager: Entering new state: " + gameState);
+            switch (gameState)
+            {
+                case GameState.None:
+                    break;
+
+                case GameState.Initializing:
+                    break;
+
+                case GameState.GameRunning:
+                    break;
+
+                case GameState.GamePaused:
+                    break;
+
+                case GameState.GameWon:
+                    break;
+
+                case GameState.GameLost:
+                    break;
+
+                default:
+                    break;
+            }
+
+            m_currentGameState = gameState;
+            return true;
+        }
     }
 
 }
@@ -171,4 +222,14 @@ public class GameManager : MonoBehaviour
 public struct GameSettings
 {
     
+}
+
+public enum GameState
+{
+    None,
+    Initializing,
+    GameRunning,
+    GamePaused,
+    GameWon,
+    GameLost
 }

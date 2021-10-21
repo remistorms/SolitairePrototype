@@ -8,6 +8,7 @@ public class ShuffleScreen : UIScreen
 {
     [SerializeField] Button _closePopUpButton;
     [SerializeField] Button _showAdButton;
+    [SerializeField] TextMeshProUGUI _confirmAdTextLabel;
 
     public override void Awake()
     {
@@ -43,6 +44,10 @@ public class ShuffleScreen : UIScreen
     protected override void OnScreenShown()
     {
         base.OnScreenHide();
+
+        _confirmAdTextLabel.text = "If you restack the deck now you will" + "<color=#FF0000> loose </color>" +
+            "<color=#FF0000>" + ScoreManager.Instance.m_pointsDeductedFromReshuffle.ToString() + " points </color>." +
+            "\nDo you want to watch an ad and  \n<color=#11E611> keep those points</color> instead?";
 
         if (GLOBAL.Instance.unityAdsManager.m_isRewardedAdReady)
         {

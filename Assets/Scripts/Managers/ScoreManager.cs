@@ -3,16 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScoreManager : MonoBehaviour
+public class ScoreManager : Singleton<ScoreManager>
 {
-    public static ScoreManager Instance;
-
     [SerializeField] private int m_currentScore;
     [SerializeField] private int m_previousScore;
     [SerializeField] private IntVariable m_scoreVariable;
-    [SerializeField] private int m_awardedPointsForGamePileDrop = 5;
-    [SerializeField] private int m_awardedPointsForEndPileDrop = 15;
-    [SerializeField] private int m_pointsDeductedFromReshuffle = 100;
+
+    [Header("Point Calculation")]
+    public int m_awardedPointsForGamePileDrop = 50;
+    public int m_awardedPointsForEndPileDrop = 150;
+    public int m_pointsDeductedFromReshuffle = 1000;
+    [SerializeField] private int m_maxTimeBonus = 3000;
+    [SerializeField] private int m_maxMoveBonus = 3000;
 
     //This lists keeps track of cards that awarded points to the player to avoid multiple points
     [SerializeField] private List<Card> m_cardsCountedTowardsScoreFromGamePiles;
@@ -23,16 +25,21 @@ public class ScoreManager : MonoBehaviour
     //private int lastPointsAwarded;
     [SerializeField] private Card lastCard;
 
-    private void Awake()
+    [Header("Final Score")]
+    [SerializeField] private int m_pointsDeductedByTime = 10;
+    [SerializeField] private int m_pointsDeductedByMove = 50;
+    [SerializeField] private int m_rewardedAdMultiplier = 2;
+
+    public int finalBaseScore = 0;
+    public int finalTimeScore = 0;
+    public int finalMovesScore = 0;
+    public int finalTotalScore = 0;
+
+
+    public override void Awake()
     {
-        if (Instance != null)
-        {
-            Destroy(this.gameObject);
-        }
-        else
-        {
-            Instance = this;
-        }
+        base.Awake();
+
         InitScore();
     }
 
@@ -82,6 +89,11 @@ public class ScoreManager : MonoBehaviour
         m_scoreVariable.value = m_currentScore;
         m_cardsCountedTowardsScoreFromGamePiles = new List<Card>();
         m_cardsCountedTowardsScoreFromEndPiles  = new List<Card>();
+
+        finalBaseScore = 0;
+        finalMovesScore = 0;
+        finalTimeScore = 0;
+        finalTotalScore = 0;
     }
 
     void UpdateScore(int score)
@@ -161,6 +173,26 @@ public class ScoreManager : MonoBehaviour
     public void SetPreviousScore(int prevScore)
     {
         m_previousScore = prevScore;
+    }
+
+    public void CalculateFinalScore()
+    {
+        finalBaseScore = m_currentScore;
+
+        finalMovesScore = m_maxMoveBonus - TurnsManager.Instance.m_currentTurn * m_pointsDeductedByMove;
+
+        finalMovesScore = Mathf.Clamp(finalMovesScore, 0, m_maxMoveBonus);
+
+        finalTimeScore = m_maxTimeBonus -  Mathf.RoundToInt(GameManager.Instance.m_timer.value * m_pointsDeductedByTime);
+
+        finalTimeScore = Mathf.Clamp(finalTimeScore, 0, m_maxTimeBonus);
+
+        finalTotalScore = finalBaseScore + finalMovesScore + finalTimeScore;
+    }
+
+    public void ApplyRewardedAdMultiplier()
+    {
+        finalTotalScore *= m_rewardedAdMultiplier;
     }
 
     private void OnDisable()
